@@ -11,7 +11,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-/* ---- YOUR EXISTING CSS, UNCHANGED ---- */
 :root {
   --burgundy:#A80F30;
   --ivory:#F7F5F1;
@@ -246,8 +245,6 @@ p,.muted {color:var(--sub)}
   color:#A87B34;
 }
 
-/* LOGIN */
-
 .login {
   min-height:100vh;
   display:grid;
@@ -327,8 +324,6 @@ p,.muted {color:var(--sub)}
 }
 
 .select-small {width:auto!important;max-width:165px}
-
-/* APPLICATION SHELL */
 
 .shell {
   display:grid;
@@ -436,8 +431,6 @@ p,.muted {color:var(--sub)}
   padding:40px clamp(18px,4vw,64px) 80px;
 }
 
-/* DASHBOARD */
-
 .balance {
   background:
     radial-gradient(circle at 95% 0%,#D9C6A322,transparent 42%),
@@ -527,8 +520,6 @@ p,.muted {color:var(--sub)}
 .positive {color:#51C4A0}
 :root[data-theme="light"] .positive {color:var(--emerald)}
 
-/* SPENDING CHART */
-
 .chart {
   height:145px;
   display:flex;
@@ -581,8 +572,6 @@ p,.muted {color:var(--sub)}
   font-size:11px;
   margin-top:14px;
 }
-
-/* CARD */
 
 .bankcard {
   max-width:420px;
@@ -669,8 +658,6 @@ p,.muted {color:var(--sub)}
   max-width:min(400px,90vw);
 }
 
-/* TRANSACTION DRAWER */
-
 .tx[data-tx-index] {cursor:pointer}
 
 .tx[data-tx-index]:hover {
@@ -747,8 +734,6 @@ p,.muted {color:var(--sub)}
   from {transform:translateX(30px)}
   to {transform:translateX(0)}
 }
-
-/* PRIVATE WEALTH EDITION */
 
 .wealth-hero {
   background:
@@ -940,8 +925,6 @@ p,.muted {color:var(--sub)}
   fill:var(--sub);
 }
 
-/* RESPONSIVE */
-
 @media(max-width:1080px) {
   .two,.three {grid-template-columns:1fr}
 }
@@ -982,7 +965,6 @@ p,.muted {color:var(--sub)}
     scroll-behavior:auto!important;
   }
 }
-
 </style>
 </head>
 <body>
@@ -991,7 +973,6 @@ p,.muted {color:var(--sub)}
 
 <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 
-<!-- FLOATING DEMO BANK WARNING -->
 <div id="Warning" role="status">
   <span class="symbol">⚠️</span>
   <span>
@@ -1001,7 +982,6 @@ finance@hapoaiim.com.
   </span>
 </div>
 
-<!-- MOVING DEMO BANK FOOTER -->
 <div id="demoBankWarning">
   <div class="demo-ticker">
     <span>
@@ -1020,15 +1000,12 @@ finance@hapoaiim.com.
     right: 0;
     height: 42px;
     z-index: 99999;
-
     background: #222831;
     border-top: 2px solid #FFD166;
     color: #FFD166;
-
     overflow: hidden;
     display: flex;
     align-items: center;
-
     pointer-events: none;
   }
 
@@ -1036,47 +1013,29 @@ finance@hapoaiim.com.
     position: absolute;
     left: 0;
     top: 50%;
-
     width: max-content;
     white-space: nowrap;
-
     font-family: Arial, sans-serif;
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 1px;
-
     transform: translate(100vw, -50%);
-
     animation: demoTickerMove 15s linear infinite !important;
     will-change: transform;
   }
 
   @keyframes demoTickerMove {
-    0% {
-      transform: translate(100vw, -50%);
-    }
-
-    100% {
-      transform: translate(-100%, -50%);
-    }
+    0% { transform: translate(100vw, -50%); }
+    100% { transform: translate(-100%, -50%); }
   }
 
-  #app {
-    padding-bottom: 55px;
-  }
+  #app { padding-bottom: 55px; }
 
   @media (max-width: 600px) {
-    #demoBankWarning {
-      height: 38px;
-    }
-
-    #demoBankWarning .demo-ticker {
-      font-size: 11px;
-    }
+    #demoBankWarning { height: 38px; }
+    #demoBankWarning .demo-ticker { font-size: 11px; }
   }
 </style>
-
-
 
 <script>
 
@@ -1084,26 +1043,23 @@ finance@hapoaiim.com.
 
 /* ============================================================
    HAPOALIM BANK PRIVATE WEALTH
-   FRONTEND APPLICATION
-   ============================================================ */
+   SINGLE-FILE BROWSER EDITION
+   No backend. No Google Apps Script. Uses localStorage.
 
-/* ============================================================
-   ⚠️⚠️⚠️   BACKEND CONFIGURATION   ⚠️⚠️⚠️
    ------------------------------------------------------------
-   After deploying Code.gs as a Google Apps Script Web App
-   (Deploy → New deployment → Web app →
-    Execute as: Me, Who has access: Anyone),
-   copy the web app URL and paste it below.
-
-   Example:
-   https://script.google.com/macros/s/AKfycb.../exec
-
-   IMPORTANT: the URL must end with /exec, NOT /dev.
+   LOGIN
+   Username: alain.wassmer@gmail.com
+   Password: alain12345678
+   (Change DEFAULT_PASSWORD below if you want.)
    ============================================================ */
 
-const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbxJfyHiZX0wZvLPcFVE9vIPdjypbuh4sC6g9kbuyKxsi1lNGWobnuNwSZNoWomKdP09/exec';
-
-/* ============================================================ */
+const DEMO = {
+  SESSION_MS: 30 * 60 * 1000,
+  MAX_TX: 200,
+  STORAGE_KEY: 'hap_demo_bank_v1_account',
+  CLIENT_EMAIL: 'alain.wassmer@gmail.com',
+  DEFAULT_PASSWORD: 'alain12345678'
+};
 
 const $ = id => document.getElementById(id);
 const app = $('app');
@@ -1113,10 +1069,8 @@ const app = $('app');
    ============================================================ */
 
 const EN = {
-  // --- FIX: these keys were referenced by t() but missing ---
   Live:'Live',
   Data:'Data',
-
   welcome:'Welcome back.',
   welcomeSub:'A complete perspective on your financial world.',
   login:'Welcome to private banking',
@@ -1124,11 +1078,10 @@ const EN = {
   password:'Password',
   reminder:'Private Banking only. Use private credentials.',
   loginButton:'Enter Private Bank',
-  loginHint:'Any nonempty username and password are not accepted.',
+  loginHint:'Demo credentials are shown on this screen.',
   processing:'Processing…',
   hero:'A more complete view of your wealth.',
   heroSub:'Everyday banking and long-term wealth, thoughtfully connected.',
-
   overview:'Overview',
   wealth:'Wealth & Investments',
   payments:'Payments',
@@ -1137,7 +1090,6 @@ const EN = {
   cards:'Cards',
   notifications:'Notifications',
   settings:'Settings',
-
   balance:'Available balance',
   income:'Money in',
   expenses:'Money out',
@@ -1149,7 +1101,6 @@ const EN = {
   seeAll:'View all',
   analytics:'Spending insights',
   analyticsSub:'Explore your spending over time.',
-
   saved:'Saved beneficiaries',
   savedSub:'Manage your trusted recipients.',
   cardTitle:'Your cards',
@@ -1158,14 +1109,12 @@ const EN = {
   inboxSub:'Stay informed about account activity.',
   profile:'Settings',
   profileSub:'Your account and preferences.',
-
   holder:'Account holder',
   session:'Live session',
   currency:'Currency',
   language:'Language',
   theme:'Appearance',
   logout:'Sign out',
-
   amount:'Amount',
   recipient:'Recipient name',
   iban:'Recipient IBAN',
@@ -1183,7 +1132,6 @@ const EN = {
   newPayment:'Make another payment',
   paymentDetails:'Payment details',
   reviewDetails:'Review transfer',
-
   search:'Search transactions',
   all:'All',
   incoming:'Incoming',
@@ -1193,7 +1141,6 @@ const EN = {
   noPayees:'No saved beneficiaries yet.',
   remove:'Remove',
   pay:'Pay',
-
   cardStatus:'Card status',
   active:'Active',
   frozen:'Frozen',
@@ -1216,11 +1163,9 @@ const EN = {
   paymentNote:'Make sure the details are correct.',
   available:'Available',
   selectPayee:'Choose a saved beneficiary',
-
   simulation:'Hapoalim is a member of the Federal Deposit Insurance Corporation (FDIC) and an Equal Housing Lender. Deposits are insured up to the maximum allowable law. All transactions executed through this platform are final, legally binding, and involve real financial movement.',
   cardNotice:'Card controls affect only this card.',
   notificationNotice:'Notifications are generated within this account.',
-
   netWorth:'Total net worth',
   netWorthSub:'Your complete financial position, in one place.',
   cash:'Everyday banking',
@@ -1246,7 +1191,6 @@ const EN = {
   portfolioValue:'Portfolio value',
   portfolioGain:'Portfolio gain',
   viewWealth:'Explore wealth',
-
   goals:'Savings goals',
   goalsSub:'Plan and track your financial milestones.',
   createGoal:'Create savings goal',
@@ -1271,375 +1215,135 @@ const EN = {
   sixMonths:'6M',
   oneYear:'1Y',
   privateClient:'Private client',
-  trainingEdition:'Training edition'
+  trainingEdition:'Private edition'
 };
 
 const TRANSLATIONS = {
   en:{},
-
   et:{
-    Live:'Reaalne',
-    Data:'Andmed',
-    welcome:'Tere tulemast tagasi.',
-    welcomeSub:'Täielik ülevaade sinu finantsmaailmast.',
-    login:'Tere tulemast privaatpangandusse',
-    username:'Kasutajanimi',
-    password:'Parool',
-    reminder:'Ainult privaatpangandus. Kasuta privaatseid volitusi.',
-    loginButton:'Sisene panka',
-    overview:'Ülevaade',
-    wealth:'Vara ja investeeringud',
-    payments:'Maksed',
-    transactions:'Tehingud',
-    beneficiaries:'Saajad',
-    cards:'Kaardid',
-    notifications:'Teavitused',
-    settings:'Seaded',
-    balance:'Kasutatav jääk',
-    income:'Laekumised',
-    expenses:'Väljaminekud',
-    quick:'Kiirtoimingud',
-    send:'Tee ülekanne',
-    history:'Tehingute ajalugu',
-    recent:'Viimased tehingud',
-    seeAll:'Vaata kõiki',
-    analytics:'Kulude analüüs',
-    saved:'Salvestatud saajad',
-    cardTitle:'Sinu kaardid',
-    inbox:'Teavitused',
-    profile:'Seaded',
-    holder:'Konto omanik',
-    language:'Keel',
-    theme:'Välimus',
-    logout:'Logi välja',
-    amount:'Summa',
-    recipient:'Saaja nimi',
-    iban:'Saaja IBAN',
-    reference:'Makse selgitus',
-    timing:'Makse aeg',
-    now:'Saada kohe',
-    later:'Ajasta hilisemaks',
-    date:'Makse kuupäev',
-    review:'Kontrolli makset',
-    confirm:'Kinnita ülekanne',
-    paymentSuccess:'Makse esitatud',
-    newPayment:'Tee uus makse',
-    search:'Otsi tehinguid',
-    all:'Kõik',
-    incoming:'Laekumised',
-    outgoing:'Väljaminekud',
-    export:'Ekspordi CSV',
-    remove:'Eemalda',
-    pay:'Maksa',
-    active:'Aktiivne',
-    frozen:'Külmutatud',
-    freeze:'Külmuta kaart',
-    unfreeze:'Aktiveeri kaart',
-    readAll:'Märgi kõik loetuks',
-    copy:'Kopeeri IBAN',
-    copied:'IBAN kopeeritud.',
-    scheduled:'Ajastatud',
-    posted:'Tehtud',
-    status:'Olek',
-    details:'Üksikasjad',
-    close:'Sulge',
-    netWorth:'Kogu netovara',
-    cash:'Igapäevapangandus',
-    investments:'Investeeringud',
-    savings:'Säästud',
-    portfolio:'Investeerimisportfell',
-    performance:'Portfelli tootlus',
-    allocation:'Varade jaotus',
-    holdings:'Investeeringud',
-    marketValue:'Turuväärtus',
-    gainLoss:'Realiseerimata kasum / kahjum',
-    goals:'Säästueesmärgid',
-    createGoal:'Loo säästueesmärk',
-    goalName:'Eesmärgi nimi',
-    goalTarget:'Sihtsumma',
-    contribute:'Lisa sissemakse',
-    viewWealth:'Vaata vara'
+    Live:'Reaalne',Data:'Andmed',
+    welcome:'Tere tulemast tagasi.',welcomeSub:'Täielik ülevaade sinu finantsmaailmast.',
+    login:'Tere tulemast privaatpangandusse',username:'Kasutajanimi',password:'Parool',
+    reminder:'Ainult privaatpangandus. Kasuta privaatseid volitusi.',loginButton:'Sisene panka',
+    overview:'Ülevaade',wealth:'Vara ja investeeringud',payments:'Maksed',transactions:'Tehingud',
+    beneficiaries:'Saajad',cards:'Kaardid',notifications:'Teavitused',settings:'Seaded',
+    balance:'Kasutatav jääk',income:'Laekumised',expenses:'Väljaminekud',quick:'Kiirtoimingud',
+    send:'Tee ülekanne',history:'Tehingute ajalugu',recent:'Viimased tehingud',seeAll:'Vaata kõiki',
+    analytics:'Kulude analüüs',saved:'Salvestatud saajad',cardTitle:'Sinu kaardid',inbox:'Teavitused',
+    profile:'Seaded',holder:'Konto omanik',language:'Keel',theme:'Välimus',logout:'Logi välja',
+    amount:'Summa',recipient:'Saaja nimi',iban:'Saaja IBAN',reference:'Makse selgitus',
+    timing:'Makse aeg',now:'Saada kohe',later:'Ajasta hilisemaks',date:'Makse kuupäev',
+    review:'Kontrolli makset',confirm:'Kinnita ülekanne',paymentSuccess:'Makse esitatud',
+    newPayment:'Tee uus makse',search:'Otsi tehinguid',all:'Kõik',incoming:'Laekumised',
+    outgoing:'Väljaminekud',export:'Ekspordi CSV',remove:'Eemalda',pay:'Maksa',
+    active:'Aktiivne',frozen:'Külmutatud',freeze:'Külmuta kaart',unfreeze:'Aktiveeri kaart',
+    readAll:'Märgi kõik loetuks',copy:'Kopeeri IBAN',copied:'IBAN kopeeritud.',
+    scheduled:'Ajastatud',posted:'Tehtud',status:'Olek',details:'Üksikasjad',close:'Sulge',
+    netWorth:'Kogu netovara',cash:'Igapäevapangandus',investments:'Investeeringud',savings:'Säästud',
+    portfolio:'Investeerimisportfell',performance:'Portfelli tootlus',allocation:'Varade jaotus',
+    holdings:'Investeeringud',marketValue:'Turuväärtus',gainLoss:'Realiseerimata kasum / kahjum',
+    goals:'Säästueesmärgid',createGoal:'Loo säästueesmärk',goalName:'Eesmärgi nimi',
+    goalTarget:'Sihtsumma',contribute:'Lisa sissemakse',viewWealth:'Vaata vara'
   },
-
   de:{
-    Live:'Live',
-    Data:'Daten',
-    welcome:'Willkommen zurück.',
-    welcomeSub:'Ihre gesamte Finanzwelt auf einen Blick.',
-    login:'Willkommen im Private Banking',
-    username:'Benutzername',
-    password:'Passwort',
-    reminder:'Nur Private Banking. Bitte private Zugangsdaten verwenden.',
-    loginButton:'Private Bank betreten',
-    overview:'Übersicht',
-    wealth:'Vermögen & Anlagen',
-    payments:'Zahlungen',
-    transactions:'Umsätze',
-    beneficiaries:'Empfänger',
-    cards:'Karten',
-    notifications:'Mitteilungen',
-    settings:'Einstellungen',
-    balance:'Verfügbares Guthaben',
-    income:'Einnahmen',
-    expenses:'Ausgaben',
-    quick:'Schnellzugriff',
-    send:'Geld überweisen',
-    history:'Umsatzübersicht',
-    recent:'Letzte Umsätze',
-    seeAll:'Alle anzeigen',
-    analytics:'Ausgabenanalyse',
-    saved:'Gespeicherte Empfänger',
-    cardTitle:'Ihre Karten',
-    inbox:'Mitteilungen',
-    profile:'Einstellungen',
-    holder:'Kontoinhaber',
-    language:'Sprache',
-    theme:'Darstellung',
-    logout:'Abmelden',
-    amount:'Betrag',
-    recipient:'Empfängername',
-    iban:'Empfänger-IBAN',
-    reference:'Verwendungszweck',
-    timing:'Ausführung',
-    now:'Sofort senden',
-    later:'Später ausführen',
-    review:'Zahlung prüfen',
-    confirm:'Überweisung bestätigen',
-    paymentSuccess:'Zahlung eingereicht',
-    search:'Umsätze suchen',
-    all:'Alle',
-    incoming:'Eingänge',
-    outgoing:'Ausgänge',
-    export:'CSV exportieren',
-    remove:'Entfernen',
-    pay:'Überweisen',
-    active:'Aktiv',
-    frozen:'Gesperrt',
-    freeze:'Karte sperren',
-    unfreeze:'Karte entsperren',
-    readAll:'Alle als gelesen markieren',
-    copy:'IBAN kopieren',
-    copied:'IBAN kopiert.',
-    scheduled:'Geplant',
-    posted:'Gebucht',
-    details:'Details',
-    close:'Schließen',
-    netWorth:'Gesamtvermögen',
-    cash:'Girokonto',
-    investments:'Investitionen',
-    savings:'Ersparnisse',
-    portfolio:'Anlageportfolio',
-    performance:'Portfolioentwicklung',
-    allocation:'Vermögensaufteilung',
-    holdings:'Positionen',
-    marketValue:'Marktwert',
-    gainLoss:'Unrealisierter Gewinn / Verlust',
-    goals:'Sparziele',
-    createGoal:'Sparziel erstellen',
-    goalName:'Name des Sparziels',
-    goalTarget:'Zielbetrag',
-    contribute:'Einzahlung',
-    viewWealth:'Vermögen ansehen'
+    Live:'Live',Data:'Daten',
+    welcome:'Willkommen zurück.',welcomeSub:'Ihre gesamte Finanzwelt auf einen Blick.',
+    login:'Willkommen im Private Banking',username:'Benutzername',password:'Passwort',
+    reminder:'Nur Private Banking. Bitte private Zugangsdaten verwenden.',loginButton:'Private Bank betreten',
+    overview:'Übersicht',wealth:'Vermögen & Anlagen',payments:'Zahlungen',transactions:'Umsätze',
+    beneficiaries:'Empfänger',cards:'Karten',notifications:'Mitteilungen',settings:'Einstellungen',
+    balance:'Verfügbares Guthaben',income:'Einnahmen',expenses:'Ausgaben',quick:'Schnellzugriff',
+    send:'Geld überweisen',history:'Umsatzübersicht',recent:'Letzte Umsätze',seeAll:'Alle anzeigen',
+    analytics:'Ausgabenanalyse',saved:'Gespeicherte Empfänger',cardTitle:'Ihre Karten',inbox:'Mitteilungen',
+    profile:'Einstellungen',holder:'Kontoinhaber',language:'Sprache',theme:'Darstellung',logout:'Abmelden',
+    amount:'Betrag',recipient:'Empfängername',iban:'Empfänger-IBAN',reference:'Verwendungszweck',
+    timing:'Ausführung',now:'Sofort senden',later:'Später ausführen',review:'Zahlung prüfen',
+    confirm:'Überweisung bestätigen',paymentSuccess:'Zahlung eingereicht',search:'Umsätze suchen',
+    all:'Alle',incoming:'Eingänge',outgoing:'Ausgänge',export:'CSV exportieren',remove:'Entfernen',
+    pay:'Überweisen',active:'Aktiv',frozen:'Gesperrt',freeze:'Karte sperren',unfreeze:'Karte entsperren',
+    readAll:'Alle als gelesen markieren',copy:'IBAN kopieren',copied:'IBAN kopiert.',
+    scheduled:'Geplant',posted:'Gebucht',details:'Details',close:'Schließen',netWorth:'Gesamtvermögen',
+    cash:'Girokonto',investments:'Investitionen',savings:'Ersparnisse',portfolio:'Anlageportfolio',
+    performance:'Portfolioentwicklung',allocation:'Vermögensaufteilung',holdings:'Positionen',
+    marketValue:'Marktwert',gainLoss:'Unrealisierter Gewinn / Verlust',goals:'Sparziele',
+    createGoal:'Sparziel erstellen',goalName:'Name des Sparziels',goalTarget:'Zielbetrag',
+    contribute:'Einzahlung',viewWealth:'Vermögen ansehen'
   },
-
   fr:{
-    Live:'Live',
-    Data:'Données',
-    welcome:'Bienvenue.',
-    welcomeSub:'Une vision complète de votre patrimoine.',
-    login:'Bienvenue dans votre banque privée',
-    username:'Identifiant',
-    password:'Mot de passe',
-    reminder:'Banque privée uniquement. Utilisez vos identifiants privés.',
-    loginButton:'Accéder à la banque privée',
-    overview:'Vue d’ensemble',
-    wealth:'Patrimoine & placements',
-    payments:'Paiements',
-    transactions:'Opérations',
-    beneficiaries:'Bénéficiaires',
-    cards:'Cartes',
-    notifications:'Notifications',
-    settings:'Paramètres',
-    balance:'Solde disponible',
-    income:'Entrées',
-    expenses:'Sorties',
-    quick:'Accès rapide',
-    send:'Envoyer de l’argent',
-    history:'Historique des opérations',
-    recent:'Activité récente',
-    seeAll:'Tout afficher',
-    analytics:'Analyse des dépenses',
-    saved:'Bénéficiaires enregistrés',
-    cardTitle:'Vos cartes',
-    inbox:'Notifications',
-    profile:'Paramètres',
-    holder:'Titulaire du compte',
-    language:'Langue',
-    theme:'Apparence',
-    logout:'Déconnexion',
-    amount:'Montant',
-    recipient:'Nom du bénéficiaire',
-    iban:'IBAN du bénéficiaire',
-    reference:'Motif du paiement',
-    timing:'Date du virement',
-    now:'Envoyer maintenant',
-    later:'Programmer',
-    review:'Vérifier le paiement',
-    confirm:'Confirmer le virement',
-    paymentSuccess:'Paiement soumis',
-    search:'Rechercher des opérations',
-    all:'Tout',
-    incoming:'Entrées',
-    outgoing:'Sorties',
-    export:'Exporter CSV',
-    remove:'Supprimer',
-    pay:'Payer',
-    active:'Active',
-    frozen:'Bloquée',
-    freeze:'Bloquer la carte',
-    unfreeze:'Débloquer la carte',
-    readAll:'Tout marquer comme lu',
-    copy:'Copier l’IBAN',
-    copied:'IBAN copié.',
-    scheduled:'Programmé',
-    posted:'Effectué',
-    details:'Détails',
-    close:'Fermer',
-    netWorth:'Patrimoine net',
-    cash:'Compte courant',
-    investments:'Investissements',
-    savings:'Épargne',
-    portfolio:'Portefeuille',
-    performance:'Performance',
-    allocation:'Répartition des actifs',
-    holdings:'Positions',
-    marketValue:'Valeur de marché',
-    gainLoss:'Plus-value / moins-value latente',
-    goals:'Objectifs d’épargne',
-    createGoal:'Créer un objectif',
-    goalName:'Nom de l’objectif',
-    goalTarget:'Montant cible',
-    contribute:'Ajouter une contribution',
+    Live:'Live',Data:'Données',
+    welcome:'Bienvenue.',welcomeSub:'Une vision complète de votre patrimoine.',
+    login:'Bienvenue dans votre banque privée',username:'Identifiant',password:'Mot de passe',
+    reminder:'Banque privée uniquement. Utilisez vos identifiants privés.',loginButton:'Accéder à la banque privée',
+    overview:'Vue d’ensemble',wealth:'Patrimoine & placements',payments:'Paiements',transactions:'Opérations',
+    beneficiaries:'Bénéficiaires',cards:'Cartes',notifications:'Notifications',settings:'Paramètres',
+    balance:'Solde disponible',income:'Entrées',expenses:'Sorties',quick:'Accès rapide',
+    send:'Envoyer de l’argent',history:'Historique des opérations',recent:'Activité récente',
+    seeAll:'Tout afficher',analytics:'Analyse des dépenses',saved:'Bénéficiaires enregistrés',
+    cardTitle:'Vos cartes',inbox:'Notifications',profile:'Paramètres',holder:'Titulaire du compte',
+    language:'Langue',theme:'Apparence',logout:'Déconnexion',amount:'Montant',recipient:'Nom du bénéficiaire',
+    iban:'IBAN du bénéficiaire',reference:'Motif du paiement',timing:'Date du virement',
+    now:'Envoyer maintenant',later:'Programmer',review:'Vérifier le paiement',
+    confirm:'Confirmer le virement',paymentSuccess:'Paiement soumis',search:'Rechercher des opérations',
+    all:'Tout',incoming:'Entrées',outgoing:'Sorties',export:'Exporter CSV',remove:'Supprimer',pay:'Payer',
+    active:'Active',frozen:'Bloquée',freeze:'Bloquer la carte',unfreeze:'Débloquer la carte',
+    readAll:'Tout marquer comme lu',copy:'Copier l’IBAN',copied:'IBAN copié.',scheduled:'Programmé',
+    posted:'Effectué',details:'Détails',close:'Fermer',netWorth:'Patrimoine net',cash:'Compte courant',
+    investments:'Investissements',savings:'Épargne',portfolio:'Portefeuille',performance:'Performance',
+    allocation:'Répartition des actifs',holdings:'Positions',marketValue:'Valeur de marché',
+    gainLoss:'Plus-value / moins-value latente',goals:'Objectifs d’épargne',createGoal:'Créer un objectif',
+    goalName:'Nom de l’objectif',goalTarget:'Montant cible',contribute:'Ajouter une contribution',
     viewWealth:'Explorer le patrimoine'
   },
-
   es:{
-    Live:'En vivo',
-    Data:'Datos',
-    welcome:'Bienvenido de nuevo.',
-    welcomeSub:'Una visión completa de tus finanzas.',
-    login:'Bienvenido a la banca privada',
-    username:'Usuario',
-    password:'Contraseña',
-    reminder:'Solo banca privada. Usa credenciales privadas.',
-    loginButton:'Entrar en el banco privado',
-    overview:'Resumen',
-    wealth:'Patrimonio e inversiones',
-    payments:'Pagos',
-    transactions:'Movimientos',
-    beneficiaries:'Beneficiarios',
-    cards:'Tarjetas',
-    notifications:'Notificaciones',
-    settings:'Configuración',
-    balance:'Saldo disponible',
-    income:'Ingresos',
-    expenses:'Gastos',
-    quick:'Acceso rápido',
-    send:'Enviar dinero',
-    history:'Historial de movimientos',
-    recent:'Actividad reciente',
-    seeAll:'Ver todo',
-    analytics:'Análisis de gastos',
-    saved:'Beneficiarios guardados',
-    cardTitle:'Tus tarjetas',
-    inbox:'Notificaciones',
-    profile:'Configuración',
-    holder:'Titular de la cuenta',
-    language:'Idioma',
-    theme:'Apariencia',
-    logout:'Cerrar sesión',
-    amount:'Importe',
-    recipient:'Nombre del destinatario',
-    iban:'IBAN del destinatario',
-    reference:'Concepto del pago',
-    timing:'Fecha del pago',
-    now:'Enviar ahora',
-    later:'Programar',
-    review:'Revisar el pago',
-    confirm:'Confirmar transferencia',
-    paymentSuccess:'Pago enviado',
-    search:'Buscar movimientos',
-    all:'Todos',
-    incoming:'Entradas',
-    outgoing:'Salidas',
-    export:'Exportar CSV',
-    remove:'Eliminar',
-    pay:'Pagar',
-    active:'Activa',
-    frozen:'Bloqueada',
-    freeze:'Bloquear tarjeta',
-    unfreeze:'Desbloquear tarjeta',
-    readAll:'Marcar todo como leído',
-    copy:'Copiar IBAN',
-    copied:'IBAN copiado.',
-    scheduled:'Programado',
-    posted:'Realizado',
-    details:'Detalles',
-    close:'Cerrar',
-    netWorth:'Patrimonio neto',
-    cash:'Cuenta corriente',
-    investments:'Inversiones',
-    savings:'Ahorros',
-    portfolio:'Cartera de inversión',
-    performance:'Rendimiento de cartera',
-    allocation:'Distribución de activos',
-    holdings:'Posiciones',
-    marketValue:'Valor de mercado',
-    gainLoss:'Ganancia / pérdida no realizada',
-    goals:'Objetivos de ahorro',
-    createGoal:'Crear objetivo',
-    goalName:'Nombre del objetivo',
-    goalTarget:'Importe objetivo',
-    contribute:'Añadir aportación',
-    viewWealth:'Explorar patrimonio'
+    Live:'En vivo',Data:'Datos',
+    welcome:'Bienvenido de nuevo.',welcomeSub:'Una visión completa de tus finanzas.',
+    login:'Bienvenido a la banca privada',username:'Usuario',password:'Contraseña',
+    reminder:'Solo banca privada. Usa credenciales privadas.',loginButton:'Entrar en el banco privado',
+    overview:'Resumen',wealth:'Patrimonio e inversiones',payments:'Pagos',transactions:'Movimientos',
+    beneficiaries:'Beneficiarios',cards:'Tarjetas',notifications:'Notificaciones',settings:'Configuración',
+    balance:'Saldo disponible',income:'Ingresos',expenses:'Gastos',quick:'Acceso rápido',
+    send:'Enviar dinero',history:'Historial de movimientos',recent:'Actividad reciente',
+    seeAll:'Ver todo',analytics:'Análisis de gastos',saved:'Beneficiarios guardados',cardTitle:'Tus tarjetas',
+    inbox:'Notificaciones',profile:'Configuración',holder:'Titular de la cuenta',language:'Idioma',
+    theme:'Apariencia',logout:'Cerrar sesión',amount:'Importe',recipient:'Nombre del destinatario',
+    iban:'IBAN del destinatario',reference:'Concepto del pago',timing:'Fecha del pago',
+    now:'Enviar ahora',later:'Programar',review:'Revisar el pago',confirm:'Confirmar transferencia',
+    paymentSuccess:'Pago enviado',search:'Buscar movimientos',all:'Todos',incoming:'Entradas',
+    outgoing:'Salidas',export:'Exportar CSV',remove:'Eliminar',pay:'Pagar',active:'Activa',
+    frozen:'Bloqueada',freeze:'Bloquear tarjeta',unfreeze:'Desbloquear tarjeta',
+    readAll:'Marcar todo como leído',copy:'Copiar IBAN',copied:'IBAN copiado.',scheduled:'Programado',
+    posted:'Realizado',details:'Detalles',close:'Cerrar',netWorth:'Patrimonio neto',cash:'Cuenta corriente',
+    investments:'Inversiones',savings:'Ahorros',portfolio:'Cartera de inversión',
+    performance:'Rendimiento de cartera',allocation:'Distribución de activos',holdings:'Posiciones',
+    marketValue:'Valor de mercado',gainLoss:'Ganancia / pérdida no realizada',goals:'Objetivos de ahorro',
+    createGoal:'Crear objetivo',goalName:'Nombre del objetivo',goalTarget:'Importe objetivo',
+    contribute:'Añadir aportación',viewWealth:'Explorar patrimonio'
   }
 };
 
 /* ============================================================
-   APPLICATION STATE
+   STATE
    ============================================================ */
 
 const SUPPORTED_LANGUAGES=['en','et','de','fr','es'];
 
 const S={
-  token:sessionStorage.getItem('db_atelier_token')||'',
+  token:sessionStorage.getItem('hap_token')||'',
   data:null,
   page:'overview',
-
-  lang:localStorage.getItem('db_hybrid_lang')||'en',
-  theme:localStorage.getItem('db_hybrid_theme')||'dark',
-
+  lang:localStorage.getItem('hap_lang')||'en',
+  theme:localStorage.getItem('hap_theme')||'dark',
   period:'month',
   wealthPeriod:'year',
-
   filter:'all',
   search:'',
-
   step:1,
   draft:null,
-
-  busy:false,
-  selectedHolding:null,
-  selectedTransaction:null
+  busy:false
 };
 
-if(!SUPPORTED_LANGUAGES.includes(S.lang)){
-  S.lang='en';
-}
-
-if(!['dark','light'].includes(S.theme)){
-  S.theme='dark';
-}
+if(!SUPPORTED_LANGUAGES.includes(S.lang)) S.lang='en';
+if(!['dark','light'].includes(S.theme)) S.theme='dark';
 
 document.documentElement.dataset.theme=S.theme;
 document.documentElement.lang=S.lang;
@@ -1649,170 +1353,349 @@ document.documentElement.lang=S.lang;
    ============================================================ */
 
 function t(key){
-  return TRANSLATIONS[S.lang]?.[key]||
-         EN[key]||
-         key;
+  return TRANSLATIONS[S.lang]?.[key]||EN[key]||key;
 }
 
 function esc(value){
   return String(value??'').replace(/[&<>"']/g,c=>({
-    '&':'&amp;',
-    '<':'&lt;',
-    '>':'&gt;',
-    '"':'&quot;',
-    "'":'&#39;'
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
   }[c]));
 }
 
 function money(value){
   return new Intl.NumberFormat(S.lang,{
-    style:'currency',
-    currency:'EUR'
+    style:'currency',currency:'EUR'
   }).format(Number(value)||0);
 }
 
 function compactMoney(value){
   return new Intl.NumberFormat(S.lang,{
-    style:'currency',
-    currency:'EUR',
-    notation:'compact',
-    maximumFractionDigits:1
+    style:'currency',currency:'EUR',notation:'compact',maximumFractionDigits:1
   }).format(Number(value)||0);
 }
 
 function percent(value){
   return new Intl.NumberFormat(S.lang,{
-    style:'percent',
-    minimumFractionDigits:2,
-    maximumFractionDigits:2
+    style:'percent',minimumFractionDigits:2,maximumFractionDigits:2
   }).format(Number(value)||0);
 }
 
 function fmtDate(value){
   const date=new Date(value);
-
-  if(Number.isNaN(date.getTime())){
-    return '—';
-  }
-
+  if(Number.isNaN(date.getTime())) return '—';
   return new Intl.DateTimeFormat(S.lang,{
-    day:'numeric',
-    month:'short',
-    year:'numeric'
+    day:'numeric',month:'short',year:'numeric'
   }).format(date);
 }
 
 function uuid(){
-  if(window.crypto?.randomUUID){
-    return crypto.randomUUID();
-  }
-
+  if(window.crypto?.randomUUID) return crypto.randomUUID();
   if(window.crypto?.getRandomValues){
-    const bytes=new Uint8Array(16);
-    crypto.getRandomValues(bytes);
-
-    bytes[6]=(bytes[6]&15)|64;
-    bytes[8]=(bytes[8]&63)|128;
-
-    const hex=Array.from(bytes,b=>
-      b.toString(16).padStart(2,'0')
-    ).join('');
-
-    return [
-      hex.slice(0,8),
-      hex.slice(8,12),
-      hex.slice(12,16),
-      hex.slice(16,20),
-      hex.slice(20)
-    ].join('-');
+    const b=new Uint8Array(16);
+    crypto.getRandomValues(b);
+    b[6]=(b[6]&15)|64; b[8]=(b[8]&63)|128;
+    const hex=Array.from(b,x=>x.toString(16).padStart(2,'0')).join('');
+    return [hex.slice(0,8),hex.slice(8,12),hex.slice(12,16),hex.slice(16,20),hex.slice(20)].join('-');
   }
-
-  throw new Error('Secure request IDs are unavailable.');
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{
+    const r=Math.random()*16|0;
+    return (c==='x'?r:(r&0x3|0x8)).toString(16);
+  });
 }
 
 function toast(message){
   const element=$('toast');
-
   if(!element)return;
-
   element.textContent=message;
   element.classList.remove('hidden');
-
   clearTimeout(toast.timer);
-
-  toast.timer=setTimeout(()=>{
-    element.classList.add('hidden');
-  },3500);
+  toast.timer=setTimeout(()=>element.classList.add('hidden'),3500);
 }
 
 /* ============================================================
-   BACKEND API  —  fetch() instead of google.script.run
+   LOCAL STORAGE ACCOUNT
    ============================================================ */
 
-function rpc(action,payload={},authenticated=true){
-  return new Promise(async(resolve,reject)=>{
+function hashPassword(password, salt){
+  // Simple synchronous SHA-256 via SubtleCrypto is async; use a
+  // deterministic synchronous fallback for demo purposes.
+  let h1=0xdeadbeef^salt.length, h2=0x41c6ce57^password.length;
+  const str=salt+':'+password;
+  for(let i=0;i<str.length;i++){
+    const ch=str.charCodeAt(i);
+    h1=Math.imul(h1^ch,2654435761);
+    h2=Math.imul(h2^ch,1597334677);
+  }
+  h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);
+  h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);
+  return (h2>>>0).toString(16).padStart(8,'0')+(h1>>>0).toString(16).padStart(8,'0');
+}
 
-    if(!BACKEND_URL||BACKEND_URL.indexOf('PASTE_YOUR')===0){
-      reject(new Error(
-        'Backend URL is not configured. ' +
-        'Set BACKEND_URL at the top of the script to your ' +
-        'Apps Script Web App /exec URL.'
-      ));
-      return;
+function loadAccount(){
+  try{
+    const raw=localStorage.getItem(DEMO.STORAGE_KEY);
+    if(!raw) return null;
+    return JSON.parse(raw);
+  }catch(e){ return null; }
+}
+
+function saveAccount(account){
+  localStorage.setItem(DEMO.STORAGE_KEY,JSON.stringify(account));
+}
+
+function createAccount(){
+  const now=Date.now();
+  const account={
+    username:DEMO.CLIENT_EMAIL,
+    passwordSalt:uuid(),
+    passwordHash:'',
+    balanceCents:13181300,
+    account:{
+      holder:'Alain Wassmer',
+      iban:'GB61 CLJU 0413 0741 8724 47',
+      country:'Switzerland',
+      currency:'EUR',
+      email:DEMO.CLIENT_EMAIL
+    },
+    txs:[
+      {
+        id:'SIM-20261027-001',
+        createdAt:Date.UTC(2026,9,27,10,0,0),
+        title:'Incoming bank transfer',
+        who:'PANIM AI SYSTEM LIMITED',
+        amount:131945.00,
+        dir:'in',status:'posted',category:'Transfer',currency:'EUR',
+        ref:'Incoming transfer'
+      },
+      {
+        id:'SIM-20261027-002',
+        createdAt:Date.UTC(2026,9,27,11,0,0),
+        title:'Outgoing bank transfer',
+        who:'Alain Wassmer',
+        iban:'CH90 8080 8004 4382 8363 3',
+        amount:132.00,
+        dir:'out',status:'posted',category:'Transfer',currency:'EUR',
+        ref:'Outgoing transfer'
+      }
+    ],
+    payees:[{
+      id:'alain-beneficiary',
+      name:'Alain Wassmer',
+      iban:'CH90 8080 8004 4382 8363 3'
+    }],
+    card:{last4:'2447',holder:'ALAIN WASSMER',expiry:'09/29',frozen:false},
+    recentLogins:[{device:'Browser',when:now,ip:'Not collected',current:true}],
+    notifications:[{
+      id:'alain-welcome',
+      title:'Welcome to Hapoalim Bank Private Wealth',
+      body:'Your client profile is ready.',
+      createdAt:now,read:false
+    }],
+    wealth:{
+      holdings:[
+        {id:'h1',ticker:'GLOBAL',name:'Global Equity Index',className:'Equities',units:320,price:284.50,cost:258.20,color:'#A80F30'},
+        {id:'h2',ticker:'US500',name:'US Large Cap Index',className:'Equities',units:140,price:232.40,cost:217.00,color:'#A80F30'},
+        {id:'h3',ticker:'GOVB',name:'Investment Grade Bonds',className:'Fixed income',units:520,price:125.08,cost:127.50,color:'#D9C6A3'},
+        {id:'h4',ticker:'REAL',name:'Global Real Assets',className:'Alternatives',units:210,price:154.86,cost:146.70,color:'#19866B'},
+        {id:'h5',ticker:'MMKT',name:'EUR Money Market',className:'Cash equivalents',units:210,price:103.24,cost:101.10,color:'#788291'}
+      ],
+      savingsCents:0,
+      goals:[
+        {id:'goal-1',name:'Future home',targetCents:5000000,savedCents:0,createdAt:now},
+        {id:'goal-2',name:'Travel fund',targetCents:1200000,savedCents:0,createdAt:now}
+      ],
+      contributionRequests:{}
+    },
+    requests:{}
+  };
+  account.passwordHash=hashPassword(DEMO.DEFAULT_PASSWORD,account.passwordSalt);
+  saveAccount(account);
+  return account;
+}
+
+function getOrCreateAccount(){
+  return loadAccount()||createAccount();
+}
+
+/* ============================================================
+   PUBLIC STATE
+   ============================================================ */
+
+function publicState(account){
+  const balance=account.balanceCents/100;
+  return {
+    balance:balance,
+    wealth:{
+      holdings:account.wealth.holdings,
+      savings:account.wealth.savingsCents/100,
+      goals:account.wealth.goals.map(g=>({
+        id:g.id,name:g.name,target:g.targetCents/100,
+        saved:g.savedCents/100,createdAt:g.createdAt
+      })),
+      portfolioValue:balance,
+      netWorth:balance,
+      asOf:Date.now(),
+      simulated:true
+    },
+    account:account.account,
+    txs:account.txs,
+    payees:account.payees,
+    card:account.card,
+    recentLogins:account.recentLogins,
+    notifications:account.notifications,
+    session:{username:account.username,expiresAt:Date.now()+DEMO.SESSION_MS}
+  };
+}
+
+/* ============================================================
+   SIMULATED API (same actions as before)
+   ============================================================ */
+
+async function api(action,payload={}){
+  // Fake network delay so the UI feels real
+  await new Promise(r=>setTimeout(r,80));
+
+  if(action==='login'){
+    const username=String(payload.username||'').trim().toLowerCase();
+    const password=String(payload.password||'');
+    if(!username||!password) throw new Error('Enter login details.');
+    if(username!==DEMO.CLIENT_EMAIL) throw new Error('Invalid login credentials.');
+    const account=getOrCreateAccount();
+    if(hashPassword(password,account.passwordSalt)!==account.passwordHash){
+      throw new Error('Invalid login credentials.');
+    }
+    const token=uuid()+':'+uuid();
+    sessionStorage.setItem('hap_token',token);
+    return {token};
+  }
+
+  if(action==='logout'){
+    sessionStorage.removeItem('hap_token');
+    return {signedOut:true};
+  }
+
+  // All other actions require a token (demo: just check it exists)
+  const token=sessionStorage.getItem('hap_token');
+  if(!token) throw new Error('Session expired.');
+
+  const account=getOrCreateAccount();
+
+  switch(action){
+    case 'getState':
+      return publicState(account);
+
+    case 'removePayee':{
+      const id=String(payload.id||'');
+      if(!account.payees.some(p=>p.id===id)) throw new Error('Beneficiary not found.');
+      account.payees=account.payees.filter(p=>p.id!==id);
+      saveAccount(account);
+      return {state:publicState(account)};
     }
 
-    try{
-      // Apps Script Web Apps cannot respond to CORS preflight
-      // requests. Sending as text/plain keeps this a "simple"
-      // request so no preflight is triggered.
-      const response=await fetch(BACKEND_URL,{
-        method:'POST',
-        headers:{
-          'Content-Type':'text/plain;charset=utf-8'
-        },
-        body:JSON.stringify({
-          action,
-          token:authenticated?S.token:'',
-          payload
-        })
+    case 'freezeCard':
+      if(typeof payload.frozen!=='boolean') throw new Error('Invalid card status.');
+      account.card.frozen=payload.frozen;
+      saveAccount(account);
+      return {state:publicState(account)};
+
+    case 'markNotifsRead':
+      account.notifications.forEach(n=>n.read=true);
+      saveAccount(account);
+      return {state:publicState(account)};
+
+    case 'transfer':
+      return transferLocal(payload,account);
+
+    case 'createGoal':{
+      const name=String(payload.name||'').trim();
+      if(name.length<2||name.length>60) throw new Error('Goal name must be 2–60 characters.');
+      const target=String(payload.target||'');
+      if(!/^\d+(?:\.\d{1,2})?$/.test(target)) throw new Error('Invalid EUR amount.');
+      const targetCents=Math.round(Number(target)*100);
+      if(targetCents<=0||targetCents>100000000) throw new Error('Amount outside allowed range.');
+      if(account.wealth.goals.length>=12) throw new Error('Maximum 12 goals per account.');
+      account.wealth.goals.push({
+        id:uuid(),name:name,targetCents:targetCents,savedCents:0,createdAt:Date.now()
       });
-
-      if(!response.ok){
-        throw new Error(
-          'Backend returned HTTP '+response.status+'.'
-        );
-      }
-
-      // Read the body as text first, then parse.
-      // This tolerates the ContentService MIME wrapper.
-      const text=await response.text();
-
-      let parsed;
-
-      try{
-        parsed=JSON.parse(text);
-      }catch(parseError){
-        throw new Error(
-          'Backend returned a non-JSON response. ' +
-          'Check that Code.gs is deployed as a Web App ' +
-          'with access set to "Anyone".'
-        );
-      }
-
-      if(parsed && parsed.ok){
-        resolve(parsed.data);
-      }else{
-        reject(new Error(
-          parsed && parsed.error || 'Request failed.'
-        ));
-      }
-
-    }catch(error){
-      reject(new Error(
-        error && error.message || 'Connection failed.'
-      ));
+      saveAccount(account);
+      return {state:publicState(account)};
     }
+
+    case 'contributeGoal':{
+      const requestId=String(payload.requestId||'');
+      const requests=account.wealth.contributionRequests;
+      if(requests[requestId]) return {state:publicState(account)};
+      const goal=account.wealth.goals.find(g=>g.id===String(payload.goalId||''));
+      if(!goal) throw new Error('Savings goal not found.');
+      const amount=String(payload.amount||'');
+      if(!/^\d+(?:\.\d{1,2})?$/.test(amount)) throw new Error('Invalid EUR amount.');
+      const cents=Math.round(Number(amount)*100);
+      if(cents>account.balanceCents) throw new Error('Insufficient cash balance.');
+      if(goal.savedCents+cents>goal.targetCents) throw new Error('Contribution exceeds goal target.');
+      account.balanceCents-=cents;
+      account.wealth.savingsCents+=cents;
+      goal.savedCents+=cents;
+      requests[requestId]=true;
+      const keys=Object.keys(requests);
+      if(keys.length>60) keys.slice(0,keys.length-60).forEach(k=>delete requests[k]);
+      account.notifications.unshift({
+        id:uuid(),title:'Savings goal updated',
+        body:'Contribution to '+goal.name+' recorded. No real money moved.',
+        createdAt:Date.now(),read:false
+      });
+      account.notifications=account.notifications.slice(0,30);
+      saveAccount(account);
+      return {state:publicState(account)};
+    }
+
+    default:
+      throw new Error('Unknown API action: '+action);
+  }
+}
+
+function transferLocal(payload,account){
+  const requestId=String(payload.requestId||'');
+  if(!/^[a-f0-9-]{36}$/i.test(requestId)) throw new Error('Invalid payment request.');
+
+  if(account.requests[requestId]){
+    return {ref:account.requests[requestId],status:'declined',state:publicState(account)};
+  }
+
+  const name=String(payload.name||'').trim();
+  const iban=String(payload.iban||'').replace(/\s+/g,'').toUpperCase();
+  const amount=String(payload.amount||'');
+
+  if(!name||name.length>140) throw new Error('Invalid recipient name.');
+  if(!/^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$/.test(iban)) throw new Error('Invalid recipient IBAN.');
+  if(!/^\d+(?:\.\d{1,2})?$/.test(amount)) throw new Error('Invalid EUR amount.');
+
+  const amountCents=Math.round(Number(amount)*100);
+  if(amountCents>account.balanceCents) throw new Error('Amount exceeds available balance.');
+
+  const now=Date.now();
+  const declinedRef='DEC-'+uuid().slice(0,8).toUpperCase();
+
+  account.txs.unshift({
+    id:declinedRef,createdAt:now,title:'Declined Transfer',
+    who:name,amount:amountCents/100,dir:'out',status:'declined',
+    category:'Transfer',currency:'EUR',iban:iban,ref:String(payload.ref||'').trim(),
+    declineReason:'Transfer declined due to Low Liquidity.'
   });
+  account.txs=account.txs.slice(0,DEMO.MAX_TX);
+  account.requests[requestId]=declinedRef;
+  const keys=Object.keys(account.requests);
+  if(keys.length>100) keys.slice(0,keys.length-100).forEach(k=>delete account.requests[k]);
+
+  account.notifications.unshift({
+    id:uuid(),title:'Transfer declined',
+    body:'Transferred Declined. No funds were transferred.',
+    createdAt:now,read:false
+  });
+  account.notifications=account.notifications.slice(0,30);
+
+  saveAccount(account);
+
+  return {ref:declinedRef,status:'declined',state:publicState(account)};
 }
 
 /* ============================================================
@@ -1831,37 +1714,16 @@ const NAVIGATION=[
 ];
 
 function brand(){
-  return `
-    <div class="brand">
-      <span class="mark">D</span>
-      HAPOALIM <b>BANK</b>
-    </div>
-  `;
+  return `<div class="brand"><span class="mark">D</span>HAPOALIM <b>BANK</b></div>`;
 }
 
 function controls(){
   return `
-    <select class="search select-small"
-      id="language"
-      aria-label="${esc(t('language'))}">
-
-      ${[
-        ['en','English'],
-        ['et','Eesti'],
-        ['de','Deutsch'],
-        ['fr','Français'],
-        ['es','Español']
-      ].map(([code,name])=>`
-        <option value="${code}"
-          ${S.lang===code?'selected':''}>
-          ${name}
-        </option>
-      `).join('')}
+    <select class="search select-small" id="language" aria-label="${esc(t('language'))}">
+      ${[['en','English'],['et','Eesti'],['de','Deutsch'],['fr','Français'],['es','Español']]
+        .map(([code,name])=>`<option value="${code}" ${S.lang===code?'selected':''}>${name}</option>`).join('')}
     </select>
-
-    <button class="btn ghost small"
-      data-action="theme"
-      aria-label="${esc(t('theme'))}">
+    <button class="btn ghost small" data-action="theme" aria-label="${esc(t('theme'))}">
       ${S.theme==='dark'?'☀':'☾'}
     </button>
   `;
@@ -1871,253 +1733,135 @@ function pageHead(title,subtitle,action=''){
   return `
     <div class="pagehead">
       <div>
-        <div class="eyebrow" style="margin-bottom:10px">
-          HAPOALIM BANK / PRIVATE
-        </div>
-
+        <div class="eyebrow" style="margin-bottom:10px">HAPOALIM BANK / PRIVATE</div>
         <h1>${esc(title)}</h1>
         <p>${esc(subtitle)}</p>
       </div>
-
       ${action}
     </div>
   `;
 }
 
 /* ============================================================
-   LOGIN SCREEN
+   LOGIN
    ============================================================ */
 
 function loginView(){
   return `
     <div class="login">
-
       <section class="login-art">
         ${brand()}
-
         <div>
-          <div class="eyebrow"
-            style="color:var(--champagne);margin-bottom:20px">
+          <div class="eyebrow" style="color:var(--champagne);margin-bottom:20px">
             HAPOALIM BANK / PRIVATE WEALTH
           </div>
-
-          <h1>
-            A more complete view of
-            <em>your wealth.</em>
-          </h1>
-
+          <h1>A more complete view of <em>your wealth.</em></h1>
           <p>${esc(t('heroSub'))}</p>
         </div>
-
-        <footer>
-          HAPOALIM BANK · PRIVATE WEALTH · PRIVATE EDITION
-        </footer>
+        <footer>HAPOALIM BANK · PRIVATE WEALTH · PRIVATE EDITION</footer>
       </section>
 
       <section class="login-right">
         <div class="login-form">
-
-          <div class="login-controls">
-            ${controls()}
-          </div>
-
-          <div class="eyebrow">
-            YOUR PRIVATE BANKING SPACE
-          </div>
-
+          <div class="login-controls">${controls()}</div>
+          <div class="eyebrow">YOUR PRIVATE BANKING SPACE</div>
           <h1>${esc(t('login'))}</h1>
           <p>${esc(t('welcomeSub'))}</p>
 
           <form id="loginForm" style="margin-top:30px">
-
             <div class="field">
-              <label for="username">
-                ${esc(t('username'))}
-              </label>
-
-              <input id="username"
-                required
-                maxlength="120"
-                autocomplete="username"
-                placeholder="alain.wassmer@gmail.com">
+              <label for="username">${esc(t('username'))}</label>
+              <input id="username" required maxlength="120" autocomplete="username" value="alain.wassmer@gmail.com">
             </div>
-
             <div class="field">
-              <label for="password">
-                ${esc(t('password'))}
-              </label>
-
-              <input id="password"
-                type="password"
-                required
-                maxlength="200"
-                autocomplete="current-password"
-                placeholder="••••••••">
+              <label for="password">${esc(t('password'))}</label>
+              <input id="password" type="password" required maxlength="200" autocomplete="current-password" placeholder="••••••••">
             </div>
-
-            <button class="btn"
-              type="submit"
-              style="width:100%">
-              ${esc(t('loginButton'))} ↗
-            </button>
-
+            <button class="btn" type="submit" style="width:100%">${esc(t('loginButton'))} ↗</button>
           </form>
 
           <div id="loginError"></div>
 
           <div class="notice">
-            ${esc(t('Live'))}
-            <div style="margin-top:6px">
-              ${esc(t('loginHint'))}
-            </div>
+            Demo credentials<br>
+            Username: <strong>alain.wassmer@gmail.com</strong><br>
+            Password: <strong>alain12345678</strong>
           </div>
-
         </div>
       </section>
-
     </div>
   `;
 }
 
 /* ============================================================
-   APPLICATION SHELL
+   SHELL
    ============================================================ */
 
 function shellView(){
   const holder=S.data?.account?.holder||'Private Client';
-
   return `
     <div class="shell">
-
       <aside class="sidebar">
-
         ${brand()}
-
         <div>
-          <div class="eyebrow"
-            style="padding:0 13px;margin-bottom:10px">
-            BANK / PRIVATE
-          </div>
-
+          <div class="eyebrow" style="padding:0 13px;margin-bottom:10px">BANK / PRIVATE</div>
           <nav class="nav">
             ${NAVIGATION.map(([name,symbol])=>`
-              <button
-                class="navbutton ${S.page===name?'active':''}"
-                data-page="${name}">
-
-                <span class="navicon">${symbol}</span>
-                ${esc(t(name))}
+              <button class="navbutton ${S.page===name?'active':''}" data-page="${name}">
+                <span class="navicon">${symbol}</span>${esc(t(name))}
               </button>
             `).join('')}
           </nav>
         </div>
-
         <div class="sidebar-bottom">
-
           <div class="profile">
             <div class="avatar">DB</div>
-
             <div style="flex:1;min-width:0">
-              <strong style="font-size:11px">
-                ${esc(holder)}
-              </strong>
-
-              <div class="muted tiny">
-                ${esc(t('privateClient'))}
-              </div>
+              <strong style="font-size:11px">${esc(holder)}</strong>
+              <div class="muted tiny">${esc(t('privateClient'))}</div>
             </div>
           </div>
-
-          <button class="btn ghost small"
-            data-action="logout"
-            style="width:100%;margin-top:18px">
+          <button class="btn ghost small" data-action="logout" style="width:100%;margin-top:18px">
             ${esc(t('logout'))}
           </button>
-
         </div>
-
       </aside>
 
       <div>
-
         <header class="topbar">
-
-          <div class="row"
-            style="justify-content:flex-start">
-
-            <div class="eyebrow">
-              PRIVATE DIGITAL BANKING
-            </div>
-
-            <span class="chip">
-              LIVE ENVIRONMENT
-            </span>
-
+          <div class="row" style="justify-content:flex-start">
+            <div class="eyebrow">PRIVATE DIGITAL BANKING</div>
+            <span class="chip">LIVE ENVIRONMENT</span>
           </div>
-
-          <div class="topbar-controls">
-            ${controls()}
-          </div>
-
+          <div class="topbar-controls">${controls()}</div>
         </header>
-
         <main class="main" id="main"></main>
-
       </div>
     </div>
   `;
 }
 
 /* ============================================================
-   SHARED TRANSACTION LIST
+   TRANSACTION LIST
    ============================================================ */
 
 function transactionList(items){
-  if(!items.length){
-    return `
-      <div class="empty">
-        ${esc(t('noTransactions'))}
-      </div>
-    `;
-  }
-
+  if(!items.length) return `<div class="empty">${esc(t('noTransactions'))}</div>`;
   return items.map(tx=>{
     const index=(S.data.txs||[]).indexOf(tx);
     const incoming=tx.dir==='in';
-
     return `
-      <div class="tx"
-        data-tx-index="${index}"
-        role="button"
-        tabindex="0"
+      <div class="tx" data-tx-index="${index}" role="button" tabindex="0"
         aria-label="${esc(t('details'))}: ${esc(tx.who||tx.title)}">
-
-        <div class="txicon">
-          ${incoming?'↙':'↗'}
-        </div>
-
+        <div class="txicon">${incoming?'↙':'↗'}</div>
         <div class="txbody">
-          <strong>
-            ${esc(tx.who||tx.title||'Transfer')}
-          </strong>
-
-          <small>
-            ${esc(tx.title||'')} · ${fmtDate(tx.createdAt)}
-          </small>
+          <strong>${esc(tx.who||tx.title||'Transfer')}</strong>
+          <small>${esc(tx.title||'')} · ${fmtDate(tx.createdAt)}</small>
         </div>
-
         <div class="txamount ${incoming?'positive':''}">
           ${incoming?'+':'−'}${money(tx.amount)}
-
-          <div style="
-            font-size:10px;
-            color:var(--sub);
-            font-weight:400">
-
-            ${esc(t(tx.status||'posted'))}
-          </div>
+          <div style="font-size:10px;color:var(--sub);font-weight:400">${esc(t(tx.status||'posted'))}</div>
         </div>
-
       </div>
     `;
   }).join('');
@@ -2130,427 +1874,205 @@ function transactionList(items){
 function dashboardView(){
   const d=S.data;
   const wealth=d.wealth||{};
-
   const txs=d.txs||[];
-
   const posted=txs.filter(tx=>tx.status==='posted');
-
-  const income=posted
-    .filter(tx=>tx.dir==='in')
-    .reduce((sum,tx)=>sum+Number(tx.amount||0),0);
-
-  const expenses=posted
-    .filter(tx=>tx.dir==='out')
-    .reduce((sum,tx)=>sum+Number(tx.amount||0),0);
-
+  const income=posted.filter(tx=>tx.dir==='in').reduce((s,tx)=>s+Number(tx.amount||0),0);
+  const expenses=posted.filter(tx=>tx.dir==='out').reduce((s,tx)=>s+Number(tx.amount||0),0);
   const netWorth=Number(wealth.netWorth||d.balance);
   const portfolioValue=Number(wealth.portfolioValue||0);
   const savings=Number(wealth.savings||0);
 
   return `
-    ${pageHead(
-      t('welcome'),
-      t('welcomeSub'),
-      `<button class="btn" data-page="payments">
-        ${esc(t('send'))} ↗
-      </button>`
-    )}
+    ${pageHead(t('welcome'),t('welcomeSub'),
+      `<button class="btn" data-page="payments">${esc(t('send'))} ↗</button>`)}
 
-    <section class="panel wealth-hero"
-      style="margin-bottom:20px;padding:30px">
-
-      <div class="row"
-        style="align-items:flex-start;flex-wrap:wrap">
-
+    <section class="panel wealth-hero" style="margin-bottom:20px;padding:30px">
+      <div class="row" style="align-items:flex-start;flex-wrap:wrap">
         <div>
-          <div class="eyebrow">
-            ${esc(t('netWorth'))}
-          </div>
-
-          <div class="wealth-number">
-            ${money(netWorth)}
-          </div>
-
+          <div class="eyebrow">${esc(t('netWorth'))}</div>
+          <div class="wealth-number">${money(netWorth)}</div>
           <p>${esc(t('netWorthSub'))}</p>
         </div>
-
-        <button class="btn ghost"
-          data-page="wealth"
-          style="
-            background:#FFFFFF14;
-            color:white;
-            border-color:#FFFFFF40">
-
+        <button class="btn ghost" data-page="wealth"
+          style="background:#FFFFFF14;color:white;border-color:#FFFFFF40">
           ${esc(t('viewWealth'))} ↗
         </button>
-
       </div>
-
-      <div class="divider"
-        style="border-color:#FFFFFF25"></div>
-
+      <div class="divider" style="border-color:#FFFFFF25"></div>
       <div class="grid three">
-        ${[
-          [t('cash'),d.balance],
-          [t('investments'),portfolioValue],
-          [t('savings'),savings]
-        ].map(([label,value])=>`
-          <div>
-            <div class="eyebrow">${esc(label)}</div>
-
-            <div class="money"
-              style="font-size:clamp(20px,2.5vw,29px);margin-top:7px">
-              ${money(value)}
+        ${[[t('cash'),d.balance],[t('investments'),portfolioValue],[t('savings'),savings]]
+          .map(([label,value])=>`
+            <div>
+              <div class="eyebrow">${esc(label)}</div>
+              <div class="money" style="font-size:clamp(20px,2.5vw,29px);margin-top:7px">${money(value)}</div>
             </div>
-          </div>
-        `).join('')}
+          `).join('')}
       </div>
-
     </section>
 
     <div class="grid two">
-
       <section class="panel balance">
-
         <div>
-          <div class="eyebrow">
-            ${esc(t('balance'))}
-          </div>
-
-          <div class="money">
-            ${money(d.balance)}
-          </div>
+          <div class="eyebrow">${esc(t('balance'))}</div>
+          <div class="money">${money(d.balance)}</div>
         </div>
-
         <div class="row">
           <div>
             <p class="tiny">${esc(t('holder'))}</p>
             <strong>${esc(d.account.holder)}</strong>
           </div>
-
           <div style="text-align:right">
             <p class="tiny">IBAN</p>
-            <strong>
-              •••• ${esc(d.account.iban.slice(-4))}
-            </strong>
+            <strong>•••• ${esc(d.account.iban.slice(-4))}</strong>
           </div>
         </div>
-
       </section>
 
       <section class="panel">
-
-        <div class="eyebrow">
-          ${esc(t('quick'))}
-        </div>
-
-        <h2 style="margin-top:8px">
-          ${esc(t('quick'))}
-        </h2>
-
+        <div class="eyebrow">${esc(t('quick'))}</div>
+        <h2 style="margin-top:8px">${esc(t('quick'))}</h2>
         <div class="quick">
-          <button data-page="payments">
-            <span>↗</span>
-            ${esc(t('send'))}
-          </button>
-
-          <button data-page="wealth">
-            <span>◇</span>
-            ${esc(t('wealth'))}
-          </button>
-
-          <button data-page="transactions">
-            <span>≡</span>
-            ${esc(t('transactions'))}
-          </button>
-
-          <button data-page="cards">
-            <span>▣</span>
-            ${esc(t('cards'))}
-          </button>
+          <button data-page="payments"><span>↗</span>${esc(t('send'))}</button>
+          <button data-page="wealth"><span>◇</span>${esc(t('wealth'))}</button>
+          <button data-page="transactions"><span>≡</span>${esc(t('transactions'))}</button>
+          <button data-page="cards"><span>▣</span>${esc(t('cards'))}</button>
         </div>
-
       </section>
-
     </div>
 
     <div class="space"></div>
 
     <div class="grid three">
-
       <section class="panel stat">
-        <div class="eyebrow">
-          ${esc(t('income'))}
-        </div>
-
-        <div class="money positive">
-          ${money(income)}
-        </div>
-
-        <div class="muted tiny">
-          ${esc(t('posted'))}
-        </div>
+        <div class="eyebrow">${esc(t('income'))}</div>
+        <div class="money positive">${money(income)}</div>
+        <div class="muted tiny">${esc(t('posted'))}</div>
       </section>
-
       <section class="panel stat">
-        <div class="eyebrow">
-          ${esc(t('expenses'))}
-        </div>
-
-        <div class="money">
-          ${money(expenses)}
-        </div>
-
-        <div class="muted tiny">
-          ${esc(t('posted'))}
-        </div>
+        <div class="eyebrow">${esc(t('expenses'))}</div>
+        <div class="money">${money(expenses)}</div>
+        <div class="muted tiny">${esc(t('posted'))}</div>
       </section>
-
       <section class="panel stat">
-        <div class="eyebrow">
-          ${esc(t('portfolioValue'))}
-        </div>
-
-        <div class="money">
-          ${money(portfolioValue)}
-        </div>
-
-        <div class="muted tiny">
-          ${esc(t('Data'))}
-        </div>
+        <div class="eyebrow">${esc(t('portfolioValue'))}</div>
+        <div class="money">${money(portfolioValue)}</div>
+        <div class="muted tiny">${esc(t('Data'))}</div>
       </section>
-
     </div>
 
     <div class="space"></div>
 
     <div class="grid two">
-
       <section class="panel">
-
         <div class="panel-head">
           <h2>${esc(t('recent'))}</h2>
-
-          <button class="btn ghost small"
-            data-page="transactions">
-            ${esc(t('seeAll'))}
-          </button>
+          <button class="btn ghost small" data-page="transactions">${esc(t('seeAll'))}</button>
         </div>
-
         ${transactionList(txs.slice(0,6))}
-
       </section>
 
       <section class="panel">
-
         <div class="panel-head">
           <h2>${esc(t('analytics'))}</h2>
-
           <div class="chart-controls">
-            ${[
-              ['week','7D'],
-              ['month','30D'],
-              ['year','12M']
-            ].map(([value,label])=>`
-              <button
-                data-period="${value}"
-                class="${S.period===value?'active':''}">
-                ${label}
-              </button>
+            ${[['week','7D'],['month','30D'],['year','12M']].map(([value,label])=>`
+              <button data-period="${value}" class="${S.period===value?'active':''}">${label}</button>
             `).join('')}
           </div>
         </div>
-
-        <p class="tiny">
-          ${esc(t('analyticsSub'))}
-        </p>
-
+        <p class="tiny">${esc(t('analyticsSub'))}</p>
         <div id="chart"></div>
         <div id="chartDetail" class="chartdetail"></div>
-
       </section>
-
     </div>
 
     <div class="space"></div>
 
     <div class="grid two">
-
       <section class="panel">
-
         <div class="panel-head">
           <h2>${esc(t('portfolio'))}</h2>
-
-          <button class="btn ghost small"
-            data-page="wealth">
-            ${esc(t('viewHoldings'))}
-          </button>
+          <button class="btn ghost small" data-page="wealth">${esc(t('viewHoldings'))}</button>
         </div>
-
-        <div class="eyebrow">
-          ${esc(t('portfolioValue'))}
-        </div>
-
-        <div class="money"
-          style="font-size:33px;margin:9px 0 19px">
-          ${money(portfolioValue)}
-        </div>
-
+        <div class="eyebrow">${esc(t('portfolioValue'))}</div>
+        <div class="money" style="font-size:33px;margin:9px 0 19px">${money(portfolioValue)}</div>
         <div id="dashboardAllocation"></div>
-
-        <div class="notice">
-          ${esc(t('Data'))}
-        </div>
-
+        <div class="notice">${esc(t('Data'))}</div>
       </section>
 
       <section class="panel">
-
         <div class="panel-head">
           <h2>${esc(t('goals'))}</h2>
-
-          <button class="btn ghost small"
-            data-page="wealth">
-            ${esc(t('seeAll'))}
-          </button>
+          <button class="btn ghost small" data-page="wealth">${esc(t('seeAll'))}</button>
         </div>
-
         ${(wealth.goals||[]).slice(0,2).map(goal=>{
-          const progress=goal.target>0
-            ?Math.min(100,goal.saved/goal.target*100)
-            :0;
-
+          const progress=goal.target>0?Math.min(100,goal.saved/goal.target*100):0;
           return `
             <div style="margin-bottom:24px">
-
               <div class="row">
                 <strong>${esc(goal.name)}</strong>
-                <span class="muted tiny">
-                  ${Math.round(progress)}%
-                </span>
+                <span class="muted tiny">${Math.round(progress)}%</span>
               </div>
-
-              <div class="wealth-progress">
-                <span style="width:${progress}%"></span>
-              </div>
-
+              <div class="wealth-progress"><span style="width:${progress}%"></span></div>
               <div class="row">
-                <span class="tiny muted">
-                  ${money(goal.saved)}
-                </span>
-
-                <span class="tiny muted">
-                  ${money(goal.target)}
-                </span>
+                <span class="tiny muted">${money(goal.saved)}</span>
+                <span class="tiny muted">${money(goal.target)}</span>
               </div>
-
             </div>
           `;
         }).join('')}
-
-        <button class="btn ghost"
-          data-page="wealth"
-          style="width:100%">
-          ${esc(t('goals'))} ↗
-        </button>
-
+        <button class="btn ghost" data-page="wealth" style="width:100%">${esc(t('goals'))} ↗</button>
       </section>
-
     </div>
   `;
 }
 
 /* ============================================================
-   DASHBOARD SPENDING CHART
+   SPENDING CHART
    ============================================================ */
 
 function drawSpendingChart(){
   const container=$('chart');
-
-  if(!container||!S.data)return;
+  if(!container||!S.data) return;
 
   const today=new Date();
-
-  const count=
-    S.period==='week'?7:
-    S.period==='month'?30:12;
-
-  const values=[];
-  const labels=[];
+  const count=S.period==='week'?7:S.period==='month'?30:12;
+  const values=[], labels=[];
 
   for(let i=count-1;i>=0;i--){
     let start,end,label;
-
     if(S.period==='year'){
-      start=new Date(
-        today.getFullYear(),
-        today.getMonth()-i,
-        1
-      );
-
-      end=new Date(
-        today.getFullYear(),
-        today.getMonth()-i+1,
-        1
-      );
-
-      label=start.toLocaleDateString(S.lang,{
-        month:'short'
-      });
-
+      start=new Date(today.getFullYear(),today.getMonth()-i,1);
+      end=new Date(today.getFullYear(),today.getMonth()-i+1,1);
+      label=start.toLocaleDateString(S.lang,{month:'short'});
     }else{
-      start=new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        today.getDate()-i
-      );
-
-      end=new Date(
-        start.getFullYear(),
-        start.getMonth(),
-        start.getDate()+1
-      );
-
-      label=start.toLocaleDateString(S.lang,{
-        day:'numeric',
-        month:'short'
-      });
+      start=new Date(today.getFullYear(),today.getMonth(),today.getDate()-i);
+      end=new Date(start.getFullYear(),start.getMonth(),start.getDate()+1);
+      label=start.toLocaleDateString(S.lang,{day:'numeric',month:'short'});
     }
-
     const value=(S.data.txs||[]).reduce((sum,tx)=>{
       const time=new Date(tx.createdAt).getTime();
-
-      if(
-        tx.status==='posted'&&
-        tx.dir==='out'&&
-        time>=start.getTime()&&
-        time<end.getTime()
-      ){
+      if(tx.status==='posted'&&tx.dir==='out'&&time>=start.getTime()&&time<end.getTime()){
         return sum+Number(tx.amount||0);
       }
-
       return sum;
     },0);
-
     values.push(value);
     labels.push(label);
   }
 
   const maximum=Math.max(1,...values);
-  const total=values.reduce((sum,n)=>sum+n,0);
+  const total=values.reduce((s,n)=>s+n,0);
 
   container.innerHTML=`
     <div class="chart">
       ${values.map((value,index)=>`
-        <button class="bar"
-          data-bar="${index}"
+        <button class="bar" data-bar="${index}"
           style="height:${Math.max(3,value/maximum*100)}%"
           title="${esc(labels[index])}: ${money(value)}"
-          aria-label="${esc(labels[index])}: ${money(value)}">
-        </button>
+          aria-label="${esc(labels[index])}: ${money(value)}"></button>
       `).join('')}
     </div>
-
     <div class="chartlabels">
       <span>${esc(labels[0])}</span>
       <strong>${money(total)}</strong>
@@ -2559,185 +2081,75 @@ function drawSpendingChart(){
   `;
 
   const detail=$('chartDetail');
-
-  if(detail){
-    detail.textContent=
-      `${t('expenses')}: ${money(total)}`;
-  }
+  if(detail) detail.textContent=`${t('expenses')}: ${money(total)}`;
 
   container.querySelectorAll('[data-bar]').forEach(button=>{
     button.addEventListener('click',()=>{
-      container.querySelectorAll('.bar').forEach(bar=>
-        bar.classList.remove('active')
-      );
-
+      container.querySelectorAll('.bar').forEach(b=>b.classList.remove('active'));
       button.classList.add('active');
-
       const index=Number(button.dataset.bar);
-
-      if(detail){
-        detail.textContent=
-          `${labels[index]} · ${money(values[index])}`;
-      }
+      if(detail) detail.textContent=`${labels[index]} · ${money(values[index])}`;
     });
   });
 }
 
 /* ============================================================
-   PRIVATE WEALTH — DATA HELPERS
+   WEALTH
    ============================================================ */
 
-const ASSET_COLORS = {
-  'Equities':'#A80F30',
-  'Fixed income':'#D9C6A3',
-  'Alternatives':'#19866B',
-  'Cash equivalents':'#788291'
-};
-
 function wealthData(){
-  return S.data?.wealth || {
-    holdings:[],
-    goals:[],
-    portfolioValue:0,
-    savings:0,
-    netWorth:S.data?.balance||0,
-    livedata:true
-  };
+  return S.data?.wealth||{holdings:[],goals:[],portfolioValue:0,savings:0,netWorth:S.data?.balance||0};
 }
 
-function holdingValue(holding){
-  return Number(
-    holding.value ??
-    (Number(holding.units||0)*Number(holding.price||0))
-  );
+function holdingValue(h){
+  return Number(h.value??(Number(h.units||0)*Number(h.price||0)));
 }
-
-function holdingCost(holding){
-  return Number(
-    holding.invested ??
-    (Number(holding.units||0)*Number(holding.cost||0))
-  );
-}
-
-function holdingGain(holding){
-  return holdingValue(holding)-holdingCost(holding);
+function holdingCost(h){
+  return Number(h.invested??(Number(h.units||0)*Number(h.cost||0)));
 }
 
 function portfolioSummary(){
-  const value = Number(
-    S.data?.wealth?.portfolioValue ??
-    S.data?.balance ??
-    0
-  );
-
-  return {
-    value: value,
-    cost: value,
-    gain: 0,
-    returnPct: 0
-  };
+  const value=Number(S.data?.wealth?.portfolioValue??S.data?.balance??0);
+  return {value:value,cost:value,gain:0,returnPct:0};
 }
 
 function allocationData(){
-  const value = portfolioSummary().value;
-
-  return value > 0
-    ? [{
-        name: 'Account portfolio',
-        value: value,
-        percentage: 100,
-        color: '#A80F30'
-      }]
-    : [];
+  const value=portfolioSummary().value;
+  return value>0?[{name:'Account portfolio',value:value,percentage:100,color:'#A80F30'}]:[];
 }
-
-/* ============================================================
-   PORTFOLIO ALLOCATION
-   ============================================================ */
 
 function allocationView(compact=false){
   const allocation=allocationData();
   const total=portfolioSummary().value;
-
-  if(!allocation.length){
-    return `
-      <div class="empty">
-        No investments are available.
-      </div>
-    `;
-  }
-
+  if(!allocation.length) return `<div class="empty">No investments are available.</div>`;
   let cursor=0;
-
   const stops=allocation.map(item=>{
-    const start=cursor;
-    cursor+=item.percentage;
-
+    const start=cursor; cursor+=item.percentage;
     return `${item.color} ${start}% ${cursor}%`;
   }).join(',');
 
   return `
-    <div class="row"
-      style="
-        align-items:center;
-        gap:25px;
-        flex-wrap:wrap">
-
-      <div class="wealth-donut"
-        style="
-          width:${compact?'145px':'190px'};
-          background:conic-gradient(${stops})">
-
+    <div class="row" style="align-items:center;gap:25px;flex-wrap:wrap">
+      <div class="wealth-donut" style="width:${compact?'145px':'190px'};background:conic-gradient(${stops})">
         <div class="wealth-donut-center">
-          <div class="eyebrow">
-            ${esc(t('portfolioValue'))}
-          </div>
-
-          <div class="money"
-            style="font-size:${compact?'18px':'22px'}">
-            ${compactMoney(total)}
-          </div>
+          <div class="eyebrow">${esc(t('portfolioValue'))}</div>
+          <div class="money" style="font-size:${compact?'18px':'22px'}">${compactMoney(total)}</div>
         </div>
-
       </div>
-
       <div class="wealth-legend">
-
         ${allocation.map(item=>`
           <div class="row">
-
-            <span>
-              <span class="wealth-dot"
-                style="background:${item.color}">
-              </span>
-
-              ${esc(item.name)}
-            </span>
-
+            <span><span class="wealth-dot" style="background:${item.color}"></span>${esc(item.name)}</span>
             <div style="text-align:right">
-              <strong class="money">
-                ${item.percentage.toFixed(1)}%
-              </strong>
-
-              ${compact?'':`
-                <div class="tiny muted">
-                  ${money(item.value)}
-                </div>
-              `}
+              <strong class="money">${item.percentage.toFixed(1)}%</strong>
+              ${compact?'':`<div class="tiny muted">${money(item.value)}</div>`}
             </div>
-
           </div>
         `).join('')}
-
       </div>
-
     </div>
   `;
 }
-
-/* ============================================================
-   PORTFOLIO PERFORMANCE — HISTORY
-   ============================================================ */
 
 function seededNoise(index,seed){
   const x=Math.sin((index+1)*12.9898+seed*78.233)*43758.5453;
@@ -2751,1485 +2163,606 @@ function performanceSeries(period){
     half:{count:26,days:7,trend:.058,volatility:.012},
     year:{count:12,days:30,trend:.082,volatility:.015},
     all:{count:24,days:30,trend:.14,volatility:.021}
-  }[period]||{
-    count:12,
-    days:30,
-    trend:.082,
-    volatility:.015
-  };
+  }[period]||{count:12,days:30,trend:.082,volatility:.015};
 
   const current=portfolioSummary().value;
   const points=[];
-
   for(let i=0;i<config.count;i++){
-    const progress=config.count===1
-      ?1
-      :i/(config.count-1);
-
+    const progress=config.count===1?1:i/(config.count-1);
     const trend=1-config.trend*(1-progress);
-
-    const noise=seededNoise(i,config.count)*
-      config.volatility*
-      Math.sin(Math.PI*progress);
-
-    const value=i===config.count-1
-      ?current
-      :Math.max(0,current*(trend+noise));
-
+    const noise=seededNoise(i,config.count)*config.volatility*Math.sin(Math.PI*progress);
+    const value=i===config.count-1?current:Math.max(0,current*(trend+noise));
     const date=new Date();
-
-    date.setDate(
-      date.getDate()-
-      (config.count-1-i)*config.days
-    );
-
-    points.push({
-      date,
-      value
-    });
+    date.setDate(date.getDate()-(config.count-1-i)*config.days);
+    points.push({date,value});
   }
-
   return points;
 }
 
 function performanceChartMarkup(){
   const periods=[
-    ['month',t('oneMonth')],
-    ['quarter',t('threeMonths')],
-    ['half',t('sixMonths')],
-    ['year',t('oneYear')],
-    ['all',t('allTime')]
+    ['month',t('oneMonth')],['quarter',t('threeMonths')],['half',t('sixMonths')],
+    ['year',t('oneYear')],['all',t('allTime')]
   ];
-
   return `
-    <div class="panel-head"
-      style="align-items:flex-start;flex-wrap:wrap">
-
+    <div class="panel-head" style="align-items:flex-start;flex-wrap:wrap">
       <div>
         <h2>${esc(t('performance'))}</h2>
-
-        <p class="tiny" style="margin-top:6px">
-          ${esc(t('Data'))}
-        </p>
+        <p class="tiny" style="margin-top:6px">${esc(t('Data'))}</p>
       </div>
-
       <div class="wealth-periods">
         ${periods.map(([value,label])=>`
-          <button
-            class="${S.wealthPeriod===value?'active':''}"
-            data-wealth-period="${value}">
+          <button class="${S.wealthPeriod===value?'active':''}" data-wealth-period="${value}">
             ${esc(label)}
           </button>
         `).join('')}
       </div>
-
     </div>
-
     <div id="performanceChart"></div>
-
-    <div class="wealth-tooltip"
-      id="performanceTooltip">
-    </div>
+    <div class="wealth-tooltip" id="performanceTooltip"></div>
   `;
 }
 
 function renderPerformanceChart(){
   const container=$('performanceChart');
   const tooltip=$('performanceTooltip');
-
-  if(!container)return;
+  if(!container) return;
 
   const points=performanceSeries(S.wealthPeriod);
+  if(!points.length){ container.innerHTML=`<div class="empty">No portfolio data.</div>`; return; }
 
-  if(!points.length){
-    container.innerHTML=`
-      <div class="empty">No portfolio data.</div>
-    `;
-    return;
-  }
-
-  const width=760;
-  const height=245;
-
-  const left=10;
-  const right=10;
-  const top=18;
-  const bottom=25;
-
-  const plotWidth=width-left-right;
-  const plotHeight=height-top-bottom;
-
+  const width=760,height=245,left=10,right=10,top=18,bottom=25;
+  const plotWidth=width-left-right, plotHeight=height-top-bottom;
   const values=points.map(p=>p.value);
-
-  const minimum=Math.min(...values);
-  const maximum=Math.max(...values);
-
+  const minimum=Math.min(...values), maximum=Math.max(...values);
   const range=Math.max(1,maximum-minimum);
-
   const padding=range*.18;
+  const minY=Math.max(0,minimum-padding), maxY=maximum+padding;
 
-  const minY=Math.max(0,minimum-padding);
-  const maxY=maximum+padding;
-
-  function x(index){
-    return left+
-      index/Math.max(1,points.length-1)*plotWidth;
-  }
-
-  function y(value){
-    return top+
-      (1-(value-minY)/(maxY-minY))*plotHeight;
-  }
-
-  const coordinates=points.map((p,i)=>({
-    x:x(i),
-    y:y(p.value)
-  }));
-
-  const line=coordinates.map((p,i)=>
-    `${i===0?'M':'L'} ${p.x.toFixed(2)} ${p.y.toFixed(2)}`
-  ).join(' ');
-
-  const area=
-    line+
-    ` L ${coordinates[coordinates.length-1].x} ${height-bottom}`+
-    ` L ${coordinates[0].x} ${height-bottom} Z`;
+  const x=i=>left+i/Math.max(1,points.length-1)*plotWidth;
+  const y=v=>top+(1-(v-minY)/(maxY-minY))*plotHeight;
+  const coords=points.map((p,i)=>({x:x(i),y:y(p.value)}));
+  const line=coords.map((p,i)=>`${i===0?'M':'L'} ${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(' ');
+  const area=line+` L ${coords[coords.length-1].x} ${height-bottom} L ${coords[0].x} ${height-bottom} Z`;
 
   const gridLines=[0,.25,.5,.75,1].map(f=>{
     const yy=top+f*plotHeight;
-
-    return `
-      <line
-        x1="${left}"
-        y1="${yy}"
-        x2="${width-right}"
-        y2="${yy}"
-        stroke="var(--line)"
-        stroke-dasharray="4 5">
-      </line>
-    `;
+    return `<line x1="${left}" y1="${yy}" x2="${width-right}" y2="${yy}" stroke="var(--line)" stroke-dasharray="4 5"></line>`;
   }).join('');
 
-  const markers=coordinates.map((p,i)=>`
-    <circle
-      class="wealth-chart-point"
-      data-performance-point="${i}"
-      cx="${p.x}"
-      cy="${p.y}"
-      r="5"
-      opacity="0"
-      tabindex="0"
-      role="button"
-      aria-label="${esc(
-        fmtDate(points[i].date)+': '+money(points[i].value)
-      )}">
-    </circle>
+  const markers=coords.map((p,i)=>`
+    <circle class="wealth-chart-point" data-performance-point="${i}" cx="${p.x}" cy="${p.y}" r="5"
+      opacity="0" tabindex="0" role="button"
+      aria-label="${esc(fmtDate(points[i].date)+': '+money(points[i].value))}"></circle>
   `).join('');
 
-  const first=points[0];
-  const last=points[points.length-1];
+  const first=points[0], last=points[points.length-1];
 
   container.innerHTML=`
-    <svg class="wealth-chart"
-      viewBox="0 0 ${width} ${height}"
-      role="img"
-      aria-label="Illustrative portfolio performance">
-
+    <svg class="wealth-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="Illustrative portfolio performance">
       <defs>
-        <linearGradient id="wealthGradient"
-          x1="0" y1="0" x2="0" y2="1">
-
-          <stop offset="0%"
-            stop-color="#A80F30"
-            stop-opacity=".28">
-          </stop>
-
-          <stop offset="100%"
-            stop-color="#A80F30"
-            stop-opacity="0">
-          </stop>
+        <linearGradient id="wealthGradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#A80F30" stop-opacity=".28"></stop>
+          <stop offset="100%" stop-color="#A80F30" stop-opacity="0"></stop>
         </linearGradient>
       </defs>
-
       ${gridLines}
-
       <path class="area" d="${area}"></path>
       <path class="line" d="${line}"></path>
-
       ${markers}
-
     </svg>
-
-    <div class="row tiny muted"
-      style="margin-top:4px">
+    <div class="row tiny muted" style="margin-top:4px">
       <span>${fmtDate(first.date)}</span>
       <span>${fmtDate(last.date)}</span>
     </div>
   `;
 
   const change=last.value-first.value;
-  const changePct=first.value>0
-    ?change/first.value
-    :0;
+  const changePct=first.value>0?change/first.value:0;
 
   function showPoint(index){
     const point=points[index];
-
-    if(!point||!tooltip)return;
-
-    tooltip.textContent=
-      `${fmtDate(point.date)} · ${money(point.value)} `+
-      '(illustrative)';
-
-    container.querySelectorAll(
-      '[data-performance-point]'
-    ).forEach(circle=>{
-      circle.setAttribute(
-        'opacity',
-        Number(circle.dataset.performancePoint)===index
-          ?'1'
-          :'0'
-      );
+    if(!point||!tooltip) return;
+    tooltip.textContent=`${fmtDate(point.date)} · ${money(point.value)} (illustrative)`;
+    container.querySelectorAll('[data-performance-point]').forEach(circle=>{
+      circle.setAttribute('opacity',Number(circle.dataset.performancePoint)===index?'1':'0');
     });
   }
 
-  container.querySelectorAll(
-    '[data-performance-point]'
-  ).forEach(circle=>{
+  container.querySelectorAll('[data-performance-point]').forEach(circle=>{
     const index=Number(circle.dataset.performancePoint);
-
-    circle.addEventListener('mouseenter',()=>{
-      showPoint(index);
-    });
-
-    circle.addEventListener('focus',()=>{
-      showPoint(index);
-    });
-
-    circle.addEventListener('click',()=>{
-      showPoint(index);
-    });
-
-    circle.addEventListener('keydown',event=>{
-      if(event.key==='Enter'||event.key===' '){
-        event.preventDefault();
-        showPoint(index);
-      }
+    circle.addEventListener('mouseenter',()=>showPoint(index));
+    circle.addEventListener('focus',()=>showPoint(index));
+    circle.addEventListener('click',()=>showPoint(index));
+    circle.addEventListener('keydown',e=>{
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); showPoint(index); }
     });
   });
 
   if(tooltip){
-    tooltip.textContent=
-      `${money(last.value)} · `+
-      `${change>=0?'+':''}${money(change)} `+
-      `(${change>=0?'+':''}${percent(changePct)}) `+
-      '· Illustrative period change';
+    tooltip.textContent=`${money(last.value)} · ${change>=0?'+':''}${money(change)} (${change>=0?'+':''}${percent(changePct)}) · Illustrative period change`;
   }
 }
 
-/* ============================================================
-   HOLDINGS
-   ============================================================ */
-
 function holdingsView(limit=0){
   const holdings=wealthData().holdings||[];
-
-  const visible=limit
-    ?holdings.slice(0,limit)
-    :holdings;
-
-  if(!visible.length){
-    return `
-      <div class="empty">
-        No holdings are available.
-      </div>
-    `;
-  }
-
+  const visible=limit?holdings.slice(0,limit):holdings;
+  if(!visible.length) return `<div class="empty">No holdings are available.</div>`;
   return visible.map(h=>{
-    const value=holdingValue(h);
-    const cost=holdingCost(h);
-    const gain=value-cost;
-    const gainPct=cost>0?gain/cost:0;
-
+    const value=holdingValue(h), cost=holdingCost(h);
+    const gain=value-cost, gainPct=cost>0?gain/cost:0;
     return `
-      <div class="holding"
-        data-holding="${esc(h.id)}"
-        role="button"
-        tabindex="0"
-        aria-label="${esc(h.name)}">
-
-        <div class="ticker"
-          style="color:${esc(h.color||'#D9C6A3')}">
-          ${esc(h.ticker)}
-        </div>
-
+      <div class="holding" data-holding="${esc(h.id)}" role="button" tabindex="0" aria-label="${esc(h.name)}">
+        <div class="ticker" style="color:${esc(h.color||'#D9C6A3')}">${esc(h.ticker)}</div>
         <div style="min-width:0">
           <strong>${esc(h.name)}</strong>
-
-          <small>
-            ${esc(h.className)} ·
-            ${Number(h.units).toLocaleString(S.lang)}
-            ${esc(t('units')).toLowerCase()}
-          </small>
+          <small>${esc(h.className)} · ${Number(h.units).toLocaleString(S.lang)} ${esc(t('units')).toLowerCase()}</small>
         </div>
-
         <div style="text-align:right">
           <div class="money">${money(value)}</div>
-
-          <small>
-            ${money(h.price)} / unit
-          </small>
+          <small>${money(h.price)} / unit</small>
         </div>
-
-        <div class="holding-gain"
-          style="text-align:right">
-
-          <strong class="${gain>=0?'positive':''}">
-            ${gain>=0?'+':''}${percent(gainPct)}
-          </strong>
-
-          <small>
-            ${gain>=0?'+':''}${money(gain)}
-          </small>
+        <div class="holding-gain" style="text-align:right">
+          <strong class="${gain>=0?'positive':''}">${gain>=0?'+':''}${percent(gainPct)}</strong>
+          <small>${gain>=0?'+':''}${money(gain)}</small>
         </div>
-
       </div>
     `;
   }).join('');
 }
 
-/* ============================================================
-   SAVINGS GOALS
-   ============================================================ */
-
 function goalCardsView(){
   const goals=wealthData().goals||[];
-
-  if(!goals.length){
-    return `
-      <div class="empty">
-        ${esc(t('noGoals'))}
-      </div>
-    `;
-  }
-
+  if(!goals.length) return `<div class="empty">${esc(t('noGoals'))}</div>`;
   return `
-    <div class="grid"
-      style="grid-template-columns:repeat(auto-fit,minmax(235px,1fr))">
-
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(235px,1fr))">
       ${goals.map(goal=>{
-        const target=Number(goal.target||0);
-        const saved=Number(goal.saved||0);
-
-        const progress=target>0
-          ?Math.min(100,saved/target*100)
-          :0;
-
+        const target=Number(goal.target||0), saved=Number(goal.saved||0);
+        const progress=target>0?Math.min(100,saved/target*100):0;
         const remaining=Math.max(0,target-saved);
-
         return `
           <div class="goal-card">
-
             <div class="row">
               <strong>${esc(goal.name)}</strong>
-
-              <span class="tag">
-                ${Math.round(progress)}%
-              </span>
+              <span class="tag">${Math.round(progress)}%</span>
             </div>
-
-            <div class="money"
-              style="margin-top:18px">
-              ${money(saved)}
-            </div>
-
-            <div class="tiny muted">
-              ${esc(t('goalTarget'))}:
-              ${money(target)}
-            </div>
-
-            <div class="wealth-progress">
-              <span style="width:${progress}%"></span>
-            </div>
-
+            <div class="money" style="margin-top:18px">${money(saved)}</div>
+            <div class="tiny muted">${esc(t('goalTarget'))}: ${money(target)}</div>
+            <div class="wealth-progress"><span style="width:${progress}%"></span></div>
             <div class="row tiny muted">
               <span>${esc(t('remaining'))}</span>
               <strong>${money(remaining)}</strong>
             </div>
-
-            <button class="btn ghost small"
-              data-contribute-goal="${esc(goal.id)}"
-              ${remaining<=0?'disabled':''}
-              style="width:100%;margin-top:18px">
-
+            <button class="btn ghost small" data-contribute-goal="${esc(goal.id)}"
+              ${remaining<=0?'disabled':''} style="width:100%;margin-top:18px">
               + ${esc(t('contribute'))}
             </button>
-
           </div>
         `;
       }).join('')}
-
     </div>
   `;
 }
 
 function createGoalForm(){
   return `
-    <div class="panel"
-      style="margin-top:18px"
-      id="goalFormPanel">
-
+    <div class="panel" style="margin-top:18px" id="goalFormPanel">
       <div class="panel-head">
         <h2>${esc(t('newGoal'))}</h2>
-
-        <button class="btn ghost small"
-          data-action="cancelGoal">
-          ${esc(t('close'))}
-        </button>
+        <button class="btn ghost small" data-action="cancelGoal">${esc(t('close'))}</button>
       </div>
-
       <form id="createGoalForm">
-
-        <div class="grid"
-          style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
-
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
           <div class="field">
-            <label for="goalName">
-              ${esc(t('goalName'))}
-            </label>
-
-            <input id="goalName"
-              required
-              maxlength="60"
-              minlength="2"
-              placeholder="Future home">
+            <label for="goalName">${esc(t('goalName'))}</label>
+            <input id="goalName" required maxlength="60" minlength="2" placeholder="Future home">
           </div>
-
           <div class="field">
-            <label for="goalTarget">
-              ${esc(t('goalTarget'))} (EUR)
-            </label>
-
-            <input id="goalTarget"
-              type="number"
-              min="0.01"
-              max="1000000"
-              step="0.01"
-              required
-              placeholder="25000">
+            <label for="goalTarget">${esc(t('goalTarget'))} (EUR)</label>
+            <input id="goalTarget" type="number" min="0.01" max="1000000" step="0.01" required placeholder="25000">
           </div>
-
         </div>
-
-        <button class="btn" type="submit">
-          ${esc(t('createGoal'))}
-        </button>
-
+        <button class="btn" type="submit">${esc(t('createGoal'))}</button>
       </form>
-
       <div id="goalFormError"></div>
-
     </div>
   `;
 }
 
 function contributeGoalForm(goalId){
-  const goal=(wealthData().goals||[])
-    .find(g=>g.id===goalId);
-
-  if(!goal)return '';
-
-  const remaining=Math.max(
-    0,
-    Number(goal.target)-Number(goal.saved)
-  );
-
-  const available=Math.max(
-    0,
-    Number(S.data.balance)
-  );
-
+  const goal=(wealthData().goals||[]).find(g=>g.id===goalId);
+  if(!goal) return '';
+  const remaining=Math.max(0,Number(goal.target)-Number(goal.saved));
+  const available=Math.max(0,Number(S.data.balance));
   const maximum=Math.min(remaining,available);
-
   return `
-    <div class="panel"
-      style="margin-top:18px"
-      id="contributionFormPanel">
-
+    <div class="panel" style="margin-top:18px" id="contributionFormPanel">
       <div class="panel-head">
         <div>
           <h2>${esc(t('contribute'))}</h2>
-
-          <p class="tiny" style="margin-top:7px">
-            ${esc(goal.name)}
-          </p>
+          <p class="tiny" style="margin-top:7px">${esc(goal.name)}</p>
         </div>
-
-        <button class="btn ghost small"
-          data-action="cancelContribution">
-          ${esc(t('close'))}
-        </button>
+        <button class="btn ghost small" data-action="cancelContribution">${esc(t('close'))}</button>
       </div>
-
-      <div class="reviewline">
-        <span>${esc(t('available'))}</span>
-        <strong>${money(available)}</strong>
-      </div>
-
-      <div class="reviewline">
-        <span>${esc(t('remaining'))}</span>
-        <strong>${money(remaining)}</strong>
-      </div>
-
-      <form id="contributeGoalForm"
-        data-goal-id="${esc(goal.id)}"
-        style="margin-top:22px">
-
+      <div class="reviewline"><span>${esc(t('available'))}</span><strong>${money(available)}</strong></div>
+      <div class="reviewline"><span>${esc(t('remaining'))}</span><strong>${money(remaining)}</strong></div>
+      <form id="contributeGoalForm" data-goal-id="${esc(goal.id)}" style="margin-top:22px">
         <div class="field">
-          <label for="contributionAmount">
-            ${esc(t('contributionAmount'))} (EUR)
-          </label>
-
-          <input id="contributionAmount"
-            type="number"
-            min="0.01"
-            max="${maximum.toFixed(2)}"
-            step="0.01"
-            required
-            placeholder="250">
+          <label for="contributionAmount">${esc(t('contributionAmount'))} (EUR)</label>
+          <input id="contributionAmount" type="number" min="0.01" max="${maximum.toFixed(2)}" step="0.01" required placeholder="250">
         </div>
-
-        <button class="btn"
-          type="submit"
-          ${maximum<=0?'disabled':''}>
-          ${esc(t('contribute'))}
-        </button>
-
+        <button class="btn" type="submit" ${maximum<=0?'disabled':''}>${esc(t('contribute'))}</button>
       </form>
-
       <div id="contributionError"></div>
-
-      <div class="notice">
-        ${esc(t('goalNotice'))}
-      </div>
-
+      <div class="notice">${esc(t('goalNotice'))}</div>
     </div>
   `;
 }
-
-/* ============================================================
-   FULL WEALTH & INVESTMENTS PAGE
-   ============================================================ */
 
 function wealthView(){
   const w=wealthData();
   const summary=portfolioSummary();
-
   const cash=Number(S.data.balance||0);
   const savings=Number(w.savings||0);
-
-  const netWorth=Number(
-    w.netWorth??(cash+savings+summary.value)
-  );
+  const netWorth=Number(w.netWorth??(cash+savings+summary.value));
 
   return `
-    ${pageHead(
-      t('wealth'),
-      t('portfolioSub'),
-      `<button class="btn"
-        data-action="showGoalForm">
-        + ${esc(t('createGoal'))}
-      </button>`
-    )}
+    ${pageHead(t('wealth'),t('portfolioSub'),
+      `<button class="btn" data-action="showGoalForm">+ ${esc(t('createGoal'))}</button>`)}
 
-    <section class="panel wealth-hero"
-      style="padding:32px;margin-bottom:19px">
-
-      <div class="eyebrow">
-        ${esc(t('netWorth'))}
-      </div>
-
-      <div class="wealth-number">
-        ${money(netWorth)}
-      </div>
-
+    <section class="panel wealth-hero" style="padding:32px;margin-bottom:19px">
+      <div class="eyebrow">${esc(t('netWorth'))}</div>
+      <div class="wealth-number">${money(netWorth)}</div>
       <p>${esc(t('netWorthSub'))}</p>
-
-      <div class="divider"
-        style="border-color:#FFFFFF25">
-      </div>
-
-      <div class="row"
-        style="align-items:flex-end;flex-wrap:wrap">
-
+      <div class="divider" style="border-color:#FFFFFF25"></div>
+      <div class="row" style="align-items:flex-end;flex-wrap:wrap">
         <div>
-          <div class="eyebrow">
-            ${esc(t('portfolioValue'))}
-          </div>
-
-          <div class="money"
-            style="font-size:28px;margin-top:7px">
-            ${money(summary.value)}
-          </div>
+          <div class="eyebrow">${esc(t('portfolioValue'))}</div>
+          <div class="money" style="font-size:28px;margin-top:7px">${money(summary.value)}</div>
         </div>
-
         <div style="text-align:right">
-          <div class="eyebrow">
-            ${esc(t('gainLoss'))}
-          </div>
-
-          <div class="money"
-            style="font-size:20px;margin-top:7px">
-            ${summary.gain>=0?'+':''}${money(summary.gain)}
-          </div>
-
-          <div class="tiny"
-            style="color:#D9C6A3">
-            ${summary.gain>=0?'+':''}${percent(summary.returnPct)}
-          </div>
+          <div class="eyebrow">${esc(t('gainLoss'))}</div>
+          <div class="money" style="font-size:20px;margin-top:7px">${summary.gain>=0?'+':''}${money(summary.gain)}</div>
+          <div class="tiny" style="color:#D9C6A3">${summary.gain>=0?'+':''}${percent(summary.returnPct)}</div>
         </div>
-
       </div>
-
     </section>
 
-    <div class="wealth-kpis"
-      style="margin-bottom:19px">
-
-      ${[
-        [t('cash'),cash,'↗'],
-        [t('investments'),summary.value,'◇'],
-        [t('savings'),savings,'◎']
-      ].map(([label,value,symbol])=>`
-        <section class="panel">
-
-          <div class="row">
-            <div class="eyebrow">
-              ${esc(label)}
+    <div class="wealth-kpis" style="margin-bottom:19px">
+      ${[[t('cash'),cash,'↗'],[t('investments'),summary.value,'◇'],[t('savings'),savings,'◎']]
+        .map(([label,value,symbol])=>`
+          <section class="panel">
+            <div class="row">
+              <div class="eyebrow">${esc(label)}</div>
+              <span style="color:var(--burgundy);font-size:20px">${symbol}</span>
             </div>
-
-            <span style="
-              color:var(--burgundy);
-              font-size:20px">
-              ${symbol}
-            </span>
-          </div>
-
-          <div class="money"
-            style="margin-top:14px">
-            ${money(value)}
-          </div>
-
-        </section>
-      `).join('')}
-
+            <div class="money" style="margin-top:14px">${money(value)}</div>
+          </section>
+        `).join('')}
     </div>
 
-    <section class="panel"
-      style="margin-bottom:19px">
+    <section class="panel" style="margin-bottom:19px">${performanceChartMarkup()}</section>
 
-      ${performanceChartMarkup()}
-
-    </section>
-
-    <div class="grid two"
-      style="margin-bottom:19px">
-
+    <div class="grid two" style="margin-bottom:19px">
       <section class="panel">
-
-        <div class="panel-head">
-          <h2>${esc(t('allocation'))}</h2>
-        </div>
-
+        <div class="panel-head"><h2>${esc(t('allocation'))}</h2></div>
         ${allocationView()}
-
       </section>
-
       <section class="panel">
-
-        <div class="panel-head">
-          <h2>${esc(t('wealthSummary'))}</h2>
-        </div>
-
-        <div class="reviewline">
-          <span>${esc(t('cash'))}</span>
-          <strong>${money(cash)}</strong>
-        </div>
-
-        <div class="reviewline">
-          <span>${esc(t('investments'))}</span>
-          <strong>${money(summary.value)}</strong>
-        </div>
-
-        <div class="reviewline">
-          <span>${esc(t('savings'))}</span>
-          <strong>${money(savings)}</strong>
-        </div>
-
-        <div class="reviewline">
-          <span>${esc(t('netWorth'))}</span>
-          <strong class="money">
-            ${money(netWorth)}
-          </strong>
-        </div>
-
-        <div class="notice">
-          ${esc(t('Data'))}
-        </div>
-
+        <div class="panel-head"><h2>${esc(t('wealthSummary'))}</h2></div>
+        <div class="reviewline"><span>${esc(t('cash'))}</span><strong>${money(cash)}</strong></div>
+        <div class="reviewline"><span>${esc(t('investments'))}</span><strong>${money(summary.value)}</strong></div>
+        <div class="reviewline"><span>${esc(t('savings'))}</span><strong>${money(savings)}</strong></div>
+        <div class="reviewline"><span>${esc(t('netWorth'))}</span><strong class="money">${money(netWorth)}</strong></div>
+        <div class="notice">${esc(t('Data'))}</div>
       </section>
-
     </div>
 
-    <section class="panel"
-      style="margin-bottom:19px">
-
+    <section class="panel" style="margin-bottom:19px">
       <div class="panel-head">
-
         <div>
           <h2>${esc(t('holdings'))}</h2>
-
-          <p class="tiny" style="margin-top:6px">
-            ${esc(t('portfolioSub'))}
-          </p>
+          <p class="tiny" style="margin-top:6px">${esc(t('portfolioSub'))}</p>
         </div>
-
-        <span class="tag">
-          ${(w.holdings||[]).length} ASSETS
-        </span>
-
+        <span class="tag">${(w.holdings||[]).length} ASSETS</span>
       </div>
-
       ${holdingsView()}
-
     </section>
 
     <section class="panel">
-
       <div class="panel-head">
-
         <div>
           <h2>${esc(t('goals'))}</h2>
-
-          <p class="tiny" style="margin-top:6px">
-            ${esc(t('goalsSub'))}
-          </p>
+          <p class="tiny" style="margin-top:6px">${esc(t('goalsSub'))}</p>
         </div>
-
-        <button class="btn ghost small"
-          data-action="showGoalForm">
-          + ${esc(t('createGoal'))}
-        </button>
-
+        <button class="btn ghost small" data-action="showGoalForm">+ ${esc(t('createGoal'))}</button>
       </div>
-
       ${goalCardsView()}
-
       <div id="wealthFormHost"></div>
-
     </section>
   `;
 }
 
-/* ============================================================
-   HOLDING DETAILS DRAWER
-   ============================================================ */
-
-function holdingDetailMarkup(holding){
-  const value=holdingValue(holding);
-  const cost=holdingCost(holding);
-  const gain=value-cost;
-  const gainPct=cost>0?gain/cost:0;
-
+function holdingDetailMarkup(h){
+  const value=holdingValue(h), cost=holdingCost(h);
+  const gain=value-cost, gainPct=cost>0?gain/cost:0;
   return `
     <div class="detail-top">
-
       <div>
-        <div class="eyebrow">
-          ${esc(t('asset'))} / ${esc(holding.ticker)}
-        </div>
-
-        <h2 style="margin-top:9px">
-          ${esc(holding.name)}
-        </h2>
+        <div class="eyebrow">${esc(t('asset'))} / ${esc(h.ticker)}</div>
+        <h2 style="margin-top:9px">${esc(h.name)}</h2>
       </div>
-
-      <button class="detail-close"
-        data-action="closeDrawer"
-        aria-label="${esc(t('close'))}">
-        ×
-      </button>
-
+      <button class="detail-close" data-action="closeDrawer" aria-label="${esc(t('close'))}">×</button>
     </div>
-
-    <div class="ticker"
-      style="
-        display:grid;
-        place-items:center;
-        width:55px;
-        height:55px;
-        border-radius:15px;
-        background:var(--soft);
-        color:${esc(holding.color||'#D9C6A3')};
-        font-weight:800">
-
-      ${esc(holding.ticker)}
+    <div class="ticker" style="display:grid;place-items:center;width:55px;height:55px;border-radius:15px;background:var(--soft);color:${esc(h.color||'#D9C6A3')};font-weight:800">${esc(h.ticker)}</div>
+    <div class="eyebrow" style="margin-top:30px">${esc(t('marketValue'))}</div>
+    <div class="detail-value">${money(value)}</div>
+    <div class="${gain>=0?'positive':''}" style="font-weight:700;margin-bottom:28px">
+      ${gain>=0?'+':''}${money(gain)} (${gain>=0?'+':''}${percent(gainPct)})
     </div>
-
-    <div class="eyebrow"
-      style="margin-top:30px">
-      ${esc(t('marketValue'))}
-    </div>
-
-    <div class="detail-value">
-      ${money(value)}
-    </div>
-
-    <div class="${gain>=0?'positive':''}"
-      style="font-weight:700;margin-bottom:28px">
-
-      ${gain>=0?'+':''}${money(gain)}
-      (${gain>=0?'+':''}${percent(gainPct)})
-    </div>
-
     ${[
-      [t('assetClass'),holding.className],
-      [t('units'),Number(holding.units).toLocaleString(S.lang)],
-      [t('unitPrice'),money(holding.price)],
+      [t('assetClass'),h.className],
+      [t('units'),Number(h.units).toLocaleString(S.lang)],
+      [t('unitPrice'),money(h.price)],
       [t('costBasis'),money(cost)],
       [t('marketValue'),money(value)],
       [t('gainLoss'),(gain>=0?'+':'')+money(gain)],
       [t('return'),(gainPct>=0?'+':'')+percent(gainPct)]
     ].map(([label,value])=>`
-      <div class="detail-line">
-        <span>${esc(label)}</span>
-        <strong>${esc(value)}</strong>
-      </div>
+      <div class="detail-line"><span>${esc(label)}</span><strong>${esc(value)}</strong></div>
     `).join('')}
-
-    <div class="notice">
-      ${esc(t('Data'))}
-    </div>
+    <div class="notice">${esc(t('Data'))}</div>
   `;
 }
 
 function openHoldingDrawer(id){
-  const holding=(wealthData().holdings||[])
-    .find(h=>h.id===id);
-
-  if(!holding)return;
-
-  openDetailDrawer(
-    holdingDetailMarkup(holding)
-  );
+  const holding=(wealthData().holdings||[]).find(h=>h.id===id);
+  if(!holding) return;
+  openDetailDrawer(holdingDetailMarkup(holding));
 }
 
 /* ============================================================
-   SAVINGS GOAL ACTIONS
+   GOAL ACTIONS
    ============================================================ */
 
 function showGoalForm(){
-  if(S.page!=='wealth'){
-    navigate('wealth');
-  }
-
+  if(S.page!=='wealth') navigate('wealth');
   const host=$('wealthFormHost');
-
-  if(!host)return;
-
+  if(!host) return;
   host.innerHTML=createGoalForm();
-
-  host.scrollIntoView({
-    behavior:'smooth',
-    block:'nearest'
-  });
-
+  host.scrollIntoView({behavior:'smooth',block:'nearest'});
   $('goalName')?.focus();
 }
 
 function cancelGoalForm(){
   const host=$('wealthFormHost');
-
-  if(host)host.innerHTML='';
+  if(host) host.innerHTML='';
 }
 
 function showContributionForm(goalId){
-  if(S.page!=='wealth'){
-    navigate('wealth');
-  }
-
+  if(S.page!=='wealth') navigate('wealth');
   const host=$('wealthFormHost');
-
-  if(!host)return;
-
+  if(!host) return;
   host.innerHTML=contributeGoalForm(goalId);
-
-  host.scrollIntoView({
-    behavior:'smooth',
-    block:'nearest'
-  });
-
+  host.scrollIntoView({behavior:'smooth',block:'nearest'});
   $('contributionAmount')?.focus();
 }
 
 function cancelContributionForm(){
   const host=$('wealthFormHost');
-
-  if(host)host.innerHTML='';
+  if(host) host.innerHTML='';
 }
 
 function showFormError(id,message){
   const target=$(id);
-
-  if(target){
-    target.innerHTML=`
-      <div class="error">
-        ${esc(message)}
-      </div>
-    `;
-  }else{
-    toast(message);
-  }
+  if(target) target.innerHTML=`<div class="error">${esc(message)}</div>`;
+  else toast(message);
 }
 
 async function submitCreateGoal(){
-  if(S.busy)return;
-
+  if(S.busy) return;
   const name=$('goalName')?.value.trim()||'';
   const target=$('goalTarget')?.value||'';
-
-  if(name.length<2||name.length>60){
-    showFormError(
-      'goalFormError',
-      'Enter a goal name between 2 and 60 characters.'
-    );
-    return;
+  if(name.length<2||name.length>60){ showFormError('goalFormError','Enter a goal name between 2 and 60 characters.'); return; }
+  if(!/^\d+(?:\.\d{1,2})?$/.test(target)||Number(target)<=0||Number(target)>1000000){
+    showFormError('goalFormError','Enter a valid target amount.'); return;
   }
-
-  if(
-    !/^\d+(?:\.\d{1,2})?$/.test(target)||
-    Number(target)<=0||
-    Number(target)>1000000
-  ){
-    showFormError(
-      'goalFormError',
-      'Enter a valid target amount.'
-    );
-    return;
-  }
-
   S.busy=true;
-
   try{
-    const response=await rpc('createGoal',{
-      name,
-      target
-    });
-
-    S.data=response.state;
-
-    render();
-
-    toast(t('goalCreated'));
-
-  }catch(error){
-    showFormError(
-      'goalFormError',
-      error.message
-    );
-  }finally{
-    S.busy=false;
-  }
+    const response=await api('createGoal',{name,target});
+    S.data=response.state; render(); toast(t('goalCreated'));
+  }catch(error){ showFormError('goalFormError',error.message); }
+  finally{ S.busy=false; }
 }
 
 async function submitContribution(goalId){
-  if(S.busy)return;
-
+  if(S.busy) return;
   const amount=$('contributionAmount')?.value||'';
-
-  const goal=(wealthData().goals||[])
-    .find(g=>g.id===goalId);
-
-  if(!goal){
-    toast('Savings goal not found.');
-    return;
+  const goal=(wealthData().goals||[]).find(g=>g.id===goalId);
+  if(!goal){ toast('Savings goal not found.'); return; }
+  const maximum=Math.min(Number(S.data.balance),Number(goal.target)-Number(goal.saved));
+  if(!/^\d+(?:\.\d{1,2})?$/.test(amount)||Number(amount)<=0||Number(amount)>maximum){
+    showFormError('contributionError','Enter an amount within your available balance and remaining goal.'); return;
   }
-
-  const maximum=Math.min(
-    Number(S.data.balance),
-    Number(goal.target)-Number(goal.saved)
-  );
-
-  if(
-    !/^\d+(?:\.\d{1,2})?$/.test(amount)||
-    Number(amount)<=0||
-    Number(amount)>maximum
-  ){
-    showFormError(
-      'contributionError',
-      'Enter an amount within your available balance and remaining goal.'
-    );
-    return;
-  }
-
   S.busy=true;
-
   const requestId=uuid();
-
   try{
-    const response=await rpc('contributeGoal',{
-      requestId,
-      goalId,
-      amount
-    });
-
-    S.data=response.state;
-
-    render();
-
-    toast(t('contributionSaved'));
-
-  }catch(error){
-    showFormError(
-      'contributionError',
-      error.message
-    );
-  }finally{
-    S.busy=false;
-  }
+    const response=await api('contributeGoal',{requestId,goalId,amount});
+    S.data=response.state; render(); toast(t('contributionSaved'));
+  }catch(error){ showFormError('contributionError',error.message); }
+  finally{ S.busy=false; }
 }
 
 /* ============================================================
-   BANKING — PAYMENT WORKFLOW
+   PAYMENTS
    ============================================================ */
 
 function paymentView(){
   const draft=S.draft||{};
-
   return `
-    ${pageHead(
-      t('payments'),
-      t('paymentNote')
-    )}
-
+    ${pageHead(t('payments'),t('paymentNote'))}
     <div class="grid two">
-
       <section class="panel">
-
         <div class="steps">
-          ${[
-            [1,t('paymentDetails')],
-            [2,t('reviewDetails')],
-            [3,t('paymentSuccess')]
-          ].map(([number,label])=>`
-            <span class="step ${S.step===number?'active':''}">
-              ${number}. ${esc(label)}
-            </span>
-          `).join('')}
+          ${[[1,t('paymentDetails')],[2,t('reviewDetails')],[3,t('paymentSuccess')]]
+            .map(([number,label])=>`
+              <span class="step ${S.step===number?'active':''}">${number}. ${esc(label)}</span>
+            `).join('')}
         </div>
-
-        ${S.step===1
-          ?paymentDetailsView(draft)
-          :S.step===2
-            ?paymentReviewView(draft)
-            :paymentSuccessView(draft)
-        }
-
+        ${S.step===1?paymentDetailsView(draft):S.step===2?paymentReviewView(draft):paymentSuccessView(draft)}
       </section>
 
       <section class="stack">
-
         <div class="panel">
-
-          <div class="eyebrow">
-            ${esc(t('available'))}
-          </div>
-
-          <div class="money"
-            style="font-size:34px;margin:12px 0">
-            ${money(S.data.balance)}
-          </div>
-
-          <div class="tiny muted">
-            ${esc(t('balance'))}
-          </div>
-
+          <div class="eyebrow">${esc(t('available'))}</div>
+          <div class="money" style="font-size:34px;margin:12px 0">${money(S.data.balance)}</div>
+          <div class="tiny muted">${esc(t('balance'))}</div>
           <div class="divider"></div>
-
-          <div class="eyebrow">
-            ${esc(t('account'))}
-          </div>
-
+          <div class="eyebrow">${esc(t('account'))}</div>
           <div style="margin-top:9px">
-            <strong>
-              ${esc(S.data.account.holder)}
-            </strong>
-
-            <div class="tiny muted"
-              style="overflow-wrap:anywhere;margin-top:5px">
-              ${esc(S.data.account.iban)}
-            </div>
+            <strong>${esc(S.data.account.holder)}</strong>
+            <div class="tiny muted" style="overflow-wrap:anywhere;margin-top:5px">${esc(S.data.account.iban)}</div>
           </div>
-
         </div>
 
         <div class="panel">
-
           <div class="panel-head">
             <h2>${esc(t('saved'))}</h2>
-
-            <button class="btn ghost small"
-              data-page="beneficiaries">
-              ${esc(t('seeAll'))}
-            </button>
+            <button class="btn ghost small" data-page="beneficiaries">${esc(t('seeAll'))}</button>
           </div>
-
           ${(S.data.payees||[]).slice(0,4).map(p=>`
             <div class="payee">
-
               <div style="min-width:0">
                 <strong>${esc(p.name)}</strong>
                 <small>${esc(p.iban)}</small>
               </div>
-
-              <button class="btn ghost small"
-                data-select-payee="${esc(p.id)}">
-                ${esc(t('pay'))}
-              </button>
-
+              <button class="btn ghost small" data-select-payee="${esc(p.id)}">${esc(t('pay'))}</button>
             </div>
           `).join('')}
-
-          ${!(S.data.payees||[]).length
-            ?`<div class="empty">${esc(t('noPayees'))}</div>`
-            :''
-          }
-
+          ${!(S.data.payees||[]).length?`<div class="empty">${esc(t('noPayees'))}</div>`:''}
         </div>
-
       </section>
-
     </div>
   `;
 }
 
 function paymentDetailsView(draft){
   return `
-    <h2 style="margin-bottom:22px">
-      ${esc(t('paymentDetails'))}
-    </h2>
-
+    <h2 style="margin-bottom:22px">${esc(t('paymentDetails'))}</h2>
     <form id="paymentDetailsForm">
-
       <div class="field">
-        <label for="paymentName">
-          ${esc(t('recipient'))}
-        </label>
-
-        <input id="paymentName"
-          maxlength="140"
-          required
-          autocomplete="off"
-          value="${esc(draft.name||'')}"
-          placeholder="Jordan Sample">
+        <label for="paymentName">${esc(t('recipient'))}</label>
+        <input id="paymentName" maxlength="140" required autocomplete="off" value="${esc(draft.name||'')}" placeholder="Jordan Sample">
       </div>
-
       <div class="field">
-        <label for="paymentIBAN">
-          ${esc(t('iban'))}
-        </label>
-
-        <input id="paymentIBAN"
-          maxlength="45"
-          required
-          spellcheck="false"
-          autocomplete="off"
-          value="${esc(draft.iban||'')}"
-          placeholder="GB61 CLJU 0413 0741 8724 47">
+        <label for="paymentIBAN">${esc(t('iban'))}</label>
+        <input id="paymentIBAN" maxlength="45" required spellcheck="false" autocomplete="off" value="${esc(draft.iban||'')}" placeholder="GB61 CLJU 0413 0741 8724 47">
       </div>
-
       <div class="field">
-        <label for="paymentAmount">
-          ${esc(t('amount'))} (EUR)
-        </label>
-
-        <input id="paymentAmount"
-          type="number"
-          min="0.01"
-          step="0.01"
-          max="${Number(S.data.balance).toFixed(2)}"
-          required
-          value="${esc(draft.amount||'')}"
-          placeholder="125.00">
+        <label for="paymentAmount">${esc(t('amount'))} (EUR)</label>
+        <input id="paymentAmount" type="number" min="0.01" step="0.01" max="${Number(S.data.balance).toFixed(2)}" required value="${esc(draft.amount||'')}" placeholder="125.00">
       </div>
-
       <div class="field">
-        <label for="paymentReference">
-          ${esc(t('reference'))}
-        </label>
-
-        <input id="paymentReference"
-          maxlength="140"
-          value="${esc(draft.ref||'')}"
-          placeholder="Invoice / personal transfer">
+        <label for="paymentReference">${esc(t('reference'))}</label>
+        <input id="paymentReference" maxlength="140" value="${esc(draft.ref||'')}" placeholder="Invoice / personal transfer">
       </div>
-
       <div class="field">
-        <label for="paymentWhen">
-          ${esc(t('timing'))}
-        </label>
-
+        <label for="paymentWhen">${esc(t('timing'))}</label>
         <select id="paymentWhen">
-          <option value="now"
-            ${(draft.when||'now')==='now'?'selected':''}>
-            ${esc(t('now'))}
-          </option>
-
-          <option value="schedule"
-            ${draft.when==='schedule'?'selected':''}>
-            ${esc(t('later'))}
-          </option>
+          <option value="now" ${(draft.when||'now')==='now'?'selected':''}>${esc(t('now'))}</option>
+          <option value="schedule" ${draft.when==='schedule'?'selected':''}>${esc(t('later'))}</option>
         </select>
       </div>
-
-      <div class="field ${draft.when==='schedule'?'':'hidden'}"
-        id="scheduleField">
-
-        <label for="paymentDate">
-          ${esc(t('date'))}
-        </label>
-
-        <input id="paymentDate"
-          type="date"
-          value="${esc(draft.date||'')}">
+      <div class="field ${draft.when==='schedule'?'':'hidden'}" id="scheduleField">
+        <label for="paymentDate">${esc(t('date'))}</label>
+        <input id="paymentDate" type="date" value="${esc(draft.date||'')}">
       </div>
-
-      <button class="btn"
-        type="submit">
-        ${esc(t('next'))} ↗
-      </button>
-
+      <button class="btn" type="submit">${esc(t('next'))} ↗</button>
     </form>
-
     <div id="paymentError"></div>
-
-    <div class="notice">
-      ${esc(t('paymentNote'))}
-    </div>
+    <div class="notice">${esc(t('paymentNote'))}</div>
   `;
 }
 
 function paymentReviewView(draft){
   return `
-    <h2 style="margin-bottom:22px">
-      ${esc(t('review'))}
-    </h2>
-
+    <h2 style="margin-bottom:22px">${esc(t('review'))}</h2>
     ${[
       [t('recipient'),draft.name],
       [t('iban'),draft.iban],
       [t('amount'),money(draft.amount)],
       [t('reference'),draft.ref||'—'],
-      [t('timing'),
-        draft.when==='schedule'
-          ?t('later')
-          :t('now')
-      ],
-      ...(draft.when==='schedule'
-        ?[[t('date'),draft.date]]
-        :[]
-      )
+      [t('timing'),draft.when==='schedule'?t('later'):t('now')],
+      ...(draft.when==='schedule'?[[t('date'),draft.date]]:[])
     ].map(([label,value])=>`
-      <div class="reviewline">
-        <span>${esc(label)}</span>
-        <strong>${esc(value)}</strong>
-      </div>
+      <div class="reviewline"><span>${esc(label)}</span><strong>${esc(value)}</strong></div>
     `).join('')}
-
-    <div class="row"
-      style="margin-top:25px;justify-content:flex-start;flex-wrap:wrap">
-
-      <button class="btn ghost"
-        data-action="paymentBack">
-        ← ${esc(t('back'))}
-      </button>
-
-      <button class="btn"
-        data-action="confirmPayment">
-        ${esc(t('confirm'))}
-      </button>
-
+    <div class="row" style="margin-top:25px;justify-content:flex-start;flex-wrap:wrap">
+      <button class="btn ghost" data-action="paymentBack">← ${esc(t('back'))}</button>
+      <button class="btn" data-action="confirmPayment">${esc(t('confirm'))}</button>
     </div>
-
     <div id="paymentError"></div>
-
-    <div class="notice">
-      ${esc(t('paymentNote'))}
-    </div>
+    <div class="notice">${esc(t('paymentNote'))}</div>
   `;
 }
 
-function paymentSuccessView(draft) {
+function paymentSuccessView(draft){
   return `
     <div style="text-align:center;padding:35px 10px">
-
-      <div style="
-        width:68px;
-        height:68px;
-        border-radius:50%;
-        background:#B4233222;
-        color:#E05260;
-        display:grid;
-        place-items:center;
-        margin:0 auto 23px;
-        font-size:32px">
-        ✕
-      </div>
-
-      <h1 style="font-size:31px;color:#E05260">
-        Transfer Declined
-      </h1>
-
-      <p style="
-        margin:13px auto 25px;
-        max-width:430px;
-        line-height:1.7">
+      <div style="width:68px;height:68px;border-radius:50%;background:#B4233222;color:#E05260;display:grid;place-items:center;margin:0 auto 23px;font-size:32px">✕</div>
+      <h1 style="font-size:31px;color:#E05260">Transfer Declined</h1>
+      <p style="margin:13px auto 25px;max-width:430px;line-height:1.7">
         Attention! Low liquidity. Operations in your account must experience a temporary delay . To know more, please contact our European email 
 finance@hapoaiim.com.
       </p>
-
-      <div class="money"
-        style="font-size:36px">
-        ${money(draft.amount)}
-      </div>
-
-      <div class="muted tiny"
-        style="margin:8px 0 25px">
-        Attempted transfer amount
-      </div>
-
-      <div style="
-        max-width:430px;
-        margin:0 auto 25px;
-        padding:20px;
-        border-radius:12px;
-        background:rgba(128,128,128,.08);
-        text-align:left">
-
-        <div style="
-          display:flex;
-          justify-content:space-between;
-          margin-bottom:14px">
-          <span>Transfer status</span>
-          <strong style="color:#E05260">
-            Declined
-          </strong>
+      <div class="money" style="font-size:36px">${money(draft.amount)}</div>
+      <div class="muted tiny" style="margin:8px 0 25px">Attempted transfer amount</div>
+      <div style="max-width:430px;margin:0 auto 25px;padding:20px;border-radius:12px;background:rgba(128,128,128,.08);text-align:left">
+        <div style="display:flex;justify-content:space-between;margin-bottom:14px">
+          <span>Transfer status</span><strong style="color:#E05260">Declined</strong>
         </div>
-
-        <div style="
-          display:flex;
-          justify-content:space-between;
-          margin-bottom:14px">
-          <span>Funds transferred</span>
-          <strong>€0.00</strong>
+        <div style="display:flex;justify-content:space-between;margin-bottom:14px">
+          <span>Funds transferred</span><strong>€0.00</strong>
         </div>
-
-        <div style="
-          display:flex;
-          justify-content:space-between">
-          <span>Balance affected</span>
-          <strong>No</strong>
+        <div style="display:flex;justify-content:space-between">
+          <span>Balance affected</span><strong>No</strong>
         </div>
-
       </div>
-
-      <div class="muted tiny"
-        style="margin:12px 0 28px">
-        Reference: ${esc(draft.resultRef || '—')}
-      </div>
-
-      <p style="
-        max-width:430px;
-        margin:0 auto 25px;
-        font-size:13px;
-        opacity:.8">
-        No money has been sent.
-        Your account balance and portfolio value
-        remain unchanged.
+      <div class="muted tiny" style="margin:12px 0 28px">Reference: ${esc(draft.resultRef||'—')}</div>
+      <p style="max-width:430px;margin:0 auto 25px;font-size:13px;opacity:.8">
+        No money has been sent. Your account balance and portfolio value remain unchanged.
       </p>
-
-      <button class="btn"
-        data-action="newPayment">
-        ${esc(t('newPayment'))}
-      </button>
-
+      <button class="btn" data-action="newPayment">${esc(t('newPayment'))}</button>
     </div>
   `;
 }
 
-function normalizeIBAN(value){
-  return String(value||'')
-    .replace(/\s+/g,'')
-    .toUpperCase();
-}
-
+function normalizeIBAN(value){ return String(value||'').replace(/\s+/g,'').toUpperCase(); }
 function validIBAN(value){
   const iban=normalizeIBAN(value);
-
-  if(!/^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$/.test(iban)){
-    return false;
-  }
-
+  if(!/^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$/.test(iban)) return false;
   const moved=iban.slice(4)+iban.slice(0,4);
-
   let remainder=0;
-
   for(const character of moved){
     const code=character.charCodeAt(0);
-
-    const chunk=code>=65
-      ?String(code-55)
-      :character;
-
-    for(const digit of chunk){
-      remainder=(remainder*10+Number(digit))%97;
-    }
+    const chunk=code>=65?String(code-55):character;
+    for(const digit of chunk){ remainder=(remainder*10+Number(digit))%97; }
   }
-
   return remainder===1;
 }
-
 function validAmount(value){
-  const string=String(value||'');
-
-  return /^\d+(?:\.\d{1,2})?$/.test(string)&&
-         Number(string)>0&&
-         Number.isFinite(Number(string));
+  const s=String(value||'');
+  return /^\d+(?:\.\d{1,2})?$/.test(s)&&Number(s)>0&&Number.isFinite(Number(s));
 }
-
 function todayLocalISO(){
   const now=new Date();
-
-  const year=now.getFullYear();
-  const month=String(now.getMonth()+1).padStart(2,'0');
-  const day=String(now.getDate()).padStart(2,'0');
-
-  return `${year}-${month}-${day}`;
+  return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
 }
-
 function validCalendarDate(value){
-  if(!/^\d{4}-\d{2}-\d{2}$/.test(value)){
-    return false;
-  }
-
-  const [year,month,day]=value.split('-').map(Number);
-
-  const parsed=new Date(Date.UTC(year,month-1,day));
-
-  return parsed.getUTCFullYear()===year&&
-         parsed.getUTCMonth()===month-1&&
-         parsed.getUTCDate()===day;
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const [y,m,d]=value.split('-').map(Number);
+  const p=new Date(Date.UTC(y,m-1,d));
+  return p.getUTCFullYear()===y&&p.getUTCMonth()===m-1&&p.getUTCDate()===d;
 }
 
 function submitPaymentDetails(){
@@ -4240,357 +2773,136 @@ function submitPaymentDetails(){
   const when=$('paymentWhen')?.value||'now';
   const date=$('paymentDate')?.value||'';
 
-  if(!name||name.length>140){
-    showFormError(
-      'paymentError',
-      'Enter a valid recipient name.'
-    );
-    return;
-  }
-
-  if(!validIBAN(iban)){
-    showFormError(
-      'paymentError',
-      'Enter a valid IBAN.'
-    );
-    return;
-  }
-
-  if(
-    !validAmount(amount)||
-    Number(amount)>Number(S.data.balance)
-  ){
-    showFormError(
-      'paymentError',
-      'Enter an amount within your available balance.'
-    );
-    return;
-  }
-
-  if(ref.length>140){
-    showFormError(
-      'paymentError',
-      'Payment reference is too long.'
-    );
-    return;
-  }
-
-  if(when!=='now'&&when!=='schedule'){
-    showFormError(
-      'paymentError',
-      'Choose a valid transfer timing.'
-    );
-    return;
-  }
-
+  if(!name||name.length>140){ showFormError('paymentError','Enter a valid recipient name.'); return; }
+  if(!validIBAN(iban)){ showFormError('paymentError','Enter a valid IBAN.'); return; }
+  if(!validAmount(amount)||Number(amount)>Number(S.data.balance)){ showFormError('paymentError','Enter an amount within your available balance.'); return; }
+  if(ref.length>140){ showFormError('paymentError','Payment reference is too long.'); return; }
+  if(when!=='now'&&when!=='schedule'){ showFormError('paymentError','Choose a valid transfer timing.'); return; }
   if(when==='schedule'){
-    if(
-      !validCalendarDate(date)||
-      date<todayLocalISO()
-    ){
-      showFormError(
-        'paymentError',
-        'Choose a valid date today or later.'
-      );
-      return;
-    }
+    if(!validCalendarDate(date)||date<todayLocalISO()){ showFormError('paymentError','Choose a valid date today or later.'); return; }
   }
 
-  S.draft={
-    requestId:uuid(),
-    name,
-    iban,
-    amount,
-    ref,
-    when,
-    date:when==='schedule'?date:''
-  };
-
+  S.draft={requestId:uuid(),name,iban,amount,ref,when,date:when==='schedule'?date:''};
   S.step=2;
   render();
 }
 
-function paymentBack(){
-  S.step=1;
-  render();
-}
+function paymentBack(){ S.step=1; render(); }
+function newPayment(){ S.step=1; S.draft=null; render(); }
 
-function newPayment(){
-  S.step=1;
-  S.draft=null;
-  render();
-}
-
-let busy = false;
-
-async function confirmPayment() {
-  if (busy) return;
-
-  busy = true;
-
-  const button = document.querySelector(
-    '[data-action="confirmPayment"]'
-  );
-
-  if (button) {
-    button.disabled = true;
-    button.textContent = 'Processing...';
-  }
-
-  try {
-    const draft = S.draft;
-
-    if (!draft) {
-      throw new Error('Payment details are missing.');
-    }
-
-    if (!draft.requestId) {
-      draft.requestId = uuid();
-    }
-
-    const result = await rpc('transfer', draft);
-
-    if (!result || result.status !== 'declined') {
-      throw new Error(
-        'The server did not return a declined transfer.'
-      );
-    }
-
-    S.data = result.state;
-
-    S.draft.resultRef = result.ref;
-    S.draft.resultStatus = 'declined';
-
-    S.step = 3;
-
+let confirmBusy=false;
+async function confirmPayment(){
+  if(confirmBusy) return;
+  confirmBusy=true;
+  const button=document.querySelector('[data-action="confirmPayment"]');
+  if(button){ button.disabled=true; button.textContent='Processing...'; }
+  try{
+    const draft=S.draft;
+    if(!draft) throw new Error('Payment details are missing.');
+    if(!draft.requestId) draft.requestId=uuid();
+    const result=await api('transfer',draft);
+    if(!result||result.status!=='declined') throw new Error('The server did not return a declined transfer.');
+    S.data=result.state;
+    S.draft.resultRef=result.ref;
+    S.draft.resultStatus='declined';
+    S.step=3;
     render();
-
-  } catch (error) {
-    console.error('Payment confirmation error:', error);
-
-    alert(
-      'Unable to display the transfer result: ' +
-      (error.message || String(error))
-    );
-
-  } finally {
-    busy = false;
-
-    if (button && button.isConnected) {
-      button.disabled = false;
-      button.textContent = t('confirm');
-    }
+  }catch(error){
+    console.error('Payment confirmation error:',error);
+    alert('Unable to display the transfer result: '+(error.message||String(error)));
+  }finally{
+    confirmBusy=false;
+    if(button&&button.isConnected){ button.disabled=false; button.textContent=t('confirm'); }
   }
 }
 
 function selectSavedPayee(id){
-  const payee=(S.data.payees||[])
-    .find(p=>p.id===id);
-
-  if(!payee)return;
-
-  S.draft={
-    name:payee.name,
-    iban:payee.iban,
-    amount:'',
-    ref:'',
-    when:'now',
-    date:''
-  };
-
+  const payee=(S.data.payees||[]).find(p=>p.id===id);
+  if(!payee) return;
+  S.draft={name:payee.name,iban:payee.iban,amount:'',ref:'',when:'now',date:''};
   S.step=1;
   navigate('payments');
 }
 
 /* ============================================================
-   TRANSACTION HISTORY
+   TRANSACTIONS
    ============================================================ */
 
 function filteredTransactions(){
   const search=S.search.trim().toLowerCase();
-
   return (S.data.txs||[]).filter(tx=>{
-    const matchesDirection=
-      S.filter==='all'||
-      (S.filter==='in'&&tx.dir==='in')||
-      (S.filter==='out'&&tx.dir==='out');
-
-    const searchable=[
-      tx.id,
-      tx.title,
-      tx.who,
-      tx.iban,
-      tx.ref,
-      tx.category,
-      tx.status
-    ].join(' ').toLowerCase();
-
-    return matchesDirection&&
-      (!search||searchable.includes(search));
+    const matchesDirection=S.filter==='all'||(S.filter==='in'&&tx.dir==='in')||(S.filter==='out'&&tx.dir==='out');
+    const searchable=[tx.id,tx.title,tx.who,tx.iban,tx.ref,tx.category,tx.status].join(' ').toLowerCase();
+    return matchesDirection&&(!search||searchable.includes(search));
   });
 }
 
 function transactionHistoryView(){
   return `
-    ${pageHead(
-      t('history'),
-      t('historySub'),
-      `<button class="btn ghost"
-        data-action="exportTransactions">
-        ↓ ${esc(t('export'))}
-      </button>`
-    )}
-
+    ${pageHead(t('history'),t('historySub'),
+      `<button class="btn ghost" data-action="exportTransactions">↓ ${esc(t('export'))}</button>`)}
     <section class="panel">
-
       <div class="filterrow">
-
-        <input class="search"
-          id="transactionSearch"
-          placeholder="${esc(t('search'))}"
-          value="${esc(S.search)}"
-          aria-label="${esc(t('search'))}">
-
-        <select id="transactionFilter"
-          aria-label="${esc(t('all'))}">
-
-          ${[
-            ['all',t('all')],
-            ['in',t('incoming')],
-            ['out',t('outgoing')]
-          ].map(([value,label])=>`
-            <option value="${value}"
-              ${S.filter===value?'selected':''}>
-              ${esc(label)}
-            </option>
+        <input class="search" id="transactionSearch" placeholder="${esc(t('search'))}" value="${esc(S.search)}" aria-label="${esc(t('search'))}">
+        <select id="transactionFilter" aria-label="${esc(t('all'))}">
+          ${[['all',t('all')],['in',t('incoming')],['out',t('outgoing')]].map(([value,label])=>`
+            <option value="${value}" ${S.filter===value?'selected':''}>${esc(label)}</option>
           `).join('')}
-
         </select>
-
       </div>
-
-      <div id="transactionResults">
-        ${transactionList(filteredTransactions())}
-      </div>
-
+      <div id="transactionResults">${transactionList(filteredTransactions())}</div>
     </section>
   `;
 }
 
 function updateTransactionResults(){
   const container=$('transactionResults');
-
-  if(container){
-    container.innerHTML=
-      transactionList(filteredTransactions());
-  }
+  if(container) container.innerHTML=transactionList(filteredTransactions());
 }
 
 function csvSafe(value){
-  let string=String(value??'');
-
-  // Prevent spreadsheet formula execution.
-  if(/^[\s]*[=+\-@]/.test(string)){
-    string="'"+string;
-  }
-
-  return '"'+string.replace(/"/g,'""')+'"';
+  let s=String(value??'');
+  if(/^[\s]*[=+\-@]/.test(s)) s="'"+s;
+  return '"'+s.replace(/"/g,'""')+'"';
 }
 
 function exportTransactions(){
-  const transactions = S.data.txs || [];
-
-  const rows=[
-    [
-      'Date',
-      'Transaction ID',
-      'Recipient / Sender',
-      'Description',
-      'Direction',
-      'Amount EUR',
-      'Status',
-      'Category',
-      'Payment Reference',
-      'IBAN'
-    ]
-  ];
-
+  const transactions=S.data.txs||[];
+  const rows=[[
+    'Date','Transaction ID','Recipient / Sender','Description','Direction',
+    'Amount EUR','Status','Category','Payment Reference','IBAN'
+  ]];
   transactions.forEach(tx=>{
     rows.push([
-      fmtDate(tx.createdAt),
-      tx.id||'',
-      tx.who||'',
-      tx.title||'',
-      tx.dir||'',
-      tx.amount||0,
-      tx.status||'',
-      tx.category||'',
-      tx.ref||'',
-      tx.iban||''
+      fmtDate(tx.createdAt),tx.id||'',tx.who||'',tx.title||'',tx.dir||'',
+      tx.amount||0,tx.status||'',tx.category||'',tx.ref||'',tx.iban||''
     ]);
   });
-
-  const csv='\uFEFF'+rows.map(row=>
-    row.map(csvSafe).join(',')
-  ).join('\r\n');
-
-  const blob=new Blob([csv],{
-    type:'text/csv;charset=utf-8'
-  });
-
+  const csv='\uFEFF'+rows.map(r=>r.map(csvSafe).join(',')).join('\r\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
   const url=URL.createObjectURL(blob);
-
   const link=document.createElement('a');
-  link.href=url;
-  link.download='Bank-transactions.csv';
-
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-
+  link.href=url; link.download='Bank-transactions.csv';
+  document.body.appendChild(link); link.click(); link.remove();
   setTimeout(()=>URL.revokeObjectURL(url),1000);
-
   toast(t('export'));
 }
 
 function transactionDetailMarkup(tx){
   const incoming=tx.dir==='in';
-
   return `
     <div class="detail-top">
-
       <div>
-        <div class="eyebrow">
-          ${esc(t('details'))}
-        </div>
-
-        <h2 style="margin-top:8px">
-          ${esc(tx.title||t('paymentType'))}
-        </h2>
+        <div class="eyebrow">${esc(t('details'))}</div>
+        <h2 style="margin-top:8px">${esc(tx.title||t('paymentType'))}</h2>
       </div>
-
-      <button class="detail-close"
-        data-action="closeDrawer"
-        aria-label="${esc(t('close'))}">
-        ×
-      </button>
-
+      <button class="detail-close" data-action="closeDrawer" aria-label="${esc(t('close'))}">×</button>
     </div>
-
-    <div class="eyebrow">
-      ${esc(t('amount'))}
-    </div>
-
-    <div class="detail-value ${incoming?'positive':''}">
-      ${incoming?'+':'−'}${money(tx.amount)}
-    </div>
-
+    <div class="eyebrow">${esc(t('amount'))}</div>
+    <div class="detail-value ${incoming?'positive':''}">${incoming?'+':'−'}${money(tx.amount)}</div>
     <div style="margin-bottom:30px">
-      <span class="tag ${tx.status==='scheduled'?'scheduled':''}">
-        ${esc(t(tx.status||'posted'))}
-      </span>
+      <span class="tag ${tx.status==='scheduled'?'scheduled':''}">${esc(t(tx.status||'posted'))}</span>
     </div>
-
     ${[
       [t('recipient'),tx.who||'—'],
       [t('transactionDate'),fmtDate(tx.createdAt)],
@@ -4599,31 +2911,18 @@ function transactionDetailMarkup(tx){
       [t('status'),t(tx.status||'posted')],
       [t('reference'),tx.ref||'—'],
       [t('iban'),tx.iban||'—'],
-      ...(tx.scheduledDate
-        ?[[t('date'),tx.scheduledDate]]
-        :[]
-      )
+      ...(tx.scheduledDate?[[t('date'),tx.scheduledDate]]:[])
     ].map(([label,value])=>`
-      <div class="detail-line">
-        <span>${esc(label)}</span>
-        <strong>${esc(value)}</strong>
-      </div>
+      <div class="detail-line"><span>${esc(label)}</span><strong>${esc(value)}</strong></div>
     `).join('')}
-
-    <div class="notice">
-      ${esc(t('paymentNote'))}
-    </div>
+    <div class="notice">${esc(t('paymentNote'))}</div>
   `;
 }
 
 function openTransactionDrawer(index){
   const tx=(S.data.txs||[])[index];
-
-  if(!tx)return;
-
-  openDetailDrawer(
-    transactionDetailMarkup(tx)
-  );
+  if(!tx) return;
+  openDetailDrawer(transactionDetailMarkup(tx));
 }
 
 /* ============================================================
@@ -4632,99 +2931,40 @@ function openTransactionDrawer(index){
 
 function beneficiariesView(){
   const payees=S.data.payees||[];
-
   return `
-    ${pageHead(
-      t('saved'),
-      t('savedSub'),
-      `<button class="btn"
-        data-page="payments">
-        + ${esc(t('send'))}
-      </button>`
-    )}
-
+    ${pageHead(t('saved'),t('savedSub'),
+      `<button class="btn" data-page="payments">+ ${esc(t('send'))}</button>`)}
     <section class="panel">
-
-      ${payees.length
-        ?payees.map(p=>`
-          <div class="payee">
-
-            <div class="row"
-              style="justify-content:flex-start;min-width:0">
-
-              <div class="avatar">
-                ${esc(
-                  (p.name||'DB')
-                    .split(/\s+/)
-                    .map(x=>x[0]||'')
-                    .slice(0,2)
-                    .join('')
-                    .toUpperCase()
-                )}
-              </div>
-
-              <div style="min-width:0">
-                <strong>${esc(p.name)}</strong>
-                <small>${esc(p.iban)}</small>
-              </div>
-
+      ${payees.length?payees.map(p=>`
+        <div class="payee">
+          <div class="row" style="justify-content:flex-start;min-width:0">
+            <div class="avatar">${esc((p.name||'DB').split(/\s+/).map(x=>x[0]||'').slice(0,2).join('').toUpperCase())}</div>
+            <div style="min-width:0">
+              <strong>${esc(p.name)}</strong>
+              <small>${esc(p.iban)}</small>
             </div>
-
-            <div class="row"
-              style="flex-wrap:wrap;justify-content:flex-end">
-
-              <button class="btn ghost small"
-                data-select-payee="${esc(p.id)}">
-                ${esc(t('pay'))}
-              </button>
-
-              <button class="btn ghost small"
-                data-remove-payee="${esc(p.id)}">
-                ${esc(t('remove'))}
-              </button>
-
-            </div>
-
           </div>
-        `).join('')
-        :`<div class="empty">
-          ${esc(t('noPayees'))}
-        </div>`
-      }
-
+          <div class="row" style="flex-wrap:wrap;justify-content:flex-end">
+            <button class="btn ghost small" data-select-payee="${esc(p.id)}">${esc(t('pay'))}</button>
+            <button class="btn ghost small" data-remove-payee="${esc(p.id)}">${esc(t('remove'))}</button>
+          </div>
+        </div>
+      `).join(''):`<div class="empty">${esc(t('noPayees'))}</div>`}
     </section>
   `;
 }
 
 async function removeBeneficiary(id){
-  if(S.busy)return;
-
-  const payee=(S.data.payees||[])
-    .find(p=>p.id===id);
-
-  if(!payee)return;
-
-  if(!confirm(
-    `Remove beneficiary "${payee.name}"?`
-  )){
-    return;
-  }
-
+  if(S.busy) return;
+  const payee=(S.data.payees||[]).find(p=>p.id===id);
+  if(!payee) return;
+  if(!confirm(`Remove beneficiary "${payee.name}"?`)) return;
   S.busy=true;
-
   try{
-    const response=await rpc('removePayee',{id});
-
-    S.data=response.state;
-
-    render();
-    toast('Beneficiary removed.');
-
-  }catch(error){
-    toast(error.message);
-  }finally{
-    S.busy=false;
-  }
+    const response=await api('removePayee',{id});
+    S.data=response.state; render(); toast('Beneficiary removed.');
+  }catch(error){ toast(error.message); }
+  finally{ S.busy=false; }
 }
 
 /* ============================================================
@@ -4733,130 +2973,58 @@ async function removeBeneficiary(id){
 
 function cardsView(){
   const card=S.data.card||{};
-
   return `
-    ${pageHead(
-      t('cardTitle'),
-      t('cardSub')
-    )}
-
+    ${pageHead(t('cardTitle'),t('cardSub'))}
     <div class="grid two">
-
       <section class="panel">
-
         <div class="bankcard">
-
           <div class="row">
-            <strong style="
-              font-family:var(--display);
-              font-size:19px">
-              HAPOALIM BANK
-            </strong>
-
-            <span style="color:var(--champagne)">
-              PRIVATE
-            </span>
+            <strong style="font-family:var(--display);font-size:19px">HAPOALIM BANK</strong>
+            <span style="color:var(--champagne)">PRIVATE</span>
           </div>
-
           <div>
-            <div class="eyebrow"
-              style="color:#C7BBC1;margin-bottom:10px">
-              VIRTUAL CARD
-            </div>
-
-            <div class="digits">
-              •••• •••• •••• ${esc(card.last4||'0000')}
-            </div>
+            <div class="eyebrow" style="color:#C7BBC1;margin-bottom:10px">VIRTUAL CARD</div>
+            <div class="digits">•••• •••• •••• ${esc(card.last4||'0000')}</div>
           </div>
-
           <div class="row">
             <div>
-              <div class="tiny" style="color:#C7BBC1">
-                CARD HOLDER
-              </div>
-
+              <div class="tiny" style="color:#C7BBC1">CARD HOLDER</div>
               <strong>${esc(card.holder||'PRIVATE CLIENT')}</strong>
             </div>
-
             <div>
-              <div class="tiny" style="color:#C7BBC1">
-                EXPIRES
-              </div>
-
+              <div class="tiny" style="color:#C7BBC1">EXPIRES</div>
               <strong>${esc(card.expiry||'—')}</strong>
             </div>
           </div>
-
         </div>
-
-        <div class="notice">
-          ${esc(t('cardNotice'))}
-        </div>
-
+        <div class="notice">${esc(t('cardNotice'))}</div>
       </section>
-
       <section class="panel">
-
         <div class="panel-head">
           <h2>${esc(t('cardStatus'))}</h2>
-
-          <span class="tag ${card.frozen?'scheduled':''}">
-            ${esc(card.frozen?t('frozen'):t('active'))}
-          </span>
+          <span class="tag ${card.frozen?'scheduled':''}">${esc(card.frozen?t('frozen'):t('active'))}</span>
         </div>
-
-        <div class="reviewline">
-          <span>${esc(t('holder'))}</span>
-          <strong>${esc(card.holder||'—')}</strong>
-        </div>
-
-        <div class="reviewline">
-          <span>Card number</span>
-          <strong>•••• ${esc(card.last4||'0000')}</strong>
-        </div>
-
-        <div class="reviewline">
-          <span>Expiry</span>
-          <strong>${esc(card.expiry||'—')}</strong>
-        </div>
-
-        <button class="btn"
-          data-action="toggleCard"
-          style="margin-top:25px;width:100%">
-
+        <div class="reviewline"><span>${esc(t('holder'))}</span><strong>${esc(card.holder||'—')}</strong></div>
+        <div class="reviewline"><span>Card number</span><strong>•••• ${esc(card.last4||'0000')}</strong></div>
+        <div class="reviewline"><span>Expiry</span><strong>${esc(card.expiry||'—')}</strong></div>
+        <button class="btn" data-action="toggleCard" style="margin-top:25px;width:100%">
           ${esc(card.frozen?t('unfreeze'):t('freeze'))}
         </button>
-
       </section>
-
     </div>
   `;
 }
 
 async function toggleCardFreeze(){
-  if(S.busy)return;
-
+  if(S.busy) return;
   const frozen=!Boolean(S.data.card.frozen);
-
   S.busy=true;
-
   try{
-    const response=await rpc('freezeCard',{frozen});
-
-    S.data=response.state;
-
-    render();
-
-    toast(
-      frozen?'Card frozen.':
-             'Card activated.'
-    );
-
-  }catch(error){
-    toast(error.message);
-  }finally{
-    S.busy=false;
-  }
+    const response=await api('freezeCard',{frozen});
+    S.data=response.state; render();
+    toast(frozen?'Card frozen.':'Card activated.');
+  }catch(error){ toast(error.message); }
+  finally{ S.busy=false; }
 }
 
 /* ============================================================
@@ -4865,86 +3033,35 @@ async function toggleCardFreeze(){
 
 function notificationsView(){
   const items=S.data.notifications||[];
-
   return `
-    ${pageHead(
-      t('inbox'),
-      t('inboxSub'),
-      `<button class="btn ghost"
-        data-action="markNotificationsRead">
-        ${esc(t('readAll'))}
-      </button>`
-    )}
-
+    ${pageHead(t('inbox'),t('inboxSub'),
+      `<button class="btn ghost" data-action="markNotificationsRead">${esc(t('readAll'))}</button>`)}
     <section class="panel">
-
-      ${items.length
-        ?items.map(item=>`
-          <div class="tx">
-
-            <div class="txicon"
-              style="
-                color:${item.read
-                  ?'var(--sub)'
-                  :'var(--burgundy)'}">
-              ♢
-            </div>
-
-            <div class="txbody">
-
-              <strong>
-                ${esc(item.title||'Notification')}
-              </strong>
-
-              <div class="tiny muted"
-                style="margin-top:5px">
-                ${esc(item.body||'')}
-              </div>
-
-              <small>
-                ${fmtDate(item.createdAt)}
-              </small>
-
-            </div>
-
-            ${item.read
-              ?''
-              :'<span class="tag">NEW</span>'
-            }
-
+      ${items.length?items.map(item=>`
+        <div class="tx">
+          <div class="txicon" style="color:${item.read?'var(--sub)':'var(--burgundy)'}">♢</div>
+          <div class="txbody">
+            <strong>${esc(item.title||'Notification')}</strong>
+            <div class="tiny muted" style="margin-top:5px">${esc(item.body||'')}</div>
+            <small>${fmtDate(item.createdAt)}</small>
           </div>
-        `).join('')
-        :`<div class="empty">
-          ${esc(t('noNotifications'))}
-        </div>`
-      }
-
-      <div class="notice">
-        ${esc(t('notificationNotice'))}
-      </div>
-
+          ${item.read?'':'<span class="tag">NEW</span>'}
+        </div>
+      `).join(''):`<div class="empty">${esc(t('noNotifications'))}</div>`}
+      <div class="notice">${esc(t('notificationNotice'))}</div>
     </section>
   `;
 }
 
 async function markNotificationsRead(){
-  if(S.busy)return;
-
+  if(S.busy) return;
   S.busy=true;
-
   try{
-    const response=await rpc('markNotifsRead');
-
-    S.data=response.state;
-
-    render();
+    const response=await api('markNotifsRead');
+    S.data=response.state; render();
     toast('Notifications marked as read.');
-
-  }catch(error){
-    toast(error.message);
-  }finally{
-    S.busy=false;
-  }
+  }catch(error){ toast(error.message); }
+  finally{ S.busy=false; }
 }
 
 /* ============================================================
@@ -4954,465 +3071,196 @@ async function markNotificationsRead(){
 function settingsView(){
   const d=S.data;
   const session=d.session||{};
-
   return `
-    ${pageHead(
-      t('profile'),
-      t('profileSub')
-    )}
-
+    ${pageHead(t('profile'),t('profileSub'))}
     <div class="grid two">
-
       <section class="panel">
-
-        <div class="panel-head">
-          <h2>${esc(t('account'))}</h2>
-        </div>
-
-        <div class="reviewline">
-          <span>${esc(t('holder'))}</span>
-          <strong>${esc(d.account.holder)}</strong>
-        </div>
-
-        <div class="reviewline">
-          <span>IBAN</span>
-          <strong>${esc(d.account.iban)}</strong>
-        </div>
-
-        <div class="reviewline">
-          <span>${esc(t('currency'))}</span>
-          <strong>EUR</strong>
-        </div>
-
-        <div class="reviewline">
-          <span>${esc(t('session'))}</span>
-          <strong>${esc(session.username||'User')}</strong>
-        </div>
-
-        <button class="btn ghost"
-          data-action="copyIBAN"
-          style="margin-top:23px">
-          ${esc(t('copy'))}
-        </button>
-
+        <div class="panel-head"><h2>${esc(t('account'))}</h2></div>
+        <div class="reviewline"><span>${esc(t('holder'))}</span><strong>${esc(d.account.holder)}</strong></div>
+        <div class="reviewline"><span>IBAN</span><strong>${esc(d.account.iban)}</strong></div>
+        <div class="reviewline"><span>${esc(t('currency'))}</span><strong>EUR</strong></div>
+        <div class="reviewline"><span>${esc(t('session'))}</span><strong>${esc(session.username||'User')}</strong></div>
+        <button class="btn ghost" data-action="copyIBAN" style="margin-top:23px">${esc(t('copy'))}</button>
       </section>
-
       <section class="panel">
-
-        <div class="panel-head">
-          <h2>${esc(t('settings'))}</h2>
-        </div>
-
-        <div class="reviewline">
-          <span>${esc(t('language'))}</span>
-          <strong>${esc(S.lang.toUpperCase())}</strong>
-        </div>
-
-        <div class="reviewline">
-          <span>${esc(t('theme'))}</span>
-          <strong>
-            ${S.theme==='dark'?'Dark':'Light'}
-          </strong>
-        </div>
-
-        <div class="reviewline">
-          <span>${esc(t('trainingEdition'))}</span>
-          <strong>Private Wealth</strong>
-        </div>
-
-        <button class="btn ghost"
-          data-action="theme"
-          style="margin-top:23px">
-          ${esc(t('theme'))}
-        </button>
-
-        <button class="btn ghost"
-          data-action="logout"
-          style="margin-top:12px;margin-left:8px">
-          ${esc(t('logout'))}
-        </button>
-
+        <div class="panel-head"><h2>${esc(t('settings'))}</h2></div>
+        <div class="reviewline"><span>${esc(t('language'))}</span><strong>${esc(S.lang.toUpperCase())}</strong></div>
+        <div class="reviewline"><span>${esc(t('theme'))}</span><strong>${S.theme==='dark'?'Dark':'Light'}</strong></div>
+        <div class="reviewline"><span>${esc(t('trainingEdition'))}</span><strong>Private Wealth</strong></div>
+        <button class="btn ghost" data-action="theme" style="margin-top:23px">${esc(t('theme'))}</button>
+        <button class="btn ghost" data-action="logout" style="margin-top:12px;margin-left:8px">${esc(t('logout'))}</button>
       </section>
-
     </div>
-
-    <div class="notice">
-      ${esc(t('simulation'))}
-    </div>
+    <div class="notice">${esc(t('simulation'))}</div>
   `;
 }
 
 /* ============================================================
-   RENDER ENGINE
+   RENDER
    ============================================================ */
 
 function render(){
   document.documentElement.dataset.theme=S.theme;
   document.documentElement.lang=S.lang;
 
-  if(!S.token||!S.data){
-    app.innerHTML=loginView();
-    return;
-  }
+  if(!S.token||!S.data){ app.innerHTML=loginView(); return; }
 
   const existingShell=app.querySelector('.shell');
-
-  if(!existingShell){
-    app.innerHTML=shellView();
-  }
+  if(!existingShell) app.innerHTML=shellView();
 
   const main=$('main');
-
-  if(!main)return;
+  if(!main) return;
 
   const views={
-    overview:dashboardView,
-    wealth:wealthView,
-    payments:paymentView,
-    transactions:transactionHistoryView,
-    beneficiaries:beneficiariesView,
-    cards:cardsView,
-    notifications:notificationsView,
-    settings:settingsView
+    overview:dashboardView,wealth:wealthView,payments:paymentView,
+    transactions:transactionHistoryView,beneficiaries:beneficiariesView,
+    cards:cardsView,notifications:notificationsView,settings:settingsView
   };
-
   const view=views[S.page]||dashboardView;
-
   main.innerHTML=view();
 
   document.querySelectorAll('[data-page]').forEach(button=>{
-    button.classList.toggle(
-      'active',
-      button.dataset.page===S.page
-    );
+    button.classList.toggle('active',button.dataset.page===S.page);
   });
 
   if(S.page==='overview'){
     drawSpendingChart();
-
     const allocation=$('dashboardAllocation');
-
-    if(allocation){
-      allocation.innerHTML=allocationView(true);
-    }
+    if(allocation) allocation.innerHTML=allocationView(true);
   }
-
-  if(S.page==='wealth'){
-    renderPerformanceChart();
-  }
+  if(S.page==='wealth') renderPerformanceChart();
 }
 
 function navigate(page){
-  const allowed=NAVIGATION.some(item=>item[0]===page);
-
-  if(!allowed)return;
-
+  if(!NAVIGATION.some(item=>item[0]===page)) return;
   S.page=page;
-
   closeDetailDrawer();
-
   render();
-
-  window.scrollTo({
-    top:0,
-    behavior:'auto'
-  });
+  window.scrollTo({top:0,behavior:'auto'});
 }
-
-/* ============================================================
-   THEME AND LANGUAGE
-   ============================================================ */
 
 function changeTheme(){
   S.theme=S.theme==='dark'?'light':'dark';
-
-  localStorage.setItem(
-    'db_hybrid_theme',
-    S.theme
-  );
-
+  localStorage.setItem('hap_theme',S.theme);
   document.documentElement.dataset.theme=S.theme;
-
-  if(S.data){
-    app.innerHTML=shellView();
-  }
-
+  if(S.data) app.innerHTML=shellView();
   render();
 }
 
 function changeLanguage(language){
-  if(!SUPPORTED_LANGUAGES.includes(language)){
-    return;
-  }
-
+  if(!SUPPORTED_LANGUAGES.includes(language)) return;
   S.lang=language;
-
-  localStorage.setItem(
-    'db_hybrid_lang',
-    language
-  );
-
+  localStorage.setItem('hap_lang',language);
   document.documentElement.lang=language;
-
-  if(S.data){
-    app.innerHTML=shellView();
-  }
-
+  if(S.data) app.innerHTML=shellView();
   render();
 }
 
 /* ============================================================
-   AUTHENTICATION
+   AUTH
    ============================================================ */
 
 async function submitLogin(){
-  if(S.busy)return;
-
+  if(S.busy) return;
   const username=$('username')?.value.trim()||'';
   const password=$('password')?.value||'';
-
-  if(!username||!password){
-    showFormError(
-      'loginError',
-      'Enter login details.'
-    );
-    return;
-  }
+  if(!username||!password){ showFormError('loginError','Enter login details.'); return; }
 
   S.busy=true;
-
-  const submitButton=$('loginForm')
-    ?.querySelector('button[type="submit"]');
-
-  if(submitButton){
-    submitButton.disabled=true;
-    submitButton.textContent=t('processing');
-  }
+  const submitButton=$('loginForm')?.querySelector('button[type="submit"]');
+  if(submitButton){ submitButton.disabled=true; submitButton.textContent=t('processing'); }
 
   try{
-    const result=await rpc('login',{
-      username,
-      password
-    },false);
-
-    if(!result?.token){
-      throw new Error('No session token received.');
-    }
-
+    const result=await api('login',{username,password});
+    if(!result?.token) throw new Error('No session token received.');
     S.token=result.token;
-
-    sessionStorage.setItem(
-      'db_atelier_token',
-      S.token
-    );
-
-    const state=await rpc('getState');
-
-    S.data=state;
-    S.page='overview';
-    S.step=1;
-    S.draft=null;
-
+    const state=await api('getState');
+    S.data=state; S.page='overview'; S.step=1; S.draft=null;
     app.innerHTML=shellView();
-
     render();
-
     toast(t('welcome'));
-
   }catch(error){
-    S.token='';
-    S.data=null;
-
-    sessionStorage.removeItem('db_atelier_token');
-
+    S.token=''; S.data=null;
+    sessionStorage.removeItem('hap_token');
     render();
-
-    showFormError(
-      'loginError',
-      error.message
-    );
-
+    showFormError('loginError',error.message);
   }finally{
     S.busy=false;
-
-    const button=$('loginForm')
-      ?.querySelector('button[type="submit"]');
-
-    if(button){
-      button.disabled=false;
-      button.textContent=t('loginButton');
-    }
+    const button=$('loginForm')?.querySelector('button[type="submit"]');
+    if(button){ button.disabled=false; button.textContent=t('loginButton'); }
   }
 }
 
 async function logout(){
-  if(S.busy)return;
-
+  if(S.busy) return;
   S.busy=true;
-
   try{
-    if(S.token){
-      await rpc('logout');
-    }
+    if(S.token) await api('logout');
   }catch(error){
     console.warn('Logout:',error.message);
   }finally{
-    S.token='';
-    S.data=null;
-    S.page='overview';
-    S.step=1;
-    S.draft=null;
-    S.selectedHolding=null;
-    S.selectedTransaction=null;
+    S.token=''; S.data=null; S.page='overview'; S.step=1; S.draft=null;
     S.busy=false;
-
-    sessionStorage.removeItem('db_atelier_token');
-
+    sessionStorage.removeItem('hap_token');
     closeDetailDrawer();
-
     render();
-  }
-}
-
-async function refreshState(){
-  if(!S.token)return;
-
-  try{
-    const state=await rpc('getState');
-
-    S.data=state;
-
-    render();
-
-  }catch(error){
-    const message=String(error.message||'');
-
-    if(/session expired|invalid session/i.test(message)){
-      S.token='';
-      S.data=null;
-
-      sessionStorage.removeItem('db_atelier_token');
-
-      render();
-
-      toast('Your session has expired. Sign in again.');
-      return;
-    }
-
-    toast(message);
   }
 }
 
 /* ============================================================
-   SHARED DETAILS DRAWER
+   DRAWER
    ============================================================ */
 
 let drawerPreviousFocus=null;
 
 function openDetailDrawer(content){
   closeDetailDrawer();
-
   drawerPreviousFocus=document.activeElement;
-
   const backdrop=document.createElement('div');
-
   backdrop.className='detail-backdrop';
   backdrop.id='detailBackdrop';
-
   backdrop.innerHTML=`
-    <aside class="detail-drawer"
-      role="dialog"
-      aria-modal="true"
-      aria-label="${esc(t('details'))}"
-      tabindex="-1">
-
+    <aside class="detail-drawer" role="dialog" aria-modal="true"
+      aria-label="${esc(t('details'))}" tabindex="-1">
       ${content}
-
     </aside>
   `;
-
   document.body.appendChild(backdrop);
-
   document.body.style.overflow='hidden';
-
   backdrop.addEventListener('click',event=>{
-    if(event.target===backdrop){
-      closeDetailDrawer();
-    }
+    if(event.target===backdrop) closeDetailDrawer();
   });
-
-  const closeButton=backdrop.querySelector(
-    '[data-action="closeDrawer"]'
-  );
-
-  (closeButton||backdrop.querySelector('.detail-drawer'))
-    ?.focus();
+  const closeButton=backdrop.querySelector('[data-action="closeDrawer"]');
+  (closeButton||backdrop.querySelector('.detail-drawer'))?.focus();
 }
 
 function closeDetailDrawer(){
   const backdrop=$('detailBackdrop');
-
-  if(!backdrop)return;
-
+  if(!backdrop) return;
   backdrop.remove();
-
   document.body.style.overflow='';
-
-  if(
-    drawerPreviousFocus&&
-    document.contains(drawerPreviousFocus)
-  ){
-    drawerPreviousFocus.focus();
-  }
-
+  if(drawerPreviousFocus&&document.contains(drawerPreviousFocus)) drawerPreviousFocus.focus();
   drawerPreviousFocus=null;
 }
 
 function trapDrawerFocus(event){
   const backdrop=$('detailBackdrop');
-
-  if(!backdrop||event.key!=='Tab'){
-    return;
-  }
-
+  if(!backdrop||event.key!=='Tab') return;
   const drawer=backdrop.querySelector('.detail-drawer');
-
-  if(!drawer)return;
-
-  const focusable=Array.from(
-    drawer.querySelectorAll(
-      'button:not([disabled]),' +
-      'a[href],' +
-      'input:not([disabled]),' +
-      'select:not([disabled]),' +
-      '[tabindex]:not([tabindex="-1"])'
-    )
-  ).filter(element=>element.getClientRects().length);
-
-  if(!focusable.length){
-    event.preventDefault();
-    drawer.focus();
-    return;
-  }
-
-  const first=focusable[0];
-  const last=focusable[focusable.length-1];
-
+  if(!drawer) return;
+  const focusable=Array.from(drawer.querySelectorAll(
+    'button:not([disabled]),a[href],input:not([disabled]),'+
+    'select:not([disabled]),[tabindex]:not([tabindex="-1"])'
+  )).filter(el=>el.getClientRects().length);
+  if(!focusable.length){ event.preventDefault(); drawer.focus(); return; }
+  const first=focusable[0], last=focusable[focusable.length-1];
   if(event.shiftKey){
-    if(
-      document.activeElement===first||
-      !drawer.contains(document.activeElement)
-    ){
-      event.preventDefault();
-      last.focus();
+    if(document.activeElement===first||!drawer.contains(document.activeElement)){
+      event.preventDefault(); last.focus();
     }
   }else{
-    if(
-      document.activeElement===last||
-      !drawer.contains(document.activeElement)
-    ){
-      event.preventDefault();
-      first.focus();
+    if(document.activeElement===last||!drawer.contains(document.activeElement)){
+      event.preventDefault(); first.focus();
     }
   }
 }
@@ -5423,356 +3271,150 @@ function trapDrawerFocus(event){
 
 async function copyIBAN(){
   const iban=S.data?.account?.iban;
-
-  if(!iban)return;
-
+  if(!iban) return;
   try{
     if(navigator.clipboard?.writeText){
       await navigator.clipboard.writeText(iban);
     }else{
       const input=document.createElement('textarea');
-
-      input.value=iban;
-      input.style.position='fixed';
-      input.style.opacity='0';
-
-      document.body.appendChild(input);
-
-      input.select();
-
+      input.value=iban; input.style.position='fixed'; input.style.opacity='0';
+      document.body.appendChild(input); input.select();
       const copied=document.execCommand('copy');
-
       input.remove();
-
-      if(!copied){
-        throw new Error('Clipboard unavailable.');
-      }
+      if(!copied) throw new Error('Clipboard unavailable.');
     }
-
     toast(t('copied'));
-
-  }catch(error){
-    toast('Could not copy IBAN. Please copy it manually.');
-  }
+  }catch(error){ toast('Could not copy IBAN. Please copy it manually.'); }
 }
 
 /* ============================================================
-   EVENT DELEGATION — CLICKS
+   EVENTS — CLICKS
    ============================================================ */
 
 document.addEventListener('click',async event=>{
-
   const navigation=event.target.closest('[data-page]');
-
-  if(navigation){
-    navigate(navigation.dataset.page);
-    return;
-  }
+  if(navigation){ navigate(navigation.dataset.page); return; }
 
   const period=event.target.closest('[data-period]');
+  if(period){ S.period=period.dataset.period; render(); return; }
 
-  if(period){
-    S.period=period.dataset.period;
-
-    render();
-    return;
-  }
-
-  const wealthPeriod=event.target.closest(
-    '[data-wealth-period]'
-  );
-
-  if(wealthPeriod){
-    S.wealthPeriod=wealthPeriod.dataset.wealthPeriod;
-
-    render();
-    return;
-  }
+  const wealthPeriod=event.target.closest('[data-wealth-period]');
+  if(wealthPeriod){ S.wealthPeriod=wealthPeriod.dataset.wealthPeriod; render(); return; }
 
   const holding=event.target.closest('[data-holding]');
+  if(holding){ openHoldingDrawer(holding.dataset.holding); return; }
 
-  if(holding){
-    openHoldingDrawer(holding.dataset.holding);
-    return;
-  }
+  const transaction=event.target.closest('[data-tx-index]');
+  if(transaction){ openTransactionDrawer(Number(transaction.dataset.txIndex)); return; }
 
-  const transaction=event.target.closest(
-    '[data-tx-index]'
-  );
+  const selectedPayee=event.target.closest('[data-select-payee]');
+  if(selectedPayee){ selectSavedPayee(selectedPayee.dataset.selectPayee); return; }
 
-  if(transaction){
-    openTransactionDrawer(
-      Number(transaction.dataset.txIndex)
-    );
-    return;
-  }
+  const removedPayee=event.target.closest('[data-remove-payee]');
+  if(removedPayee){ await removeBeneficiary(removedPayee.dataset.removePayee); return; }
 
-  const selectedPayee=event.target.closest(
-    '[data-select-payee]'
-  );
+  const contribution=event.target.closest('[data-contribute-goal]');
+  if(contribution){ showContributionForm(contribution.dataset.contributeGoal); return; }
 
-  if(selectedPayee){
-    selectSavedPayee(selectedPayee.dataset.selectPayee);
-    return;
-  }
-
-  const removedPayee=event.target.closest(
-    '[data-remove-payee]'
-  );
-
-  if(removedPayee){
-    await removeBeneficiary(
-      removedPayee.dataset.removePayee
-    );
-    return;
-  }
-
-  const contribution=event.target.closest(
-    '[data-contribute-goal]'
-  );
-
-  if(contribution){
-    showContributionForm(
-      contribution.dataset.contributeGoal
-    );
-    return;
-  }
-
-  const actionElement=event.target.closest(
-    '[data-action]'
-  );
-
-  if(!actionElement)return;
-
+  const actionElement=event.target.closest('[data-action]');
+  if(!actionElement) return;
   const action=actionElement.dataset.action;
 
   switch(action){
-
-    case 'theme':
-      changeTheme();
-      break;
-
-    case 'logout':
-      await logout();
-      break;
-
-    case 'paymentBack':
-      paymentBack();
-      break;
-
-    case 'confirmPayment':
-      await confirmPayment();
-      break;
-
-    case 'newPayment':
-      newPayment();
-      break;
-
-    case 'exportTransactions':
-      exportTransactions();
-      break;
-
-    case 'toggleCard':
-      await toggleCardFreeze();
-      break;
-
-    case 'markNotificationsRead':
-      await markNotificationsRead();
-      break;
-
-    case 'copyIBAN':
-      await copyIBAN();
-      break;
-
-    case 'showGoalForm':
-      showGoalForm();
-      break;
-
-    case 'cancelGoal':
-      cancelGoalForm();
-      break;
-
-    case 'cancelContribution':
-      cancelContributionForm();
-      break;
-
-    case 'closeDrawer':
-      closeDetailDrawer();
-      break;
+    case 'theme': changeTheme(); break;
+    case 'logout': await logout(); break;
+    case 'paymentBack': paymentBack(); break;
+    case 'confirmPayment': await confirmPayment(); break;
+    case 'newPayment': newPayment(); break;
+    case 'exportTransactions': exportTransactions(); break;
+    case 'toggleCard': await toggleCardFreeze(); break;
+    case 'markNotificationsRead': await markNotificationsRead(); break;
+    case 'copyIBAN': await copyIBAN(); break;
+    case 'showGoalForm': showGoalForm(); break;
+    case 'cancelGoal': cancelGoalForm(); break;
+    case 'cancelContribution': cancelContributionForm(); break;
+    case 'closeDrawer': closeDetailDrawer(); break;
   }
 });
 
 /* ============================================================
-   EVENT DELEGATION — FORMS
+   EVENTS — FORMS
    ============================================================ */
 
 document.addEventListener('submit',async event=>{
-
-  if(event.target.id==='loginForm'){
-    event.preventDefault();
-
-    await submitLogin();
-    return;
-  }
-
-  if(event.target.id==='paymentDetailsForm'){
-    event.preventDefault();
-
-    submitPaymentDetails();
-    return;
-  }
-
-  if(event.target.id==='createGoalForm'){
-    event.preventDefault();
-
-    await submitCreateGoal();
-    return;
-  }
-
+  if(event.target.id==='loginForm'){ event.preventDefault(); await submitLogin(); return; }
+  if(event.target.id==='paymentDetailsForm'){ event.preventDefault(); submitPaymentDetails(); return; }
+  if(event.target.id==='createGoalForm'){ event.preventDefault(); await submitCreateGoal(); return; }
   if(event.target.id==='contributeGoalForm'){
     event.preventDefault();
-
-    const goalId=event.target.dataset.goalId;
-
-    await submitContribution(goalId);
+    await submitContribution(event.target.dataset.goalId);
     return;
   }
 });
 
 /* ============================================================
-   EVENT DELEGATION — INPUTS
+   EVENTS — INPUTS
    ============================================================ */
 
 document.addEventListener('input',event=>{
-
   if(event.target.id==='transactionSearch'){
     S.search=event.target.value;
-
     updateTransactionResults();
     return;
   }
 });
 
 document.addEventListener('change',event=>{
-
-  if(event.target.id==='language'){
-    changeLanguage(event.target.value);
-    return;
-  }
-
-  if(event.target.id==='transactionFilter'){
-    S.filter=event.target.value;
-
-    updateTransactionResults();
-    return;
-  }
-
+  if(event.target.id==='language'){ changeLanguage(event.target.value); return; }
+  if(event.target.id==='transactionFilter'){ S.filter=event.target.value; updateTransactionResults(); return; }
   if(event.target.id==='paymentWhen'){
     const schedule=event.target.value==='schedule';
-
     const field=$('scheduleField');
-
-    if(field){
-      field.classList.toggle('hidden',!schedule);
-    }
-
+    if(field) field.classList.toggle('hidden',!schedule);
     const dateInput=$('paymentDate');
-
     if(dateInput){
       dateInput.required=schedule;
       dateInput.min=todayLocalISO();
-
-      if(!schedule){
-        dateInput.value='';
-      }
+      if(!schedule) dateInput.value='';
     }
-
     return;
   }
 });
 
 /* ============================================================
-   KEYBOARD ACCESSIBILITY
+   KEYBOARD
    ============================================================ */
 
 document.addEventListener('keydown',event=>{
-
-  if(event.key==='Escape'){
-    closeDetailDrawer();
-    return;
-  }
-
+  if(event.key==='Escape'){ closeDetailDrawer(); return; }
   trapDrawerFocus(event);
-
-  if(
-    event.key!=='Enter'&&
-    event.key!==' '
-  ){
-    return;
-  }
-
-  if(
-    event.target.closest(
-      'button,input,select,textarea,a'
-    )
-  ){
-    return;
-  }
-
-  const holding=event.target.closest(
-    '[data-holding]'
-  );
-
-  if(holding){
-    event.preventDefault();
-
-    openHoldingDrawer(holding.dataset.holding);
-    return;
-  }
-
-  const transaction=event.target.closest(
-    '[data-tx-index]'
-  );
-
-  if(transaction){
-    event.preventDefault();
-
-    openTransactionDrawer(
-      Number(transaction.dataset.txIndex)
-    );
-  }
+  if(event.key!=='Enter'&&event.key!==' ') return;
+  if(event.target.closest('button,input,select,textarea,a')) return;
+  const holding=event.target.closest('[data-holding]');
+  if(holding){ event.preventDefault(); openHoldingDrawer(holding.dataset.holding); return; }
+  const transaction=event.target.closest('[data-tx-index]');
+  if(transaction){ event.preventDefault(); openTransactionDrawer(Number(transaction.dataset.txIndex)); }
 });
 
 /* ============================================================
-   INITIALIZATION
+   INIT
    ============================================================ */
 
 async function initialize(){
   document.documentElement.dataset.theme=S.theme;
   document.documentElement.lang=S.lang;
 
-  if(!S.token){
-    render();
-    return;
-  }
+  if(!S.token){ render(); return; }
 
   try{
-    const state=await rpc('getState');
-
+    const state=await api('getState');
     S.data=state;
-
     app.innerHTML=shellView();
-
     render();
-
   }catch(error){
-    S.token='';
-    S.data=null;
-
-    sessionStorage.removeItem('db_atelier_token');
-
+    S.token=''; S.data=null;
+    sessionStorage.removeItem('hap_token');
     render();
-
     if(/session expired/i.test(error.message||'')){
       toast('Your session expired. Sign in again.');
     }else{
@@ -5780,10 +3422,6 @@ async function initialize(){
     }
   }
 }
-
-/* ============================================================
-   START HAPOALIM BANK
-   ============================================================ */
 
 initialize();
 
