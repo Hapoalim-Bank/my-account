@@ -1,0 +1,5792 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hapoalim Bank · Private Wealth</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ---- YOUR EXISTING CSS, UNCHANGED ---- */
+:root {
+  --burgundy:#A80F30;
+  --ivory:#F7F5F1;
+  --graphite:#1B1D22;
+  --champagne:#D9C6A3;
+  --emerald:#19866B;
+
+  --display:'Plus Jakarta Sans',Arial,sans-serif;
+  --reading:'Inter',Arial,sans-serif;
+
+  --bg:#15161A;
+  --surface:#222329;
+  --text:#F7F5F1;
+  --sub:#C0BEC3;
+  --line:#414149;
+  --soft:#2B2C33;
+  --shadow:0 14px 42px #0002;
+
+  color-scheme:dark;
+}
+
+:root[data-theme="light"] {
+  --bg:#F7F5F1;
+  --surface:#FFFFFF;
+  --text:#1B1D22;
+  --sub:#64636B;
+  --line:#E5E1DC;
+  --soft:#F1EEE9;
+  --shadow:0 12px 35px #1b1d220b;
+  color-scheme:light;
+}
+
+* {box-sizing:border-box}
+
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--reading);
+  font-size:13px;
+  font-weight:400;
+  line-height:1.6;
+  text-rendering:optimizeLegibility;
+}
+
+button,input,select {font:inherit}
+button {cursor:pointer}
+button:disabled {opacity:.5;cursor:not-allowed}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline:3px solid var(--champagne);
+  outline-offset:2px;
+}
+
+h1,h2,h3,p {margin:0}
+
+h1,h2,h3,.serif {
+  font-family:var(--display);
+  font-weight:700;
+  letter-spacing:-.042em;
+  line-height:1.23;
+}
+
+h1 {font-size:clamp(31px,3.3vw,47px)}
+h2 {font-size:18px;letter-spacing:-.035em}
+p,.muted {color:var(--sub)}
+.tiny {font-size:11px}
+
+.eyebrow {
+  font-size:10px;
+  letter-spacing:.085em;
+  font-weight:700;
+  text-transform:uppercase;
+  color:var(--sub);
+}
+
+.money {
+  font-family:var(--display);
+  font-variant-numeric:tabular-nums;
+  font-feature-settings:'tnum' 1;
+  letter-spacing:-.04em;
+  font-weight:700;
+}
+
+.hidden {display:none!important}
+
+.brand {
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-family:var(--display);
+  font-weight:800;
+  letter-spacing:-.055em;
+  font-size:19px;
+}
+
+.mark {
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border-radius:11px;
+  background:var(--burgundy);
+  color:white;
+  font-size:21px;
+}
+
+.brand b {color:var(--burgundy)}
+
+.btn {
+  border:1px solid var(--burgundy);
+  border-radius:11px;
+  background:var(--burgundy);
+  color:white;
+  padding:11px 17px;
+  min-height:42px;
+  font-weight:700;
+  font-size:12px;
+  transition:transform .18s,background .18s;
+}
+
+.btn:hover {
+  transform:translateY(-1px);
+  background:#8B0A26;
+}
+
+.btn.ghost {
+  background:var(--surface);
+  border-color:var(--line);
+  color:var(--text);
+}
+
+.btn.ghost:hover {background:var(--soft)}
+.btn.small {min-height:34px;padding:7px 11px}
+
+.field {margin-bottom:16px}
+
+.field label {
+  display:block;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.085em;
+  margin-bottom:7px;
+}
+
+.field input,
+.field select,
+.search {
+  width:100%;
+  padding:12px 13px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--surface);
+  color:var(--text);
+  min-width:0;
+  font-size:13px;
+}
+
+.panel {
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:25px;
+  box-shadow:var(--shadow);
+  min-width:0;
+}
+
+.panel-head,.row {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+}
+
+.panel-head {margin-bottom:19px}
+.stack {display:grid;gap:17px}
+.grid {display:grid;gap:18px}
+
+.two {
+  grid-template-columns:minmax(0,1.6fr) minmax(280px,1fr);
+}
+
+.three {
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.pagehead {
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:15px;
+  margin-bottom:27px;
+}
+
+.pagehead p {margin-top:9px;font-size:12px}
+.space {height:20px}
+.divider {border-top:1px solid var(--line);margin:20px 0}
+
+.notice {
+  background:#D9C6A320;
+  border:1px solid #D9C6A350;
+  color:var(--text);
+  padding:14px;
+  border-radius:11px;
+  font-size:11px;
+  margin-top:17px;
+}
+
+.error {
+  background:#A80F3017;
+  color:var(--burgundy);
+  border:1px solid #A80F3033;
+  border-radius:10px;
+  padding:12px;
+  margin-top:12px;
+  white-space:pre-wrap;
+}
+
+.tag {
+  font-size:10px;
+  font-weight:800;
+  border-radius:30px;
+  padding:5px 10px;
+  background:#19866B1A;
+  color:var(--emerald);
+}
+
+.tag.scheduled {
+  background:#D9C6A344;
+  color:#A87B34;
+}
+
+/* LOGIN */
+
+.login {
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1.04fr .96fr;
+}
+
+.login-art {
+  background:
+    radial-gradient(circle at 100% 10%,#D9C6A31A,transparent 38%),
+    linear-gradient(145deg,#1B1D22,#29252D 70%,#641B34);
+  color:white;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:clamp(30px,5vw,75px);
+  position:relative;
+  overflow:hidden;
+}
+
+.login-art:after {
+  content:'';
+  position:absolute;
+  border:1px solid #FFFFFF24;
+  width:620px;
+  height:620px;
+  border-radius:50%;
+  right:-340px;
+  bottom:-320px;
+  box-shadow:0 0 0 90px #FFFFFF08,
+             0 0 0 180px #FFFFFF05;
+  pointer-events:none;
+}
+
+.login-art>* {position:relative;z-index:1}
+
+.login-art h1 {
+  font-size:clamp(42px,5.2vw,76px);
+  letter-spacing:-.058em;
+  line-height:1.1;
+  max-width:660px;
+}
+
+.login-art h1 em {
+  color:var(--champagne);
+  font-style:normal;
+  font-weight:600;
+}
+
+.login-art p {
+  color:#C9C2C6;
+  max-width:440px;
+  margin-top:24px;
+}
+
+.login-art footer {
+  font-size:10px;
+  letter-spacing:.12em;
+  color:#A9A1A7;
+}
+
+.login-right {
+  background:var(--surface);
+  display:grid;
+  place-items:center;
+  padding:45px 25px;
+}
+
+.login-form {width:min(100%,420px)}
+.login-form h1 {font-size:42px;margin:10px 0}
+.login-form>p {margin-bottom:31px}
+
+.login-controls {
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-bottom:38px;
+}
+
+.select-small {width:auto!important;max-width:165px}
+
+/* APPLICATION SHELL */
+
+.shell {
+  display:grid;
+  grid-template-columns:244px minmax(0,1fr);
+  min-height:100vh;
+}
+
+.sidebar {
+  background:var(--surface);
+  border-right:1px solid var(--line);
+  height:100vh;
+  position:sticky;
+  top:0;
+  padding:28px 17px;
+  display:flex;
+  flex-direction:column;
+  gap:43px;
+}
+
+.sidebar .brand {padding:0 10px}
+.nav {display:grid;gap:5px}
+
+.navbutton {
+  border:0;
+  background:transparent;
+  color:var(--sub);
+  border-radius:11px;
+  padding:12px 14px;
+  text-align:left;
+  font-size:12px;
+  font-weight:700;
+  display:flex;
+  gap:13px;
+  align-items:center;
+  transition:background .18s,color .18s;
+}
+
+.navbutton:hover {background:var(--soft)}
+
+.navbutton.active {
+  background:#A80F3025;
+  color:#ED8BA1;
+}
+
+:root[data-theme="light"] .navbutton.active {
+  color:var(--burgundy);
+  background:#A80F3015;
+}
+
+.navicon {
+  font-size:17px;
+  width:21px;
+  text-align:center;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.sidebar-bottom {margin-top:auto}
+
+.profile {
+  border-top:1px solid var(--line);
+  padding:19px 9px 0;
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.avatar {
+  background:#A80F3018;
+  color:var(--burgundy);
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  font-weight:800;
+}
+
+.topbar {
+  height:78px;
+  background:var(--surface);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 clamp(18px,4vw,64px);
+  gap:10px;
+}
+
+.topbar-controls {display:flex;gap:9px;align-items:center}
+
+.chip {
+  font-size:10px;
+  letter-spacing:.08em;
+  background:#D9C6A32C;
+  color:var(--text);
+  padding:8px 11px;
+  border-radius:30px;
+}
+
+.main {
+  max-width:1440px;
+  margin:auto;
+  padding:40px clamp(18px,4vw,64px) 80px;
+}
+
+/* DASHBOARD */
+
+.balance {
+  background:
+    radial-gradient(circle at 95% 0%,#D9C6A322,transparent 42%),
+    linear-gradient(130deg,#1B1D22,#30262F 68%,#681C35);
+  color:white;
+  min-height:275px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  position:relative;
+  overflow:hidden;
+}
+
+.balance .eyebrow,.balance p {color:#C2B7BD}
+.balance .money {font-size:clamp(38px,4vw,60px);margin:8px 0}
+.balance .row {position:relative}
+
+.quick {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:16px;
+}
+
+.quick button {
+  background:var(--soft);
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:16px;
+  text-align:left;
+  font-size:12px;
+  font-weight:700;
+  color:var(--text);
+}
+
+.quick button:hover {border-color:var(--burgundy)}
+
+.quick button span {
+  display:block;
+  color:var(--burgundy);
+  font-size:22px;
+  margin-bottom:8px;
+}
+
+.stat .money {font-size:26px;margin:10px 0 3px}
+
+.tx {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.tx:last-child {border-bottom:0}
+
+.txicon {
+  width:39px;
+  height:39px;
+  background:var(--soft);
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  flex-shrink:0;
+}
+
+.txbody {flex:1;min-width:0}
+
+.txbody strong {
+  display:block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:12px;
+}
+
+.txbody small {color:var(--sub);font-size:10px}
+
+.txamount {
+  text-align:right;
+  white-space:nowrap;
+  font-size:12px;
+  font-weight:700;
+  font-variant-numeric:tabular-nums;
+}
+
+.positive {color:#51C4A0}
+:root[data-theme="light"] .positive {color:var(--emerald)}
+
+/* SPENDING CHART */
+
+.chart {
+  height:145px;
+  display:flex;
+  align-items:end;
+  gap:6px;
+  border-bottom:1px solid var(--line);
+  margin-top:20px;
+}
+
+.bar {
+  flex:1;
+  min-height:4px;
+  border-radius:5px 5px 0 0;
+  background:#A80F3040;
+  border:0;
+  padding:0;
+  transition:height .2s,background .2s;
+}
+
+.bar:hover,.bar.active {background:var(--burgundy)}
+
+.chartlabels {
+  display:flex;
+  justify-content:space-between;
+  color:var(--sub);
+  font-size:10px;
+  margin-top:10px;
+}
+
+.chart-controls {display:flex;gap:6px}
+
+.chart-controls button {
+  background:var(--soft);
+  color:var(--sub);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:6px 10px;
+  font-weight:700;
+  font-size:10px;
+}
+
+.chart-controls button.active {
+  background:var(--burgundy);
+  color:white;
+}
+
+.chartdetail {
+  min-height:20px;
+  color:var(--sub);
+  font-size:11px;
+  margin-top:14px;
+}
+
+/* CARD */
+
+.bankcard {
+  max-width:420px;
+  min-height:235px;
+  border-radius:19px;
+  padding:27px;
+  color:white;
+  background:
+    radial-gradient(circle at 100% 0%,#D9C6A32E,transparent 55%),
+    linear-gradient(130deg,#1B1D22,#3A2632 75%,#781D3D);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  box-shadow:0 20px 40px #0002;
+}
+
+.bankcard .digits {
+  font-family:var(--display);
+  font-size:21px;
+  letter-spacing:.13em;
+}
+
+.reviewline {
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  border-bottom:1px solid var(--line);
+  padding:13px 0;
+  font-size:12px;
+}
+
+.reviewline strong {text-align:right;overflow-wrap:anywhere}
+.reviewline span {color:var(--sub)}
+
+.payee {
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  align-items:center;
+  border-bottom:1px solid var(--line);
+  padding:16px 0;
+}
+
+.payee:last-child {border-bottom:0}
+.payee strong {font-size:12px}
+.payee small {display:block;color:var(--sub);overflow-wrap:anywhere}
+
+.steps {display:flex;gap:8px;margin-bottom:23px;flex-wrap:wrap}
+
+.step {
+  border-radius:25px;
+  background:var(--soft);
+  color:var(--sub);
+  padding:7px 12px;
+  font-size:10px;
+  font-weight:700;
+}
+
+.step.active {
+  background:#A80F3020;
+  color:var(--burgundy);
+}
+
+.filterrow {
+  display:grid;
+  grid-template-columns:1fr 180px;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.empty {padding:20px 0;color:var(--sub);font-size:12px}
+
+.toast {
+  position:fixed;
+  bottom:22px;
+  right:22px;
+  z-index:100;
+  background:var(--text);
+  color:var(--surface);
+  padding:13px 18px;
+  border-radius:11px;
+  box-shadow:var(--shadow);
+  font-size:12px;
+  max-width:min(400px,90vw);
+}
+
+/* TRANSACTION DRAWER */
+
+.tx[data-tx-index] {cursor:pointer}
+
+.tx[data-tx-index]:hover {
+  background:var(--soft);
+  border-radius:9px;
+  padding-left:10px;
+  padding-right:10px;
+}
+
+.detail-backdrop {
+  position:fixed;
+  inset:0;
+  background:#0009;
+  z-index:80;
+  display:flex;
+  justify-content:flex-end;
+  animation:db-fade .18s ease;
+}
+
+.detail-drawer {
+  width:min(100%,480px);
+  height:100%;
+  overflow-y:auto;
+  background:var(--surface);
+  border-left:1px solid var(--line);
+  padding:34px 28px;
+  box-shadow:-20px 0 70px #0003;
+  animation:db-slide .24s ease;
+}
+
+.detail-top {
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  margin-bottom:35px;
+}
+
+.detail-close {
+  width:38px;
+  height:38px;
+  background:var(--soft);
+  border:1px solid var(--line);
+  border-radius:10px;
+  color:var(--text);
+  font-size:20px;
+}
+
+.detail-value {
+  font:700 clamp(32px,6vw,46px)/1.2 var(--display);
+  letter-spacing:-.055em;
+  font-variant-numeric:tabular-nums;
+  margin:15px 0 8px;
+}
+
+.detail-line {
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  padding:16px 0;
+  border-bottom:1px solid var(--line);
+  font-size:12px;
+}
+
+.detail-line span {color:var(--sub)}
+.detail-line strong {text-align:right;overflow-wrap:anywhere}
+
+@keyframes db-fade {
+  from {opacity:0}
+  to {opacity:1}
+}
+
+@keyframes db-slide {
+  from {transform:translateX(30px)}
+  to {transform:translateX(0)}
+}
+
+/* PRIVATE WEALTH EDITION */
+
+.wealth-hero {
+  background:
+    radial-gradient(circle at 90% 10%,#D9C6A324,transparent 40%),
+    linear-gradient(120deg,#1B1D22,#322832 70%,#641B34);
+  color:white;
+  position:relative;
+  overflow:hidden;
+}
+
+.wealth-hero .eyebrow,
+.wealth-hero p {color:#D0C4C8}
+
+.wealth-number {
+  font:700 clamp(34px,5vw,59px)/1.15 var(--display);
+  letter-spacing:-.055em;
+  font-variant-numeric:tabular-nums;
+  margin:12px 0;
+}
+
+.wealth-kpis {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+
+.wealth-kpis .panel {padding:20px}
+
+.wealth-kpis .money {
+  font-size:clamp(18px,2.1vw,27px);
+}
+
+.wealth-chart {
+  width:100%;
+  height:245px;
+  display:block;
+  overflow:visible;
+}
+
+.wealth-chart path {vector-effect:non-scaling-stroke}
+
+.wealth-chart .line {
+  fill:none;
+  stroke:#A80F30;
+  stroke-width:3;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.wealth-chart .area {fill:url(#wealthGradient)}
+
+.wealth-periods {
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+}
+
+.wealth-periods button {
+  border:1px solid var(--line);
+  background:var(--soft);
+  color:var(--sub);
+  border-radius:8px;
+  padding:6px 10px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.wealth-periods button.active {
+  background:var(--burgundy);
+  color:white;
+  border-color:var(--burgundy);
+}
+
+.wealth-donut {
+  width:190px;
+  max-width:100%;
+  aspect-ratio:1;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  position:relative;
+  flex-shrink:0;
+}
+
+.wealth-donut:after {
+  content:'';
+  position:absolute;
+  inset:28px;
+  border-radius:50%;
+  background:var(--surface);
+}
+
+.wealth-donut-center {
+  position:relative;
+  z-index:1;
+  text-align:center;
+}
+
+.wealth-legend {display:grid;gap:12px;flex:1}
+.wealth-legend .row {font-size:12px}
+
+.wealth-dot {
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  display:inline-block;
+  margin-right:8px;
+}
+
+.holding {
+  display:grid;
+  grid-template-columns:45px minmax(0,1fr) minmax(95px,auto) minmax(80px,auto);
+  gap:12px;
+  align-items:center;
+  border-bottom:1px solid var(--line);
+  padding:15px 0;
+  cursor:pointer;
+}
+
+.holding:last-child {border-bottom:0}
+
+.holding:hover {
+  background:var(--soft);
+  border-radius:10px;
+  padding-left:9px;
+  padding-right:9px;
+}
+
+.holding .ticker {
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:var(--soft);
+  font-size:10px;
+  font-weight:800;
+}
+
+.holding strong {font-size:12px}
+
+.holding small {
+  display:block;
+  color:var(--sub);
+  font-size:10px;
+}
+
+.holding .money {font-size:13px}
+
+.wealth-progress {
+  height:8px;
+  border-radius:99px;
+  background:var(--soft);
+  overflow:hidden;
+  margin:12px 0;
+}
+
+.wealth-progress>span {
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,var(--burgundy),#D9C6A3);
+  border-radius:99px;
+}
+
+.goal-card {
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--surface);
+}
+
+.goal-card .money {font-size:20px}
+
+.wealth-tooltip {
+  color:var(--sub);
+  font-size:12px;
+  min-height:22px;
+}
+
+.wealth-chart-point {
+  cursor:pointer;
+  fill:var(--burgundy);
+  stroke:var(--surface);
+  stroke-width:2;
+}
+
+.wealth-label {
+  font-size:11px;
+  fill:var(--sub);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1080px) {
+  .two,.three {grid-template-columns:1fr}
+}
+
+@media(max-width:800px) {
+  .login {grid-template-columns:1fr}
+  .login-art {min-height:320px;gap:35px}
+  .login-art h1 {font-size:44px}
+  .login-art footer {display:none}
+  .login-right {padding:35px 20px}
+  .shell {display:block}
+  .sidebar {position:relative;height:auto;padding:15px;gap:12px}
+  .sidebar-bottom {display:none}
+  .nav {display:flex;overflow:auto}
+  .navbutton {white-space:nowrap}
+  .topbar {height:65px}
+  .chip {display:none}
+  .main {padding:27px 17px 65px}
+  .panel {padding:19px}
+  .pagehead {align-items:flex-start}
+  .filterrow {grid-template-columns:1fr}
+  .balance .money {font-size:40px}
+}
+
+@media(max-width:760px) {
+  .detail-drawer {padding:25px 20px}
+  .wealth-kpis {grid-template-columns:1fr}
+  .holding {grid-template-columns:40px minmax(0,1fr) auto}
+  .holding .holding-gain {display:none}
+  .wealth-donut {width:160px}
+  .wealth-donut:after {inset:24px}
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*:before,*:after {
+    transition:none!important;
+    animation:none!important;
+    scroll-behavior:auto!important;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<div id="app"></div>
+
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+<!-- FLOATING DEMO BANK WARNING -->
+<div id="Warning" role="status">
+  <span class="symbol">⚠️</span>
+  <span>
+    <strong>BANK</strong>
+    — Attention! Low liquidity. Operations in your account must experience a temporary delay . To know more, please contact our European email 
+finance@hapoaiim.com.
+  </span>
+</div>
+
+<!-- MOVING DEMO BANK FOOTER -->
+<div id="demoBankWarning">
+  <div class="demo-ticker">
+    <span>
+      ⚠️ATTENTION lOW lIQUIDITY —
+      Operations in your account must experience a temporary delay . To know more, please contact our European email  —
+      finance@hapoaiim.com ⚠️
+    </span>
+  </div>
+</div>
+
+<style>
+  #demoBankWarning {
+    position: fixed !important;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 42px;
+    z-index: 99999;
+
+    background: #222831;
+    border-top: 2px solid #FFD166;
+    color: #FFD166;
+
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+
+    pointer-events: none;
+  }
+
+  #demoBankWarning .demo-ticker {
+    position: absolute;
+    left: 0;
+    top: 50%;
+
+    width: max-content;
+    white-space: nowrap;
+
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    transform: translate(100vw, -50%);
+
+    animation: demoTickerMove 15s linear infinite !important;
+    will-change: transform;
+  }
+
+  @keyframes demoTickerMove {
+    0% {
+      transform: translate(100vw, -50%);
+    }
+
+    100% {
+      transform: translate(-100%, -50%);
+    }
+  }
+
+  #app {
+    padding-bottom: 55px;
+  }
+
+  @media (max-width: 600px) {
+    #demoBankWarning {
+      height: 38px;
+    }
+
+    #demoBankWarning .demo-ticker {
+      font-size: 11px;
+    }
+  }
+</style>
+
+
+
+<script>
+
+'use strict';
+
+/* ============================================================
+   HAPOALIM BANK PRIVATE WEALTH
+   FRONTEND APPLICATION
+   ============================================================ */
+
+/* ============================================================
+   ⚠️⚠️⚠️   BACKEND CONFIGURATION   ⚠️⚠️⚠️
+   ------------------------------------------------------------
+   After deploying Code.gs as a Google Apps Script Web App
+   (Deploy → New deployment → Web app →
+    Execute as: Me, Who has access: Anyone),
+   copy the web app URL and paste it below.
+
+   Example:
+   https://script.google.com/macros/s/AKfycb.../exec
+
+   IMPORTANT: the URL must end with /exec, NOT /dev.
+   ============================================================ */
+
+const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbzJv-Uwls-HDh98m2zA9Ria7_U2H2c-Cq6gXJ69bcs/dev';
+
+/* ============================================================ */
+
+const $ = id => document.getElementById(id);
+const app = $('app');
+
+/* ============================================================
+   TRANSLATIONS
+   ============================================================ */
+
+const EN = {
+  // --- FIX: these keys were referenced by t() but missing ---
+  Live:'Live',
+  Data:'Data',
+
+  welcome:'Welcome back.',
+  welcomeSub:'A complete perspective on your financial world.',
+  login:'Welcome to private banking',
+  username:'Username',
+  password:'Password',
+  reminder:'Private Banking only. Use private credentials.',
+  loginButton:'Enter Private Bank',
+  loginHint:'Any nonempty username and password are not accepted.',
+  processing:'Processing…',
+  hero:'A more complete view of your wealth.',
+  heroSub:'Everyday banking and long-term wealth, thoughtfully connected.',
+
+  overview:'Overview',
+  wealth:'Wealth & Investments',
+  payments:'Payments',
+  transactions:'Transactions',
+  beneficiaries:'Beneficiaries',
+  cards:'Cards',
+  notifications:'Notifications',
+  settings:'Settings',
+
+  balance:'Available balance',
+  income:'Money in',
+  expenses:'Money out',
+  quick:'Quick actions',
+  send:'Send money',
+  history:'Transaction history',
+  historySub:'Every movement, clearly presented.',
+  recent:'Recent activity',
+  seeAll:'View all',
+  analytics:'Spending insights',
+  analyticsSub:'Explore your spending over time.',
+
+  saved:'Saved beneficiaries',
+  savedSub:'Manage your trusted recipients.',
+  cardTitle:'Your cards',
+  cardSub:'Your card, your control.',
+  inbox:'Notifications',
+  inboxSub:'Stay informed about account activity.',
+  profile:'Settings',
+  profileSub:'Your account and preferences.',
+
+  holder:'Account holder',
+  session:'Live session',
+  currency:'Currency',
+  language:'Language',
+  theme:'Appearance',
+  logout:'Sign out',
+
+  amount:'Amount',
+  recipient:'Recipient name',
+  iban:'Recipient IBAN',
+  reference:'Payment reference',
+  timing:'Transfer timing',
+  now:'Send now',
+  later:'Schedule for later',
+  date:'Scheduled date',
+  next:'Continue',
+  back:'Back',
+  review:'Review payment',
+  confirm:'Confirm Transfer',
+  paymentSuccess:'Transfer submitted',
+  paymentSuccessSub:'Your payment has been recorded.',
+  newPayment:'Make another payment',
+  paymentDetails:'Payment details',
+  reviewDetails:'Review transfer',
+
+  search:'Search transactions',
+  all:'All',
+  incoming:'Incoming',
+  outgoing:'Outgoing',
+  export:'Export CSV',
+  noTransactions:'No matching transactions.',
+  noPayees:'No saved beneficiaries yet.',
+  remove:'Remove',
+  pay:'Pay',
+
+  cardStatus:'Card status',
+  active:'Active',
+  frozen:'Frozen',
+  freeze:'Freeze card',
+  unfreeze:'Unfreeze card',
+  readAll:'Mark all as read',
+  noNotifications:'You have no notifications.',
+  copy:'Copy IBAN',
+  copied:'IBAN copied.',
+  scheduled:'Scheduled',
+  posted:'Posted',
+  account:'Account',
+  details:'Details',
+  close:'Close',
+  status:'Status',
+  category:'Category',
+  transactionDate:'Transaction date',
+  transactionId:'Transaction reference',
+  paymentType:'Transfer',
+  paymentNote:'Make sure the details are correct.',
+  available:'Available',
+  selectPayee:'Choose a saved beneficiary',
+
+  simulation:'Hapoalim is a member of the Federal Deposit Insurance Corporation (FDIC) and an Equal Housing Lender. Deposits are insured up to the maximum allowable law. All transactions executed through this platform are final, legally binding, and involve real financial movement.',
+  cardNotice:'Card controls affect only this card.',
+  notificationNotice:'Notifications are generated within this account.',
+
+  netWorth:'Total net worth',
+  netWorthSub:'Your complete financial position, in one place.',
+  cash:'Everyday banking',
+  investments:'Investments',
+  savings:'Savings',
+  portfolio:'Investment portfolio',
+  portfolioSub:'Explore your investments and performance.',
+  performance:'Portfolio performance',
+  allocation:'Asset allocation',
+  holdings:'Your holdings',
+  asset:'Asset',
+  assetClass:'Asset class',
+  units:'Units',
+  unitPrice:'Unit price',
+  marketValue:'Market value',
+  costBasis:'Cost basis',
+  gainLoss:'Unrealized gain / loss',
+  return:'Return',
+  equity:'Equities',
+  fixedIncome:'Fixed income',
+  alternatives:'Alternatives',
+  cashEquivalents:'Cash equivalents',
+  portfolioValue:'Portfolio value',
+  portfolioGain:'Portfolio gain',
+  viewWealth:'Explore wealth',
+
+  goals:'Savings goals',
+  goalsSub:'Plan and track your financial milestones.',
+  createGoal:'Create savings goal',
+  goalName:'Goal name',
+  goalTarget:'Target amount',
+  savedAmount:'Saved amount',
+  remaining:'Remaining',
+  progress:'Progress',
+  contribute:'Add contribution',
+  contributionAmount:'Contribution amount',
+  newGoal:'New savings goal',
+  goalCreated:'Savings goal created.',
+  contributionSaved:'Contribution recorded.',
+  noGoals:'No savings goals yet.',
+  goalNotice:'Contributions transfer cash into savings. Total net worth remains unchanged.',
+  accountOverview:'Your financial position',
+  wealthSummary:'Private wealth overview',
+  viewHoldings:'View holdings',
+  allTime:'All time',
+  oneMonth:'1M',
+  threeMonths:'3M',
+  sixMonths:'6M',
+  oneYear:'1Y',
+  privateClient:'Private client',
+  trainingEdition:'Training edition'
+};
+
+const TRANSLATIONS = {
+  en:{},
+
+  et:{
+    Live:'Reaalne',
+    Data:'Andmed',
+    welcome:'Tere tulemast tagasi.',
+    welcomeSub:'Täielik ülevaade sinu finantsmaailmast.',
+    login:'Tere tulemast privaatpangandusse',
+    username:'Kasutajanimi',
+    password:'Parool',
+    reminder:'Ainult privaatpangandus. Kasuta privaatseid volitusi.',
+    loginButton:'Sisene panka',
+    overview:'Ülevaade',
+    wealth:'Vara ja investeeringud',
+    payments:'Maksed',
+    transactions:'Tehingud',
+    beneficiaries:'Saajad',
+    cards:'Kaardid',
+    notifications:'Teavitused',
+    settings:'Seaded',
+    balance:'Kasutatav jääk',
+    income:'Laekumised',
+    expenses:'Väljaminekud',
+    quick:'Kiirtoimingud',
+    send:'Tee ülekanne',
+    history:'Tehingute ajalugu',
+    recent:'Viimased tehingud',
+    seeAll:'Vaata kõiki',
+    analytics:'Kulude analüüs',
+    saved:'Salvestatud saajad',
+    cardTitle:'Sinu kaardid',
+    inbox:'Teavitused',
+    profile:'Seaded',
+    holder:'Konto omanik',
+    language:'Keel',
+    theme:'Välimus',
+    logout:'Logi välja',
+    amount:'Summa',
+    recipient:'Saaja nimi',
+    iban:'Saaja IBAN',
+    reference:'Makse selgitus',
+    timing:'Makse aeg',
+    now:'Saada kohe',
+    later:'Ajasta hilisemaks',
+    date:'Makse kuupäev',
+    review:'Kontrolli makset',
+    confirm:'Kinnita ülekanne',
+    paymentSuccess:'Makse esitatud',
+    newPayment:'Tee uus makse',
+    search:'Otsi tehinguid',
+    all:'Kõik',
+    incoming:'Laekumised',
+    outgoing:'Väljaminekud',
+    export:'Ekspordi CSV',
+    remove:'Eemalda',
+    pay:'Maksa',
+    active:'Aktiivne',
+    frozen:'Külmutatud',
+    freeze:'Külmuta kaart',
+    unfreeze:'Aktiveeri kaart',
+    readAll:'Märgi kõik loetuks',
+    copy:'Kopeeri IBAN',
+    copied:'IBAN kopeeritud.',
+    scheduled:'Ajastatud',
+    posted:'Tehtud',
+    status:'Olek',
+    details:'Üksikasjad',
+    close:'Sulge',
+    netWorth:'Kogu netovara',
+    cash:'Igapäevapangandus',
+    investments:'Investeeringud',
+    savings:'Säästud',
+    portfolio:'Investeerimisportfell',
+    performance:'Portfelli tootlus',
+    allocation:'Varade jaotus',
+    holdings:'Investeeringud',
+    marketValue:'Turuväärtus',
+    gainLoss:'Realiseerimata kasum / kahjum',
+    goals:'Säästueesmärgid',
+    createGoal:'Loo säästueesmärk',
+    goalName:'Eesmärgi nimi',
+    goalTarget:'Sihtsumma',
+    contribute:'Lisa sissemakse',
+    viewWealth:'Vaata vara'
+  },
+
+  de:{
+    Live:'Live',
+    Data:'Daten',
+    welcome:'Willkommen zurück.',
+    welcomeSub:'Ihre gesamte Finanzwelt auf einen Blick.',
+    login:'Willkommen im Private Banking',
+    username:'Benutzername',
+    password:'Passwort',
+    reminder:'Nur Private Banking. Bitte private Zugangsdaten verwenden.',
+    loginButton:'Private Bank betreten',
+    overview:'Übersicht',
+    wealth:'Vermögen & Anlagen',
+    payments:'Zahlungen',
+    transactions:'Umsätze',
+    beneficiaries:'Empfänger',
+    cards:'Karten',
+    notifications:'Mitteilungen',
+    settings:'Einstellungen',
+    balance:'Verfügbares Guthaben',
+    income:'Einnahmen',
+    expenses:'Ausgaben',
+    quick:'Schnellzugriff',
+    send:'Geld überweisen',
+    history:'Umsatzübersicht',
+    recent:'Letzte Umsätze',
+    seeAll:'Alle anzeigen',
+    analytics:'Ausgabenanalyse',
+    saved:'Gespeicherte Empfänger',
+    cardTitle:'Ihre Karten',
+    inbox:'Mitteilungen',
+    profile:'Einstellungen',
+    holder:'Kontoinhaber',
+    language:'Sprache',
+    theme:'Darstellung',
+    logout:'Abmelden',
+    amount:'Betrag',
+    recipient:'Empfängername',
+    iban:'Empfänger-IBAN',
+    reference:'Verwendungszweck',
+    timing:'Ausführung',
+    now:'Sofort senden',
+    later:'Später ausführen',
+    review:'Zahlung prüfen',
+    confirm:'Überweisung bestätigen',
+    paymentSuccess:'Zahlung eingereicht',
+    search:'Umsätze suchen',
+    all:'Alle',
+    incoming:'Eingänge',
+    outgoing:'Ausgänge',
+    export:'CSV exportieren',
+    remove:'Entfernen',
+    pay:'Überweisen',
+    active:'Aktiv',
+    frozen:'Gesperrt',
+    freeze:'Karte sperren',
+    unfreeze:'Karte entsperren',
+    readAll:'Alle als gelesen markieren',
+    copy:'IBAN kopieren',
+    copied:'IBAN kopiert.',
+    scheduled:'Geplant',
+    posted:'Gebucht',
+    details:'Details',
+    close:'Schließen',
+    netWorth:'Gesamtvermögen',
+    cash:'Girokonto',
+    investments:'Investitionen',
+    savings:'Ersparnisse',
+    portfolio:'Anlageportfolio',
+    performance:'Portfolioentwicklung',
+    allocation:'Vermögensaufteilung',
+    holdings:'Positionen',
+    marketValue:'Marktwert',
+    gainLoss:'Unrealisierter Gewinn / Verlust',
+    goals:'Sparziele',
+    createGoal:'Sparziel erstellen',
+    goalName:'Name des Sparziels',
+    goalTarget:'Zielbetrag',
+    contribute:'Einzahlung',
+    viewWealth:'Vermögen ansehen'
+  },
+
+  fr:{
+    Live:'Live',
+    Data:'Données',
+    welcome:'Bienvenue.',
+    welcomeSub:'Une vision complète de votre patrimoine.',
+    login:'Bienvenue dans votre banque privée',
+    username:'Identifiant',
+    password:'Mot de passe',
+    reminder:'Banque privée uniquement. Utilisez vos identifiants privés.',
+    loginButton:'Accéder à la banque privée',
+    overview:'Vue d’ensemble',
+    wealth:'Patrimoine & placements',
+    payments:'Paiements',
+    transactions:'Opérations',
+    beneficiaries:'Bénéficiaires',
+    cards:'Cartes',
+    notifications:'Notifications',
+    settings:'Paramètres',
+    balance:'Solde disponible',
+    income:'Entrées',
+    expenses:'Sorties',
+    quick:'Accès rapide',
+    send:'Envoyer de l’argent',
+    history:'Historique des opérations',
+    recent:'Activité récente',
+    seeAll:'Tout afficher',
+    analytics:'Analyse des dépenses',
+    saved:'Bénéficiaires enregistrés',
+    cardTitle:'Vos cartes',
+    inbox:'Notifications',
+    profile:'Paramètres',
+    holder:'Titulaire du compte',
+    language:'Langue',
+    theme:'Apparence',
+    logout:'Déconnexion',
+    amount:'Montant',
+    recipient:'Nom du bénéficiaire',
+    iban:'IBAN du bénéficiaire',
+    reference:'Motif du paiement',
+    timing:'Date du virement',
+    now:'Envoyer maintenant',
+    later:'Programmer',
+    review:'Vérifier le paiement',
+    confirm:'Confirmer le virement',
+    paymentSuccess:'Paiement soumis',
+    search:'Rechercher des opérations',
+    all:'Tout',
+    incoming:'Entrées',
+    outgoing:'Sorties',
+    export:'Exporter CSV',
+    remove:'Supprimer',
+    pay:'Payer',
+    active:'Active',
+    frozen:'Bloquée',
+    freeze:'Bloquer la carte',
+    unfreeze:'Débloquer la carte',
+    readAll:'Tout marquer comme lu',
+    copy:'Copier l’IBAN',
+    copied:'IBAN copié.',
+    scheduled:'Programmé',
+    posted:'Effectué',
+    details:'Détails',
+    close:'Fermer',
+    netWorth:'Patrimoine net',
+    cash:'Compte courant',
+    investments:'Investissements',
+    savings:'Épargne',
+    portfolio:'Portefeuille',
+    performance:'Performance',
+    allocation:'Répartition des actifs',
+    holdings:'Positions',
+    marketValue:'Valeur de marché',
+    gainLoss:'Plus-value / moins-value latente',
+    goals:'Objectifs d’épargne',
+    createGoal:'Créer un objectif',
+    goalName:'Nom de l’objectif',
+    goalTarget:'Montant cible',
+    contribute:'Ajouter une contribution',
+    viewWealth:'Explorer le patrimoine'
+  },
+
+  es:{
+    Live:'En vivo',
+    Data:'Datos',
+    welcome:'Bienvenido de nuevo.',
+    welcomeSub:'Una visión completa de tus finanzas.',
+    login:'Bienvenido a la banca privada',
+    username:'Usuario',
+    password:'Contraseña',
+    reminder:'Solo banca privada. Usa credenciales privadas.',
+    loginButton:'Entrar en el banco privado',
+    overview:'Resumen',
+    wealth:'Patrimonio e inversiones',
+    payments:'Pagos',
+    transactions:'Movimientos',
+    beneficiaries:'Beneficiarios',
+    cards:'Tarjetas',
+    notifications:'Notificaciones',
+    settings:'Configuración',
+    balance:'Saldo disponible',
+    income:'Ingresos',
+    expenses:'Gastos',
+    quick:'Acceso rápido',
+    send:'Enviar dinero',
+    history:'Historial de movimientos',
+    recent:'Actividad reciente',
+    seeAll:'Ver todo',
+    analytics:'Análisis de gastos',
+    saved:'Beneficiarios guardados',
+    cardTitle:'Tus tarjetas',
+    inbox:'Notificaciones',
+    profile:'Configuración',
+    holder:'Titular de la cuenta',
+    language:'Idioma',
+    theme:'Apariencia',
+    logout:'Cerrar sesión',
+    amount:'Importe',
+    recipient:'Nombre del destinatario',
+    iban:'IBAN del destinatario',
+    reference:'Concepto del pago',
+    timing:'Fecha del pago',
+    now:'Enviar ahora',
+    later:'Programar',
+    review:'Revisar el pago',
+    confirm:'Confirmar transferencia',
+    paymentSuccess:'Pago enviado',
+    search:'Buscar movimientos',
+    all:'Todos',
+    incoming:'Entradas',
+    outgoing:'Salidas',
+    export:'Exportar CSV',
+    remove:'Eliminar',
+    pay:'Pagar',
+    active:'Activa',
+    frozen:'Bloqueada',
+    freeze:'Bloquear tarjeta',
+    unfreeze:'Desbloquear tarjeta',
+    readAll:'Marcar todo como leído',
+    copy:'Copiar IBAN',
+    copied:'IBAN copiado.',
+    scheduled:'Programado',
+    posted:'Realizado',
+    details:'Detalles',
+    close:'Cerrar',
+    netWorth:'Patrimonio neto',
+    cash:'Cuenta corriente',
+    investments:'Inversiones',
+    savings:'Ahorros',
+    portfolio:'Cartera de inversión',
+    performance:'Rendimiento de cartera',
+    allocation:'Distribución de activos',
+    holdings:'Posiciones',
+    marketValue:'Valor de mercado',
+    gainLoss:'Ganancia / pérdida no realizada',
+    goals:'Objetivos de ahorro',
+    createGoal:'Crear objetivo',
+    goalName:'Nombre del objetivo',
+    goalTarget:'Importe objetivo',
+    contribute:'Añadir aportación',
+    viewWealth:'Explorar patrimonio'
+  }
+};
+
+/* ============================================================
+   APPLICATION STATE
+   ============================================================ */
+
+const SUPPORTED_LANGUAGES=['en','et','de','fr','es'];
+
+const S={
+  token:sessionStorage.getItem('db_atelier_token')||'',
+  data:null,
+  page:'overview',
+
+  lang:localStorage.getItem('db_hybrid_lang')||'en',
+  theme:localStorage.getItem('db_hybrid_theme')||'dark',
+
+  period:'month',
+  wealthPeriod:'year',
+
+  filter:'all',
+  search:'',
+
+  step:1,
+  draft:null,
+
+  busy:false,
+  selectedHolding:null,
+  selectedTransaction:null
+};
+
+if(!SUPPORTED_LANGUAGES.includes(S.lang)){
+  S.lang='en';
+}
+
+if(!['dark','light'].includes(S.theme)){
+  S.theme='dark';
+}
+
+document.documentElement.dataset.theme=S.theme;
+document.documentElement.lang=S.lang;
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+
+function t(key){
+  return TRANSLATIONS[S.lang]?.[key]||
+         EN[key]||
+         key;
+}
+
+function esc(value){
+  return String(value??'').replace(/[&<>"']/g,c=>({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#39;'
+  }[c]));
+}
+
+function money(value){
+  return new Intl.NumberFormat(S.lang,{
+    style:'currency',
+    currency:'EUR'
+  }).format(Number(value)||0);
+}
+
+function compactMoney(value){
+  return new Intl.NumberFormat(S.lang,{
+    style:'currency',
+    currency:'EUR',
+    notation:'compact',
+    maximumFractionDigits:1
+  }).format(Number(value)||0);
+}
+
+function percent(value){
+  return new Intl.NumberFormat(S.lang,{
+    style:'percent',
+    minimumFractionDigits:2,
+    maximumFractionDigits:2
+  }).format(Number(value)||0);
+}
+
+function fmtDate(value){
+  const date=new Date(value);
+
+  if(Number.isNaN(date.getTime())){
+    return '—';
+  }
+
+  return new Intl.DateTimeFormat(S.lang,{
+    day:'numeric',
+    month:'short',
+    year:'numeric'
+  }).format(date);
+}
+
+function uuid(){
+  if(window.crypto?.randomUUID){
+    return crypto.randomUUID();
+  }
+
+  if(window.crypto?.getRandomValues){
+    const bytes=new Uint8Array(16);
+    crypto.getRandomValues(bytes);
+
+    bytes[6]=(bytes[6]&15)|64;
+    bytes[8]=(bytes[8]&63)|128;
+
+    const hex=Array.from(bytes,b=>
+      b.toString(16).padStart(2,'0')
+    ).join('');
+
+    return [
+      hex.slice(0,8),
+      hex.slice(8,12),
+      hex.slice(12,16),
+      hex.slice(16,20),
+      hex.slice(20)
+    ].join('-');
+  }
+
+  throw new Error('Secure request IDs are unavailable.');
+}
+
+function toast(message){
+  const element=$('toast');
+
+  if(!element)return;
+
+  element.textContent=message;
+  element.classList.remove('hidden');
+
+  clearTimeout(toast.timer);
+
+  toast.timer=setTimeout(()=>{
+    element.classList.add('hidden');
+  },3500);
+}
+
+/* ============================================================
+   BACKEND API  —  fetch() instead of google.script.run
+   ============================================================ */
+
+function rpc(action,payload={},authenticated=true){
+  return new Promise(async(resolve,reject)=>{
+
+    if(!BACKEND_URL||BACKEND_URL.indexOf('PASTE_YOUR')===0){
+      reject(new Error(
+        'Backend URL is not configured. ' +
+        'Set BACKEND_URL at the top of the script to your ' +
+        'Apps Script Web App /exec URL.'
+      ));
+      return;
+    }
+
+    try{
+      // Apps Script Web Apps cannot respond to CORS preflight
+      // requests. Sending as text/plain keeps this a "simple"
+      // request so no preflight is triggered.
+      const response=await fetch(BACKEND_URL,{
+        method:'POST',
+        headers:{
+          'Content-Type':'text/plain;charset=utf-8'
+        },
+        body:JSON.stringify({
+          action,
+          token:authenticated?S.token:'',
+          payload
+        })
+      });
+
+      if(!response.ok){
+        throw new Error(
+          'Backend returned HTTP '+response.status+'.'
+        );
+      }
+
+      // Read the body as text first, then parse.
+      // This tolerates the ContentService MIME wrapper.
+      const text=await response.text();
+
+      let parsed;
+
+      try{
+        parsed=JSON.parse(text);
+      }catch(parseError){
+        throw new Error(
+          'Backend returned a non-JSON response. ' +
+          'Check that Code.gs is deployed as a Web App ' +
+          'with access set to "Anyone".'
+        );
+      }
+
+      if(parsed && parsed.ok){
+        resolve(parsed.data);
+      }else{
+        reject(new Error(
+          parsed && parsed.error || 'Request failed.'
+        ));
+      }
+
+    }catch(error){
+      reject(new Error(
+        error && error.message || 'Connection failed.'
+      ));
+    }
+  });
+}
+
+/* ============================================================
+   NAVIGATION AND BRAND
+   ============================================================ */
+
+const NAVIGATION=[
+  ['overview','◫'],
+  ['wealth','◇'],
+  ['payments','↗'],
+  ['transactions','≡'],
+  ['beneficiaries','♧'],
+  ['cards','▣'],
+  ['notifications','♢'],
+  ['settings','⚙']
+];
+
+function brand(){
+  return `
+    <div class="brand">
+      <span class="mark">D</span>
+      HAPOALIM <b>BANK</b>
+    </div>
+  `;
+}
+
+function controls(){
+  return `
+    <select class="search select-small"
+      id="language"
+      aria-label="${esc(t('language'))}">
+
+      ${[
+        ['en','English'],
+        ['et','Eesti'],
+        ['de','Deutsch'],
+        ['fr','Français'],
+        ['es','Español']
+      ].map(([code,name])=>`
+        <option value="${code}"
+          ${S.lang===code?'selected':''}>
+          ${name}
+        </option>
+      `).join('')}
+    </select>
+
+    <button class="btn ghost small"
+      data-action="theme"
+      aria-label="${esc(t('theme'))}">
+      ${S.theme==='dark'?'☀':'☾'}
+    </button>
+  `;
+}
+
+function pageHead(title,subtitle,action=''){
+  return `
+    <div class="pagehead">
+      <div>
+        <div class="eyebrow" style="margin-bottom:10px">
+          HAPOALIM BANK / PRIVATE
+        </div>
+
+        <h1>${esc(title)}</h1>
+        <p>${esc(subtitle)}</p>
+      </div>
+
+      ${action}
+    </div>
+  `;
+}
+
+/* ============================================================
+   LOGIN SCREEN
+   ============================================================ */
+
+function loginView(){
+  return `
+    <div class="login">
+
+      <section class="login-art">
+        ${brand()}
+
+        <div>
+          <div class="eyebrow"
+            style="color:var(--champagne);margin-bottom:20px">
+            HAPOALIM BANK / PRIVATE WEALTH
+          </div>
+
+          <h1>
+            A more complete view of
+            <em>your wealth.</em>
+          </h1>
+
+          <p>${esc(t('heroSub'))}</p>
+        </div>
+
+        <footer>
+          HAPOALIM BANK · PRIVATE WEALTH · PRIVATE EDITION
+        </footer>
+      </section>
+
+      <section class="login-right">
+        <div class="login-form">
+
+          <div class="login-controls">
+            ${controls()}
+          </div>
+
+          <div class="eyebrow">
+            YOUR PRIVATE BANKING SPACE
+          </div>
+
+          <h1>${esc(t('login'))}</h1>
+          <p>${esc(t('welcomeSub'))}</p>
+
+          <form id="loginForm" style="margin-top:30px">
+
+            <div class="field">
+              <label for="username">
+                ${esc(t('username'))}
+              </label>
+
+              <input id="username"
+                required
+                maxlength="120"
+                autocomplete="username"
+                placeholder="alain.wassmer@gmail.com">
+            </div>
+
+            <div class="field">
+              <label for="password">
+                ${esc(t('password'))}
+              </label>
+
+              <input id="password"
+                type="password"
+                required
+                maxlength="200"
+                autocomplete="current-password"
+                placeholder="••••••••">
+            </div>
+
+            <button class="btn"
+              type="submit"
+              style="width:100%">
+              ${esc(t('loginButton'))} ↗
+            </button>
+
+          </form>
+
+          <div id="loginError"></div>
+
+          <div class="notice">
+            ${esc(t('Live'))}
+            <div style="margin-top:6px">
+              ${esc(t('loginHint'))}
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  `;
+}
+
+/* ============================================================
+   APPLICATION SHELL
+   ============================================================ */
+
+function shellView(){
+  const holder=S.data?.account?.holder||'Private Client';
+
+  return `
+    <div class="shell">
+
+      <aside class="sidebar">
+
+        ${brand()}
+
+        <div>
+          <div class="eyebrow"
+            style="padding:0 13px;margin-bottom:10px">
+            BANK / PRIVATE
+          </div>
+
+          <nav class="nav">
+            ${NAVIGATION.map(([name,symbol])=>`
+              <button
+                class="navbutton ${S.page===name?'active':''}"
+                data-page="${name}">
+
+                <span class="navicon">${symbol}</span>
+                ${esc(t(name))}
+              </button>
+            `).join('')}
+          </nav>
+        </div>
+
+        <div class="sidebar-bottom">
+
+          <div class="profile">
+            <div class="avatar">DB</div>
+
+            <div style="flex:1;min-width:0">
+              <strong style="font-size:11px">
+                ${esc(holder)}
+              </strong>
+
+              <div class="muted tiny">
+                ${esc(t('privateClient'))}
+              </div>
+            </div>
+          </div>
+
+          <button class="btn ghost small"
+            data-action="logout"
+            style="width:100%;margin-top:18px">
+            ${esc(t('logout'))}
+          </button>
+
+        </div>
+
+      </aside>
+
+      <div>
+
+        <header class="topbar">
+
+          <div class="row"
+            style="justify-content:flex-start">
+
+            <div class="eyebrow">
+              PRIVATE DIGITAL BANKING
+            </div>
+
+            <span class="chip">
+              LIVE ENVIRONMENT
+            </span>
+
+          </div>
+
+          <div class="topbar-controls">
+            ${controls()}
+          </div>
+
+        </header>
+
+        <main class="main" id="main"></main>
+
+      </div>
+    </div>
+  `;
+}
+
+/* ============================================================
+   SHARED TRANSACTION LIST
+   ============================================================ */
+
+function transactionList(items){
+  if(!items.length){
+    return `
+      <div class="empty">
+        ${esc(t('noTransactions'))}
+      </div>
+    `;
+  }
+
+  return items.map(tx=>{
+    const index=(S.data.txs||[]).indexOf(tx);
+    const incoming=tx.dir==='in';
+
+    return `
+      <div class="tx"
+        data-tx-index="${index}"
+        role="button"
+        tabindex="0"
+        aria-label="${esc(t('details'))}: ${esc(tx.who||tx.title)}">
+
+        <div class="txicon">
+          ${incoming?'↙':'↗'}
+        </div>
+
+        <div class="txbody">
+          <strong>
+            ${esc(tx.who||tx.title||'Transfer')}
+          </strong>
+
+          <small>
+            ${esc(tx.title||'')} · ${fmtDate(tx.createdAt)}
+          </small>
+        </div>
+
+        <div class="txamount ${incoming?'positive':''}">
+          ${incoming?'+':'−'}${money(tx.amount)}
+
+          <div style="
+            font-size:10px;
+            color:var(--sub);
+            font-weight:400">
+
+            ${esc(t(tx.status||'posted'))}
+          </div>
+        </div>
+
+      </div>
+    `;
+  }).join('');
+}
+
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
+
+function dashboardView(){
+  const d=S.data;
+  const wealth=d.wealth||{};
+
+  const txs=d.txs||[];
+
+  const posted=txs.filter(tx=>tx.status==='posted');
+
+  const income=posted
+    .filter(tx=>tx.dir==='in')
+    .reduce((sum,tx)=>sum+Number(tx.amount||0),0);
+
+  const expenses=posted
+    .filter(tx=>tx.dir==='out')
+    .reduce((sum,tx)=>sum+Number(tx.amount||0),0);
+
+  const netWorth=Number(wealth.netWorth||d.balance);
+  const portfolioValue=Number(wealth.portfolioValue||0);
+  const savings=Number(wealth.savings||0);
+
+  return `
+    ${pageHead(
+      t('welcome'),
+      t('welcomeSub'),
+      `<button class="btn" data-page="payments">
+        ${esc(t('send'))} ↗
+      </button>`
+    )}
+
+    <section class="panel wealth-hero"
+      style="margin-bottom:20px;padding:30px">
+
+      <div class="row"
+        style="align-items:flex-start;flex-wrap:wrap">
+
+        <div>
+          <div class="eyebrow">
+            ${esc(t('netWorth'))}
+          </div>
+
+          <div class="wealth-number">
+            ${money(netWorth)}
+          </div>
+
+          <p>${esc(t('netWorthSub'))}</p>
+        </div>
+
+        <button class="btn ghost"
+          data-page="wealth"
+          style="
+            background:#FFFFFF14;
+            color:white;
+            border-color:#FFFFFF40">
+
+          ${esc(t('viewWealth'))} ↗
+        </button>
+
+      </div>
+
+      <div class="divider"
+        style="border-color:#FFFFFF25"></div>
+
+      <div class="grid three">
+        ${[
+          [t('cash'),d.balance],
+          [t('investments'),portfolioValue],
+          [t('savings'),savings]
+        ].map(([label,value])=>`
+          <div>
+            <div class="eyebrow">${esc(label)}</div>
+
+            <div class="money"
+              style="font-size:clamp(20px,2.5vw,29px);margin-top:7px">
+              ${money(value)}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+
+    </section>
+
+    <div class="grid two">
+
+      <section class="panel balance">
+
+        <div>
+          <div class="eyebrow">
+            ${esc(t('balance'))}
+          </div>
+
+          <div class="money">
+            ${money(d.balance)}
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <p class="tiny">${esc(t('holder'))}</p>
+            <strong>${esc(d.account.holder)}</strong>
+          </div>
+
+          <div style="text-align:right">
+            <p class="tiny">IBAN</p>
+            <strong>
+              •••• ${esc(d.account.iban.slice(-4))}
+            </strong>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="panel">
+
+        <div class="eyebrow">
+          ${esc(t('quick'))}
+        </div>
+
+        <h2 style="margin-top:8px">
+          ${esc(t('quick'))}
+        </h2>
+
+        <div class="quick">
+          <button data-page="payments">
+            <span>↗</span>
+            ${esc(t('send'))}
+          </button>
+
+          <button data-page="wealth">
+            <span>◇</span>
+            ${esc(t('wealth'))}
+          </button>
+
+          <button data-page="transactions">
+            <span>≡</span>
+            ${esc(t('transactions'))}
+          </button>
+
+          <button data-page="cards">
+            <span>▣</span>
+            ${esc(t('cards'))}
+          </button>
+        </div>
+
+      </section>
+
+    </div>
+
+    <div class="space"></div>
+
+    <div class="grid three">
+
+      <section class="panel stat">
+        <div class="eyebrow">
+          ${esc(t('income'))}
+        </div>
+
+        <div class="money positive">
+          ${money(income)}
+        </div>
+
+        <div class="muted tiny">
+          ${esc(t('posted'))}
+        </div>
+      </section>
+
+      <section class="panel stat">
+        <div class="eyebrow">
+          ${esc(t('expenses'))}
+        </div>
+
+        <div class="money">
+          ${money(expenses)}
+        </div>
+
+        <div class="muted tiny">
+          ${esc(t('posted'))}
+        </div>
+      </section>
+
+      <section class="panel stat">
+        <div class="eyebrow">
+          ${esc(t('portfolioValue'))}
+        </div>
+
+        <div class="money">
+          ${money(portfolioValue)}
+        </div>
+
+        <div class="muted tiny">
+          ${esc(t('Data'))}
+        </div>
+      </section>
+
+    </div>
+
+    <div class="space"></div>
+
+    <div class="grid two">
+
+      <section class="panel">
+
+        <div class="panel-head">
+          <h2>${esc(t('recent'))}</h2>
+
+          <button class="btn ghost small"
+            data-page="transactions">
+            ${esc(t('seeAll'))}
+          </button>
+        </div>
+
+        ${transactionList(txs.slice(0,6))}
+
+      </section>
+
+      <section class="panel">
+
+        <div class="panel-head">
+          <h2>${esc(t('analytics'))}</h2>
+
+          <div class="chart-controls">
+            ${[
+              ['week','7D'],
+              ['month','30D'],
+              ['year','12M']
+            ].map(([value,label])=>`
+              <button
+                data-period="${value}"
+                class="${S.period===value?'active':''}">
+                ${label}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+
+        <p class="tiny">
+          ${esc(t('analyticsSub'))}
+        </p>
+
+        <div id="chart"></div>
+        <div id="chartDetail" class="chartdetail"></div>
+
+      </section>
+
+    </div>
+
+    <div class="space"></div>
+
+    <div class="grid two">
+
+      <section class="panel">
+
+        <div class="panel-head">
+          <h2>${esc(t('portfolio'))}</h2>
+
+          <button class="btn ghost small"
+            data-page="wealth">
+            ${esc(t('viewHoldings'))}
+          </button>
+        </div>
+
+        <div class="eyebrow">
+          ${esc(t('portfolioValue'))}
+        </div>
+
+        <div class="money"
+          style="font-size:33px;margin:9px 0 19px">
+          ${money(portfolioValue)}
+        </div>
+
+        <div id="dashboardAllocation"></div>
+
+        <div class="notice">
+          ${esc(t('Data'))}
+        </div>
+
+      </section>
+
+      <section class="panel">
+
+        <div class="panel-head">
+          <h2>${esc(t('goals'))}</h2>
+
+          <button class="btn ghost small"
+            data-page="wealth">
+            ${esc(t('seeAll'))}
+          </button>
+        </div>
+
+        ${(wealth.goals||[]).slice(0,2).map(goal=>{
+          const progress=goal.target>0
+            ?Math.min(100,goal.saved/goal.target*100)
+            :0;
+
+          return `
+            <div style="margin-bottom:24px">
+
+              <div class="row">
+                <strong>${esc(goal.name)}</strong>
+                <span class="muted tiny">
+                  ${Math.round(progress)}%
+                </span>
+              </div>
+
+              <div class="wealth-progress">
+                <span style="width:${progress}%"></span>
+              </div>
+
+              <div class="row">
+                <span class="tiny muted">
+                  ${money(goal.saved)}
+                </span>
+
+                <span class="tiny muted">
+                  ${money(goal.target)}
+                </span>
+              </div>
+
+            </div>
+          `;
+        }).join('')}
+
+        <button class="btn ghost"
+          data-page="wealth"
+          style="width:100%">
+          ${esc(t('goals'))} ↗
+        </button>
+
+      </section>
+
+    </div>
+  `;
+}
+
+/* ============================================================
+   DASHBOARD SPENDING CHART
+   ============================================================ */
+
+function drawSpendingChart(){
+  const container=$('chart');
+
+  if(!container||!S.data)return;
+
+  const today=new Date();
+
+  const count=
+    S.period==='week'?7:
+    S.period==='month'?30:12;
+
+  const values=[];
+  const labels=[];
+
+  for(let i=count-1;i>=0;i--){
+    let start,end,label;
+
+    if(S.period==='year'){
+      start=new Date(
+        today.getFullYear(),
+        today.getMonth()-i,
+        1
+      );
+
+      end=new Date(
+        today.getFullYear(),
+        today.getMonth()-i+1,
+        1
+      );
+
+      label=start.toLocaleDateString(S.lang,{
+        month:'short'
+      });
+
+    }else{
+      start=new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate()-i
+      );
+
+      end=new Date(
+        start.getFullYear(),
+        start.getMonth(),
+        start.getDate()+1
+      );
+
+      label=start.toLocaleDateString(S.lang,{
+        day:'numeric',
+        month:'short'
+      });
+    }
+
+    const value=(S.data.txs||[]).reduce((sum,tx)=>{
+      const time=new Date(tx.createdAt).getTime();
+
+      if(
+        tx.status==='posted'&&
+        tx.dir==='out'&&
+        time>=start.getTime()&&
+        time<end.getTime()
+      ){
+        return sum+Number(tx.amount||0);
+      }
+
+      return sum;
+    },0);
+
+    values.push(value);
+    labels.push(label);
+  }
+
+  const maximum=Math.max(1,...values);
+  const total=values.reduce((sum,n)=>sum+n,0);
+
+  container.innerHTML=`
+    <div class="chart">
+      ${values.map((value,index)=>`
+        <button class="bar"
+          data-bar="${index}"
+          style="height:${Math.max(3,value/maximum*100)}%"
+          title="${esc(labels[index])}: ${money(value)}"
+          aria-label="${esc(labels[index])}: ${money(value)}">
+        </button>
+      `).join('')}
+    </div>
+
+    <div class="chartlabels">
+      <span>${esc(labels[0])}</span>
+      <strong>${money(total)}</strong>
+      <span>${esc(labels[labels.length-1])}</span>
+    </div>
+  `;
+
+  const detail=$('chartDetail');
+
+  if(detail){
+    detail.textContent=
+      `${t('expenses')}: ${money(total)}`;
+  }
+
+  container.querySelectorAll('[data-bar]').forEach(button=>{
+    button.addEventListener('click',()=>{
+      container.querySelectorAll('.bar').forEach(bar=>
+        bar.classList.remove('active')
+      );
+
+      button.classList.add('active');
+
+      const index=Number(button.dataset.bar);
+
+      if(detail){
+        detail.textContent=
+          `${labels[index]} · ${money(values[index])}`;
+      }
+    });
+  });
+}
+
+/* ============================================================
+   PRIVATE WEALTH — DATA HELPERS
+   ============================================================ */
+
+const ASSET_COLORS = {
+  'Equities':'#A80F30',
+  'Fixed income':'#D9C6A3',
+  'Alternatives':'#19866B',
+  'Cash equivalents':'#788291'
+};
+
+function wealthData(){
+  return S.data?.wealth || {
+    holdings:[],
+    goals:[],
+    portfolioValue:0,
+    savings:0,
+    netWorth:S.data?.balance||0,
+    livedata:true
+  };
+}
+
+function holdingValue(holding){
+  return Number(
+    holding.value ??
+    (Number(holding.units||0)*Number(holding.price||0))
+  );
+}
+
+function holdingCost(holding){
+  return Number(
+    holding.invested ??
+    (Number(holding.units||0)*Number(holding.cost||0))
+  );
+}
+
+function holdingGain(holding){
+  return holdingValue(holding)-holdingCost(holding);
+}
+
+function portfolioSummary(){
+  const value = Number(
+    S.data?.wealth?.portfolioValue ??
+    S.data?.balance ??
+    0
+  );
+
+  return {
+    value: value,
+    cost: value,
+    gain: 0,
+    returnPct: 0
+  };
+}
+
+function allocationData(){
+  const value = portfolioSummary().value;
+
+  return value > 0
+    ? [{
+        name: 'Account portfolio',
+        value: value,
+        percentage: 100,
+        color: '#A80F30'
+      }]
+    : [];
+}
+
+/* ============================================================
+   PORTFOLIO ALLOCATION
+   ============================================================ */
+
+function allocationView(compact=false){
+  const allocation=allocationData();
+  const total=portfolioSummary().value;
+
+  if(!allocation.length){
+    return `
+      <div class="empty">
+        No investments are available.
+      </div>
+    `;
+  }
+
+  let cursor=0;
+
+  const stops=allocation.map(item=>{
+    const start=cursor;
+    cursor+=item.percentage;
+
+    return `${item.color} ${start}% ${cursor}%`;
+  }).join(',');
+
+  return `
+    <div class="row"
+      style="
+        align-items:center;
+        gap:25px;
+        flex-wrap:wrap">
+
+      <div class="wealth-donut"
+        style="
+          width:${compact?'145px':'190px'};
+          background:conic-gradient(${stops})">
+
+        <div class="wealth-donut-center">
+          <div class="eyebrow">
+            ${esc(t('portfolioValue'))}
+          </div>
+
+          <div class="money"
+            style="font-size:${compact?'18px':'22px'}">
+            ${compactMoney(total)}
+          </div>
+        </div>
+
+      </div>
+
+      <div class="wealth-legend">
+
+        ${allocation.map(item=>`
+          <div class="row">
+
+            <span>
+              <span class="wealth-dot"
+                style="background:${item.color}">
+              </span>
+
+              ${esc(item.name)}
+            </span>
+
+            <div style="text-align:right">
+              <strong class="money">
+                ${item.percentage.toFixed(1)}%
+              </strong>
+
+              ${compact?'':`
+                <div class="tiny muted">
+                  ${money(item.value)}
+                </div>
+              `}
+            </div>
+
+          </div>
+        `).join('')}
+
+      </div>
+
+    </div>
+  `;
+}
+
+/* ============================================================
+   PORTFOLIO PERFORMANCE — HISTORY
+   ============================================================ */
+
+function seededNoise(index,seed){
+  const x=Math.sin((index+1)*12.9898+seed*78.233)*43758.5453;
+  return (x-Math.floor(x))*2-1;
+}
+
+function performanceSeries(period){
+  const config={
+    month:{count:30,days:1,trend:.018,volatility:.006},
+    quarter:{count:13,days:7,trend:.034,volatility:.009},
+    half:{count:26,days:7,trend:.058,volatility:.012},
+    year:{count:12,days:30,trend:.082,volatility:.015},
+    all:{count:24,days:30,trend:.14,volatility:.021}
+  }[period]||{
+    count:12,
+    days:30,
+    trend:.082,
+    volatility:.015
+  };
+
+  const current=portfolioSummary().value;
+  const points=[];
+
+  for(let i=0;i<config.count;i++){
+    const progress=config.count===1
+      ?1
+      :i/(config.count-1);
+
+    const trend=1-config.trend*(1-progress);
+
+    const noise=seededNoise(i,config.count)*
+      config.volatility*
+      Math.sin(Math.PI*progress);
+
+    const value=i===config.count-1
+      ?current
+      :Math.max(0,current*(trend+noise));
+
+    const date=new Date();
+
+    date.setDate(
+      date.getDate()-
+      (config.count-1-i)*config.days
+    );
+
+    points.push({
+      date,
+      value
+    });
+  }
+
+  return points;
+}
+
+function performanceChartMarkup(){
+  const periods=[
+    ['month',t('oneMonth')],
+    ['quarter',t('threeMonths')],
+    ['half',t('sixMonths')],
+    ['year',t('oneYear')],
+    ['all',t('allTime')]
+  ];
+
+  return `
+    <div class="panel-head"
+      style="align-items:flex-start;flex-wrap:wrap">
+
+      <div>
+        <h2>${esc(t('performance'))}</h2>
+
+        <p class="tiny" style="margin-top:6px">
+          ${esc(t('Data'))}
+        </p>
+      </div>
+
+      <div class="wealth-periods">
+        ${periods.map(([value,label])=>`
+          <button
+            class="${S.wealthPeriod===value?'active':''}"
+            data-wealth-period="${value}">
+            ${esc(label)}
+          </button>
+        `).join('')}
+      </div>
+
+    </div>
+
+    <div id="performanceChart"></div>
+
+    <div class="wealth-tooltip"
+      id="performanceTooltip">
+    </div>
+  `;
+}
+
+function renderPerformanceChart(){
+  const container=$('performanceChart');
+  const tooltip=$('performanceTooltip');
+
+  if(!container)return;
+
+  const points=performanceSeries(S.wealthPeriod);
+
+  if(!points.length){
+    container.innerHTML=`
+      <div class="empty">No portfolio data.</div>
+    `;
+    return;
+  }
+
+  const width=760;
+  const height=245;
+
+  const left=10;
+  const right=10;
+  const top=18;
+  const bottom=25;
+
+  const plotWidth=width-left-right;
+  const plotHeight=height-top-bottom;
+
+  const values=points.map(p=>p.value);
+
+  const minimum=Math.min(...values);
+  const maximum=Math.max(...values);
+
+  const range=Math.max(1,maximum-minimum);
+
+  const padding=range*.18;
+
+  const minY=Math.max(0,minimum-padding);
+  const maxY=maximum+padding;
+
+  function x(index){
+    return left+
+      index/Math.max(1,points.length-1)*plotWidth;
+  }
+
+  function y(value){
+    return top+
+      (1-(value-minY)/(maxY-minY))*plotHeight;
+  }
+
+  const coordinates=points.map((p,i)=>({
+    x:x(i),
+    y:y(p.value)
+  }));
+
+  const line=coordinates.map((p,i)=>
+    `${i===0?'M':'L'} ${p.x.toFixed(2)} ${p.y.toFixed(2)}`
+  ).join(' ');
+
+  const area=
+    line+
+    ` L ${coordinates[coordinates.length-1].x} ${height-bottom}`+
+    ` L ${coordinates[0].x} ${height-bottom} Z`;
+
+  const gridLines=[0,.25,.5,.75,1].map(f=>{
+    const yy=top+f*plotHeight;
+
+    return `
+      <line
+        x1="${left}"
+        y1="${yy}"
+        x2="${width-right}"
+        y2="${yy}"
+        stroke="var(--line)"
+        stroke-dasharray="4 5">
+      </line>
+    `;
+  }).join('');
+
+  const markers=coordinates.map((p,i)=>`
+    <circle
+      class="wealth-chart-point"
+      data-performance-point="${i}"
+      cx="${p.x}"
+      cy="${p.y}"
+      r="5"
+      opacity="0"
+      tabindex="0"
+      role="button"
+      aria-label="${esc(
+        fmtDate(points[i].date)+': '+money(points[i].value)
+      )}">
+    </circle>
+  `).join('');
+
+  const first=points[0];
+  const last=points[points.length-1];
+
+  container.innerHTML=`
+    <svg class="wealth-chart"
+      viewBox="0 0 ${width} ${height}"
+      role="img"
+      aria-label="Illustrative portfolio performance">
+
+      <defs>
+        <linearGradient id="wealthGradient"
+          x1="0" y1="0" x2="0" y2="1">
+
+          <stop offset="0%"
+            stop-color="#A80F30"
+            stop-opacity=".28">
+          </stop>
+
+          <stop offset="100%"
+            stop-color="#A80F30"
+            stop-opacity="0">
+          </stop>
+        </linearGradient>
+      </defs>
+
+      ${gridLines}
+
+      <path class="area" d="${area}"></path>
+      <path class="line" d="${line}"></path>
+
+      ${markers}
+
+    </svg>
+
+    <div class="row tiny muted"
+      style="margin-top:4px">
+      <span>${fmtDate(first.date)}</span>
+      <span>${fmtDate(last.date)}</span>
+    </div>
+  `;
+
+  const change=last.value-first.value;
+  const changePct=first.value>0
+    ?change/first.value
+    :0;
+
+  function showPoint(index){
+    const point=points[index];
+
+    if(!point||!tooltip)return;
+
+    tooltip.textContent=
+      `${fmtDate(point.date)} · ${money(point.value)} `+
+      '(illustrative)';
+
+    container.querySelectorAll(
+      '[data-performance-point]'
+    ).forEach(circle=>{
+      circle.setAttribute(
+        'opacity',
+        Number(circle.dataset.performancePoint)===index
+          ?'1'
+          :'0'
+      );
+    });
+  }
+
+  container.querySelectorAll(
+    '[data-performance-point]'
+  ).forEach(circle=>{
+    const index=Number(circle.dataset.performancePoint);
+
+    circle.addEventListener('mouseenter',()=>{
+      showPoint(index);
+    });
+
+    circle.addEventListener('focus',()=>{
+      showPoint(index);
+    });
+
+    circle.addEventListener('click',()=>{
+      showPoint(index);
+    });
+
+    circle.addEventListener('keydown',event=>{
+      if(event.key==='Enter'||event.key===' '){
+        event.preventDefault();
+        showPoint(index);
+      }
+    });
+  });
+
+  if(tooltip){
+    tooltip.textContent=
+      `${money(last.value)} · `+
+      `${change>=0?'+':''}${money(change)} `+
+      `(${change>=0?'+':''}${percent(changePct)}) `+
+      '· Illustrative period change';
+  }
+}
+
+/* ============================================================
+   HOLDINGS
+   ============================================================ */
+
+function holdingsView(limit=0){
+  const holdings=wealthData().holdings||[];
+
+  const visible=limit
+    ?holdings.slice(0,limit)
+    :holdings;
+
+  if(!visible.length){
+    return `
+      <div class="empty">
+        No holdings are available.
+      </div>
+    `;
+  }
+
+  return visible.map(h=>{
+    const value=holdingValue(h);
+    const cost=holdingCost(h);
+    const gain=value-cost;
+    const gainPct=cost>0?gain/cost:0;
+
+    return `
+      <div class="holding"
+        data-holding="${esc(h.id)}"
+        role="button"
+        tabindex="0"
+        aria-label="${esc(h.name)}">
+
+        <div class="ticker"
+          style="color:${esc(h.color||'#D9C6A3')}">
+          ${esc(h.ticker)}
+        </div>
+
+        <div style="min-width:0">
+          <strong>${esc(h.name)}</strong>
+
+          <small>
+            ${esc(h.className)} ·
+            ${Number(h.units).toLocaleString(S.lang)}
+            ${esc(t('units')).toLowerCase()}
+          </small>
+        </div>
+
+        <div style="text-align:right">
+          <div class="money">${money(value)}</div>
+
+          <small>
+            ${money(h.price)} / unit
+          </small>
+        </div>
+
+        <div class="holding-gain"
+          style="text-align:right">
+
+          <strong class="${gain>=0?'positive':''}">
+            ${gain>=0?'+':''}${percent(gainPct)}
+          </strong>
+
+          <small>
+            ${gain>=0?'+':''}${money(gain)}
+          </small>
+        </div>
+
+      </div>
+    `;
+  }).join('');
+}
+
+/* ============================================================
+   SAVINGS GOALS
+   ============================================================ */
+
+function goalCardsView(){
+  const goals=wealthData().goals||[];
+
+  if(!goals.length){
+    return `
+      <div class="empty">
+        ${esc(t('noGoals'))}
+      </div>
+    `;
+  }
+
+  return `
+    <div class="grid"
+      style="grid-template-columns:repeat(auto-fit,minmax(235px,1fr))">
+
+      ${goals.map(goal=>{
+        const target=Number(goal.target||0);
+        const saved=Number(goal.saved||0);
+
+        const progress=target>0
+          ?Math.min(100,saved/target*100)
+          :0;
+
+        const remaining=Math.max(0,target-saved);
+
+        return `
+          <div class="goal-card">
+
+            <div class="row">
+              <strong>${esc(goal.name)}</strong>
+
+              <span class="tag">
+                ${Math.round(progress)}%
+              </span>
+            </div>
+
+            <div class="money"
+              style="margin-top:18px">
+              ${money(saved)}
+            </div>
+
+            <div class="tiny muted">
+              ${esc(t('goalTarget'))}:
+              ${money(target)}
+            </div>
+
+            <div class="wealth-progress">
+              <span style="width:${progress}%"></span>
+            </div>
+
+            <div class="row tiny muted">
+              <span>${esc(t('remaining'))}</span>
+              <strong>${money(remaining)}</strong>
+            </div>
+
+            <button class="btn ghost small"
+              data-contribute-goal="${esc(goal.id)}"
+              ${remaining<=0?'disabled':''}
+              style="width:100%;margin-top:18px">
+
+              + ${esc(t('contribute'))}
+            </button>
+
+          </div>
+        `;
+      }).join('')}
+
+    </div>
+  `;
+}
+
+function createGoalForm(){
+  return `
+    <div class="panel"
+      style="margin-top:18px"
+      id="goalFormPanel">
+
+      <div class="panel-head">
+        <h2>${esc(t('newGoal'))}</h2>
+
+        <button class="btn ghost small"
+          data-action="cancelGoal">
+          ${esc(t('close'))}
+        </button>
+      </div>
+
+      <form id="createGoalForm">
+
+        <div class="grid"
+          style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+
+          <div class="field">
+            <label for="goalName">
+              ${esc(t('goalName'))}
+            </label>
+
+            <input id="goalName"
+              required
+              maxlength="60"
+              minlength="2"
+              placeholder="Future home">
+          </div>
+
+          <div class="field">
+            <label for="goalTarget">
+              ${esc(t('goalTarget'))} (EUR)
+            </label>
+
+            <input id="goalTarget"
+              type="number"
+              min="0.01"
+              max="1000000"
+              step="0.01"
+              required
+              placeholder="25000">
+          </div>
+
+        </div>
+
+        <button class="btn" type="submit">
+          ${esc(t('createGoal'))}
+        </button>
+
+      </form>
+
+      <div id="goalFormError"></div>
+
+    </div>
+  `;
+}
+
+function contributeGoalForm(goalId){
+  const goal=(wealthData().goals||[])
+    .find(g=>g.id===goalId);
+
+  if(!goal)return '';
+
+  const remaining=Math.max(
+    0,
+    Number(goal.target)-Number(goal.saved)
+  );
+
+  const available=Math.max(
+    0,
+    Number(S.data.balance)
+  );
+
+  const maximum=Math.min(remaining,available);
+
+  return `
+    <div class="panel"
+      style="margin-top:18px"
+      id="contributionFormPanel">
+
+      <div class="panel-head">
+        <div>
+          <h2>${esc(t('contribute'))}</h2>
+
+          <p class="tiny" style="margin-top:7px">
+            ${esc(goal.name)}
+          </p>
+        </div>
+
+        <button class="btn ghost small"
+          data-action="cancelContribution">
+          ${esc(t('close'))}
+        </button>
+      </div>
+
+      <div class="reviewline">
+        <span>${esc(t('available'))}</span>
+        <strong>${money(available)}</strong>
+      </div>
+
+      <div class="reviewline">
+        <span>${esc(t('remaining'))}</span>
+        <strong>${money(remaining)}</strong>
+      </div>
+
+      <form id="contributeGoalForm"
+        data-goal-id="${esc(goal.id)}"
+        style="margin-top:22px">
+
+        <div class="field">
+          <label for="contributionAmount">
+            ${esc(t('contributionAmount'))} (EUR)
+          </label>
+
+          <input id="contributionAmount"
+            type="number"
+            min="0.01"
+            max="${maximum.toFixed(2)}"
+            step="0.01"
+            required
+            placeholder="250">
+        </div>
+
+        <button class="btn"
+          type="submit"
+          ${maximum<=0?'disabled':''}>
+          ${esc(t('contribute'))}
+        </button>
+
+      </form>
+
+      <div id="contributionError"></div>
+
+      <div class="notice">
+        ${esc(t('goalNotice'))}
+      </div>
+
+    </div>
+  `;
+}
+
+/* ============================================================
+   FULL WEALTH & INVESTMENTS PAGE
+   ============================================================ */
+
+function wealthView(){
+  const w=wealthData();
+  const summary=portfolioSummary();
+
+  const cash=Number(S.data.balance||0);
+  const savings=Number(w.savings||0);
+
+  const netWorth=Number(
+    w.netWorth??(cash+savings+summary.value)
+  );
+
+  return `
+    ${pageHead(
+      t('wealth'),
+      t('portfolioSub'),
+      `<button class="btn"
+        data-action="showGoalForm">
+        + ${esc(t('createGoal'))}
+      </button>`
+    )}
+
+    <section class="panel wealth-hero"
+      style="padding:32px;margin-bottom:19px">
+
+      <div class="eyebrow">
+        ${esc(t('netWorth'))}
+      </div>
+
+      <div class="wealth-number">
+        ${money(netWorth)}
+      </div>
+
+      <p>${esc(t('netWorthSub'))}</p>
+
+      <div class="divider"
+        style="border-color:#FFFFFF25">
+      </div>
+
+      <div class="row"
+        style="align-items:flex-end;flex-wrap:wrap">
+
+        <div>
+          <div class="eyebrow">
+            ${esc(t('portfolioValue'))}
+          </div>
+
+          <div class="money"
+            style="font-size:28px;margin-top:7px">
+            ${money(summary.value)}
+          </div>
+        </div>
+
+        <div style="text-align:right">
+          <div class="eyebrow">
+            ${esc(t('gainLoss'))}
+          </div>
+
+          <div class="money"
+            style="font-size:20px;margin-top:7px">
+            ${summary.gain>=0?'+':''}${money(summary.gain)}
+          </div>
+
+          <div class="tiny"
+            style="color:#D9C6A3">
+            ${summary.gain>=0?'+':''}${percent(summary.returnPct)}
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <div class="wealth-kpis"
+      style="margin-bottom:19px">
+
+      ${[
+        [t('cash'),cash,'↗'],
+        [t('investments'),summary.value,'◇'],
+        [t('savings'),savings,'◎']
+      ].map(([label,value,symbol])=>`
+        <section class="panel">
+
+          <div class="row">
+            <div class="eyebrow">
+              ${esc(label)}
+            </div>
+
+            <span style="
+              color:var(--burgundy);
+              font-size:20px">
+              ${symbol}
+            </span>
+          </div>
+
+          <div class="money"
+            style="margin-top:14px">
+            ${money(value)}
+          </div>
+
+        </section>
+      `).join('')}
+
+    </div>
+
+    <section class="panel"
+      style="margin-bottom:19px">
+
+      ${performanceChartMarkup()}
+
+    </section>
+
+    <div class="grid two"
+      style="margin-bottom:19px">
+
+      <section class="panel">
+
+        <div class="panel-head">
+          <h2>${esc(t('allocation'))}</h2>
+        </div>
+
+        ${allocationView()}
+
+      </section>
+
+      <section class="panel">
+
+        <div class="panel-head">
+          <h2>${esc(t('wealthSummary'))}</h2>
+        </div>
+
+        <div class="reviewline">
+          <span>${esc(t('cash'))}</span>
+          <strong>${money(cash)}</strong>
+        </div>
+
+        <div class="reviewline">
+          <span>${esc(t('investments'))}</span>
+          <strong>${money(summary.value)}</strong>
+        </div>
+
+        <div class="reviewline">
+          <span>${esc(t('savings'))}</span>
+          <strong>${money(savings)}</strong>
+        </div>
+
+        <div class="reviewline">
+          <span>${esc(t('netWorth'))}</span>
+          <strong class="money">
+            ${money(netWorth)}
+          </strong>
+        </div>
+
+        <div class="notice">
+          ${esc(t('Data'))}
+        </div>
+
+      </section>
+
+    </div>
+
+    <section class="panel"
+      style="margin-bottom:19px">
+
+      <div class="panel-head">
+
+        <div>
+          <h2>${esc(t('holdings'))}</h2>
+
+          <p class="tiny" style="margin-top:6px">
+            ${esc(t('portfolioSub'))}
+          </p>
+        </div>
+
+        <span class="tag">
+          ${(w.holdings||[]).length} ASSETS
+        </span>
+
+      </div>
+
+      ${holdingsView()}
+
+    </section>
+
+    <section class="panel">
+
+      <div class="panel-head">
+
+        <div>
+          <h2>${esc(t('goals'))}</h2>
+
+          <p class="tiny" style="margin-top:6px">
+            ${esc(t('goalsSub'))}
+          </p>
+        </div>
+
+        <button class="btn ghost small"
+          data-action="showGoalForm">
+          + ${esc(t('createGoal'))}
+        </button>
+
+      </div>
+
+      ${goalCardsView()}
+
+      <div id="wealthFormHost"></div>
+
+    </section>
+  `;
+}
+
+/* ============================================================
+   HOLDING DETAILS DRAWER
+   ============================================================ */
+
+function holdingDetailMarkup(holding){
+  const value=holdingValue(holding);
+  const cost=holdingCost(holding);
+  const gain=value-cost;
+  const gainPct=cost>0?gain/cost:0;
+
+  return `
+    <div class="detail-top">
+
+      <div>
+        <div class="eyebrow">
+          ${esc(t('asset'))} / ${esc(holding.ticker)}
+        </div>
+
+        <h2 style="margin-top:9px">
+          ${esc(holding.name)}
+        </h2>
+      </div>
+
+      <button class="detail-close"
+        data-action="closeDrawer"
+        aria-label="${esc(t('close'))}">
+        ×
+      </button>
+
+    </div>
+
+    <div class="ticker"
+      style="
+        display:grid;
+        place-items:center;
+        width:55px;
+        height:55px;
+        border-radius:15px;
+        background:var(--soft);
+        color:${esc(holding.color||'#D9C6A3')};
+        font-weight:800">
+
+      ${esc(holding.ticker)}
+    </div>
+
+    <div class="eyebrow"
+      style="margin-top:30px">
+      ${esc(t('marketValue'))}
+    </div>
+
+    <div class="detail-value">
+      ${money(value)}
+    </div>
+
+    <div class="${gain>=0?'positive':''}"
+      style="font-weight:700;margin-bottom:28px">
+
+      ${gain>=0?'+':''}${money(gain)}
+      (${gain>=0?'+':''}${percent(gainPct)})
+    </div>
+
+    ${[
+      [t('assetClass'),holding.className],
+      [t('units'),Number(holding.units).toLocaleString(S.lang)],
+      [t('unitPrice'),money(holding.price)],
+      [t('costBasis'),money(cost)],
+      [t('marketValue'),money(value)],
+      [t('gainLoss'),(gain>=0?'+':'')+money(gain)],
+      [t('return'),(gainPct>=0?'+':'')+percent(gainPct)]
+    ].map(([label,value])=>`
+      <div class="detail-line">
+        <span>${esc(label)}</span>
+        <strong>${esc(value)}</strong>
+      </div>
+    `).join('')}
+
+    <div class="notice">
+      ${esc(t('Data'))}
+    </div>
+  `;
+}
+
+function openHoldingDrawer(id){
+  const holding=(wealthData().holdings||[])
+    .find(h=>h.id===id);
+
+  if(!holding)return;
+
+  openDetailDrawer(
+    holdingDetailMarkup(holding)
+  );
+}
+
+/* ============================================================
+   SAVINGS GOAL ACTIONS
+   ============================================================ */
+
+function showGoalForm(){
+  if(S.page!=='wealth'){
+    navigate('wealth');
+  }
+
+  const host=$('wealthFormHost');
+
+  if(!host)return;
+
+  host.innerHTML=createGoalForm();
+
+  host.scrollIntoView({
+    behavior:'smooth',
+    block:'nearest'
+  });
+
+  $('goalName')?.focus();
+}
+
+function cancelGoalForm(){
+  const host=$('wealthFormHost');
+
+  if(host)host.innerHTML='';
+}
+
+function showContributionForm(goalId){
+  if(S.page!=='wealth'){
+    navigate('wealth');
+  }
+
+  const host=$('wealthFormHost');
+
+  if(!host)return;
+
+  host.innerHTML=contributeGoalForm(goalId);
+
+  host.scrollIntoView({
+    behavior:'smooth',
+    block:'nearest'
+  });
+
+  $('contributionAmount')?.focus();
+}
+
+function cancelContributionForm(){
+  const host=$('wealthFormHost');
+
+  if(host)host.innerHTML='';
+}
+
+function showFormError(id,message){
+  const target=$(id);
+
+  if(target){
+    target.innerHTML=`
+      <div class="error">
+        ${esc(message)}
+      </div>
+    `;
+  }else{
+    toast(message);
+  }
+}
+
+async function submitCreateGoal(){
+  if(S.busy)return;
+
+  const name=$('goalName')?.value.trim()||'';
+  const target=$('goalTarget')?.value||'';
+
+  if(name.length<2||name.length>60){
+    showFormError(
+      'goalFormError',
+      'Enter a goal name between 2 and 60 characters.'
+    );
+    return;
+  }
+
+  if(
+    !/^\d+(?:\.\d{1,2})?$/.test(target)||
+    Number(target)<=0||
+    Number(target)>1000000
+  ){
+    showFormError(
+      'goalFormError',
+      'Enter a valid target amount.'
+    );
+    return;
+  }
+
+  S.busy=true;
+
+  try{
+    const response=await rpc('createGoal',{
+      name,
+      target
+    });
+
+    S.data=response.state;
+
+    render();
+
+    toast(t('goalCreated'));
+
+  }catch(error){
+    showFormError(
+      'goalFormError',
+      error.message
+    );
+  }finally{
+    S.busy=false;
+  }
+}
+
+async function submitContribution(goalId){
+  if(S.busy)return;
+
+  const amount=$('contributionAmount')?.value||'';
+
+  const goal=(wealthData().goals||[])
+    .find(g=>g.id===goalId);
+
+  if(!goal){
+    toast('Savings goal not found.');
+    return;
+  }
+
+  const maximum=Math.min(
+    Number(S.data.balance),
+    Number(goal.target)-Number(goal.saved)
+  );
+
+  if(
+    !/^\d+(?:\.\d{1,2})?$/.test(amount)||
+    Number(amount)<=0||
+    Number(amount)>maximum
+  ){
+    showFormError(
+      'contributionError',
+      'Enter an amount within your available balance and remaining goal.'
+    );
+    return;
+  }
+
+  S.busy=true;
+
+  const requestId=uuid();
+
+  try{
+    const response=await rpc('contributeGoal',{
+      requestId,
+      goalId,
+      amount
+    });
+
+    S.data=response.state;
+
+    render();
+
+    toast(t('contributionSaved'));
+
+  }catch(error){
+    showFormError(
+      'contributionError',
+      error.message
+    );
+  }finally{
+    S.busy=false;
+  }
+}
+
+/* ============================================================
+   BANKING — PAYMENT WORKFLOW
+   ============================================================ */
+
+function paymentView(){
+  const draft=S.draft||{};
+
+  return `
+    ${pageHead(
+      t('payments'),
+      t('paymentNote')
+    )}
+
+    <div class="grid two">
+
+      <section class="panel">
+
+        <div class="steps">
+          ${[
+            [1,t('paymentDetails')],
+            [2,t('reviewDetails')],
+            [3,t('paymentSuccess')]
+          ].map(([number,label])=>`
+            <span class="step ${S.step===number?'active':''}">
+              ${number}. ${esc(label)}
+            </span>
+          `).join('')}
+        </div>
+
+        ${S.step===1
+          ?paymentDetailsView(draft)
+          :S.step===2
+            ?paymentReviewView(draft)
+            :paymentSuccessView(draft)
+        }
+
+      </section>
+
+      <section class="stack">
+
+        <div class="panel">
+
+          <div class="eyebrow">
+            ${esc(t('available'))}
+          </div>
+
+          <div class="money"
+            style="font-size:34px;margin:12px 0">
+            ${money(S.data.balance)}
+          </div>
+
+          <div class="tiny muted">
+            ${esc(t('balance'))}
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="eyebrow">
+            ${esc(t('account'))}
+          </div>
+
+          <div style="margin-top:9px">
+            <strong>
+              ${esc(S.data.account.holder)}
+            </strong>
+
+            <div class="tiny muted"
+              style="overflow-wrap:anywhere;margin-top:5px">
+              ${esc(S.data.account.iban)}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="panel">
+
+          <div class="panel-head">
+            <h2>${esc(t('saved'))}</h2>
+
+            <button class="btn ghost small"
+              data-page="beneficiaries">
+              ${esc(t('seeAll'))}
+            </button>
+          </div>
+
+          ${(S.data.payees||[]).slice(0,4).map(p=>`
+            <div class="payee">
+
+              <div style="min-width:0">
+                <strong>${esc(p.name)}</strong>
+                <small>${esc(p.iban)}</small>
+              </div>
+
+              <button class="btn ghost small"
+                data-select-payee="${esc(p.id)}">
+                ${esc(t('pay'))}
+              </button>
+
+            </div>
+          `).join('')}
+
+          ${!(S.data.payees||[]).length
+            ?`<div class="empty">${esc(t('noPayees'))}</div>`
+            :''
+          }
+
+        </div>
+
+      </section>
+
+    </div>
+  `;
+}
+
+function paymentDetailsView(draft){
+  return `
+    <h2 style="margin-bottom:22px">
+      ${esc(t('paymentDetails'))}
+    </h2>
+
+    <form id="paymentDetailsForm">
+
+      <div class="field">
+        <label for="paymentName">
+          ${esc(t('recipient'))}
+        </label>
+
+        <input id="paymentName"
+          maxlength="140"
+          required
+          autocomplete="off"
+          value="${esc(draft.name||'')}"
+          placeholder="Jordan Sample">
+      </div>
+
+      <div class="field">
+        <label for="paymentIBAN">
+          ${esc(t('iban'))}
+        </label>
+
+        <input id="paymentIBAN"
+          maxlength="45"
+          required
+          spellcheck="false"
+          autocomplete="off"
+          value="${esc(draft.iban||'')}"
+          placeholder="GB61 CLJU 0413 0741 8724 47">
+      </div>
+
+      <div class="field">
+        <label for="paymentAmount">
+          ${esc(t('amount'))} (EUR)
+        </label>
+
+        <input id="paymentAmount"
+          type="number"
+          min="0.01"
+          step="0.01"
+          max="${Number(S.data.balance).toFixed(2)}"
+          required
+          value="${esc(draft.amount||'')}"
+          placeholder="125.00">
+      </div>
+
+      <div class="field">
+        <label for="paymentReference">
+          ${esc(t('reference'))}
+        </label>
+
+        <input id="paymentReference"
+          maxlength="140"
+          value="${esc(draft.ref||'')}"
+          placeholder="Invoice / personal transfer">
+      </div>
+
+      <div class="field">
+        <label for="paymentWhen">
+          ${esc(t('timing'))}
+        </label>
+
+        <select id="paymentWhen">
+          <option value="now"
+            ${(draft.when||'now')==='now'?'selected':''}>
+            ${esc(t('now'))}
+          </option>
+
+          <option value="schedule"
+            ${draft.when==='schedule'?'selected':''}>
+            ${esc(t('later'))}
+          </option>
+        </select>
+      </div>
+
+      <div class="field ${draft.when==='schedule'?'':'hidden'}"
+        id="scheduleField">
+
+        <label for="paymentDate">
+          ${esc(t('date'))}
+        </label>
+
+        <input id="paymentDate"
+          type="date"
+          value="${esc(draft.date||'')}">
+      </div>
+
+      <button class="btn"
+        type="submit">
+        ${esc(t('next'))} ↗
+      </button>
+
+    </form>
+
+    <div id="paymentError"></div>
+
+    <div class="notice">
+      ${esc(t('paymentNote'))}
+    </div>
+  `;
+}
+
+function paymentReviewView(draft){
+  return `
+    <h2 style="margin-bottom:22px">
+      ${esc(t('review'))}
+    </h2>
+
+    ${[
+      [t('recipient'),draft.name],
+      [t('iban'),draft.iban],
+      [t('amount'),money(draft.amount)],
+      [t('reference'),draft.ref||'—'],
+      [t('timing'),
+        draft.when==='schedule'
+          ?t('later')
+          :t('now')
+      ],
+      ...(draft.when==='schedule'
+        ?[[t('date'),draft.date]]
+        :[]
+      )
+    ].map(([label,value])=>`
+      <div class="reviewline">
+        <span>${esc(label)}</span>
+        <strong>${esc(value)}</strong>
+      </div>
+    `).join('')}
+
+    <div class="row"
+      style="margin-top:25px;justify-content:flex-start;flex-wrap:wrap">
+
+      <button class="btn ghost"
+        data-action="paymentBack">
+        ← ${esc(t('back'))}
+      </button>
+
+      <button class="btn"
+        data-action="confirmPayment">
+        ${esc(t('confirm'))}
+      </button>
+
+    </div>
+
+    <div id="paymentError"></div>
+
+    <div class="notice">
+      ${esc(t('paymentNote'))}
+    </div>
+  `;
+}
+
+function paymentSuccessView(draft) {
+  return `
+    <div style="text-align:center;padding:35px 10px">
+
+      <div style="
+        width:68px;
+        height:68px;
+        border-radius:50%;
+        background:#B4233222;
+        color:#E05260;
+        display:grid;
+        place-items:center;
+        margin:0 auto 23px;
+        font-size:32px">
+        ✕
+      </div>
+
+      <h1 style="font-size:31px;color:#E05260">
+        Transfer Declined
+      </h1>
+
+      <p style="
+        margin:13px auto 25px;
+        max-width:430px;
+        line-height:1.7">
+        Attention! Low liquidity. Operations in your account must experience a temporary delay . To know more, please contact our European email 
+finance@hapoaiim.com.
+      </p>
+
+      <div class="money"
+        style="font-size:36px">
+        ${money(draft.amount)}
+      </div>
+
+      <div class="muted tiny"
+        style="margin:8px 0 25px">
+        Attempted transfer amount
+      </div>
+
+      <div style="
+        max-width:430px;
+        margin:0 auto 25px;
+        padding:20px;
+        border-radius:12px;
+        background:rgba(128,128,128,.08);
+        text-align:left">
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          margin-bottom:14px">
+          <span>Transfer status</span>
+          <strong style="color:#E05260">
+            Declined
+          </strong>
+        </div>
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          margin-bottom:14px">
+          <span>Funds transferred</span>
+          <strong>€0.00</strong>
+        </div>
+
+        <div style="
+          display:flex;
+          justify-content:space-between">
+          <span>Balance affected</span>
+          <strong>No</strong>
+        </div>
+
+      </div>
+
+      <div class="muted tiny"
+        style="margin:12px 0 28px">
+        Reference: ${esc(draft.resultRef || '—')}
+      </div>
+
+      <p style="
+        max-width:430px;
+        margin:0 auto 25px;
+        font-size:13px;
+        opacity:.8">
+        No money has been sent.
+        Your account balance and portfolio value
+        remain unchanged.
+      </p>
+
+      <button class="btn"
+        data-action="newPayment">
+        ${esc(t('newPayment'))}
+      </button>
+
+    </div>
+  `;
+}
+
+function normalizeIBAN(value){
+  return String(value||'')
+    .replace(/\s+/g,'')
+    .toUpperCase();
+}
+
+function validIBAN(value){
+  const iban=normalizeIBAN(value);
+
+  if(!/^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$/.test(iban)){
+    return false;
+  }
+
+  const moved=iban.slice(4)+iban.slice(0,4);
+
+  let remainder=0;
+
+  for(const character of moved){
+    const code=character.charCodeAt(0);
+
+    const chunk=code>=65
+      ?String(code-55)
+      :character;
+
+    for(const digit of chunk){
+      remainder=(remainder*10+Number(digit))%97;
+    }
+  }
+
+  return remainder===1;
+}
+
+function validAmount(value){
+  const string=String(value||'');
+
+  return /^\d+(?:\.\d{1,2})?$/.test(string)&&
+         Number(string)>0&&
+         Number.isFinite(Number(string));
+}
+
+function todayLocalISO(){
+  const now=new Date();
+
+  const year=now.getFullYear();
+  const month=String(now.getMonth()+1).padStart(2,'0');
+  const day=String(now.getDate()).padStart(2,'0');
+
+  return `${year}-${month}-${day}`;
+}
+
+function validCalendarDate(value){
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(value)){
+    return false;
+  }
+
+  const [year,month,day]=value.split('-').map(Number);
+
+  const parsed=new Date(Date.UTC(year,month-1,day));
+
+  return parsed.getUTCFullYear()===year&&
+         parsed.getUTCMonth()===month-1&&
+         parsed.getUTCDate()===day;
+}
+
+function submitPaymentDetails(){
+  const name=$('paymentName')?.value.trim()||'';
+  const iban=normalizeIBAN($('paymentIBAN')?.value);
+  const amount=$('paymentAmount')?.value||'';
+  const ref=$('paymentReference')?.value.trim()||'';
+  const when=$('paymentWhen')?.value||'now';
+  const date=$('paymentDate')?.value||'';
+
+  if(!name||name.length>140){
+    showFormError(
+      'paymentError',
+      'Enter a valid recipient name.'
+    );
+    return;
+  }
+
+  if(!validIBAN(iban)){
+    showFormError(
+      'paymentError',
+      'Enter a valid IBAN.'
+    );
+    return;
+  }
+
+  if(
+    !validAmount(amount)||
+    Number(amount)>Number(S.data.balance)
+  ){
+    showFormError(
+      'paymentError',
+      'Enter an amount within your available balance.'
+    );
+    return;
+  }
+
+  if(ref.length>140){
+    showFormError(
+      'paymentError',
+      'Payment reference is too long.'
+    );
+    return;
+  }
+
+  if(when!=='now'&&when!=='schedule'){
+    showFormError(
+      'paymentError',
+      'Choose a valid transfer timing.'
+    );
+    return;
+  }
+
+  if(when==='schedule'){
+    if(
+      !validCalendarDate(date)||
+      date<todayLocalISO()
+    ){
+      showFormError(
+        'paymentError',
+        'Choose a valid date today or later.'
+      );
+      return;
+    }
+  }
+
+  S.draft={
+    requestId:uuid(),
+    name,
+    iban,
+    amount,
+    ref,
+    when,
+    date:when==='schedule'?date:''
+  };
+
+  S.step=2;
+  render();
+}
+
+function paymentBack(){
+  S.step=1;
+  render();
+}
+
+function newPayment(){
+  S.step=1;
+  S.draft=null;
+  render();
+}
+
+let busy = false;
+
+async function confirmPayment() {
+  if (busy) return;
+
+  busy = true;
+
+  const button = document.querySelector(
+    '[data-action="confirmPayment"]'
+  );
+
+  if (button) {
+    button.disabled = true;
+    button.textContent = 'Processing...';
+  }
+
+  try {
+    const draft = S.draft;
+
+    if (!draft) {
+      throw new Error('Payment details are missing.');
+    }
+
+    if (!draft.requestId) {
+      draft.requestId = uuid();
+    }
+
+    const result = await rpc('transfer', draft);
+
+    if (!result || result.status !== 'declined') {
+      throw new Error(
+        'The server did not return a declined transfer.'
+      );
+    }
+
+    S.data = result.state;
+
+    S.draft.resultRef = result.ref;
+    S.draft.resultStatus = 'declined';
+
+    S.step = 3;
+
+    render();
+
+  } catch (error) {
+    console.error('Payment confirmation error:', error);
+
+    alert(
+      'Unable to display the transfer result: ' +
+      (error.message || String(error))
+    );
+
+  } finally {
+    busy = false;
+
+    if (button && button.isConnected) {
+      button.disabled = false;
+      button.textContent = t('confirm');
+    }
+  }
+}
+
+function selectSavedPayee(id){
+  const payee=(S.data.payees||[])
+    .find(p=>p.id===id);
+
+  if(!payee)return;
+
+  S.draft={
+    name:payee.name,
+    iban:payee.iban,
+    amount:'',
+    ref:'',
+    when:'now',
+    date:''
+  };
+
+  S.step=1;
+  navigate('payments');
+}
+
+/* ============================================================
+   TRANSACTION HISTORY
+   ============================================================ */
+
+function filteredTransactions(){
+  const search=S.search.trim().toLowerCase();
+
+  return (S.data.txs||[]).filter(tx=>{
+    const matchesDirection=
+      S.filter==='all'||
+      (S.filter==='in'&&tx.dir==='in')||
+      (S.filter==='out'&&tx.dir==='out');
+
+    const searchable=[
+      tx.id,
+      tx.title,
+      tx.who,
+      tx.iban,
+      tx.ref,
+      tx.category,
+      tx.status
+    ].join(' ').toLowerCase();
+
+    return matchesDirection&&
+      (!search||searchable.includes(search));
+  });
+}
+
+function transactionHistoryView(){
+  return `
+    ${pageHead(
+      t('history'),
+      t('historySub'),
+      `<button class="btn ghost"
+        data-action="exportTransactions">
+        ↓ ${esc(t('export'))}
+      </button>`
+    )}
+
+    <section class="panel">
+
+      <div class="filterrow">
+
+        <input class="search"
+          id="transactionSearch"
+          placeholder="${esc(t('search'))}"
+          value="${esc(S.search)}"
+          aria-label="${esc(t('search'))}">
+
+        <select id="transactionFilter"
+          aria-label="${esc(t('all'))}">
+
+          ${[
+            ['all',t('all')],
+            ['in',t('incoming')],
+            ['out',t('outgoing')]
+          ].map(([value,label])=>`
+            <option value="${value}"
+              ${S.filter===value?'selected':''}>
+              ${esc(label)}
+            </option>
+          `).join('')}
+
+        </select>
+
+      </div>
+
+      <div id="transactionResults">
+        ${transactionList(filteredTransactions())}
+      </div>
+
+    </section>
+  `;
+}
+
+function updateTransactionResults(){
+  const container=$('transactionResults');
+
+  if(container){
+    container.innerHTML=
+      transactionList(filteredTransactions());
+  }
+}
+
+function csvSafe(value){
+  let string=String(value??'');
+
+  // Prevent spreadsheet formula execution.
+  if(/^[\s]*[=+\-@]/.test(string)){
+    string="'"+string;
+  }
+
+  return '"'+string.replace(/"/g,'""')+'"';
+}
+
+function exportTransactions(){
+  const transactions = S.data.txs || [];
+
+  const rows=[
+    [
+      'Date',
+      'Transaction ID',
+      'Recipient / Sender',
+      'Description',
+      'Direction',
+      'Amount EUR',
+      'Status',
+      'Category',
+      'Payment Reference',
+      'IBAN'
+    ]
+  ];
+
+  transactions.forEach(tx=>{
+    rows.push([
+      fmtDate(tx.createdAt),
+      tx.id||'',
+      tx.who||'',
+      tx.title||'',
+      tx.dir||'',
+      tx.amount||0,
+      tx.status||'',
+      tx.category||'',
+      tx.ref||'',
+      tx.iban||''
+    ]);
+  });
+
+  const csv='\uFEFF'+rows.map(row=>
+    row.map(csvSafe).join(',')
+  ).join('\r\n');
+
+  const blob=new Blob([csv],{
+    type:'text/csv;charset=utf-8'
+  });
+
+  const url=URL.createObjectURL(blob);
+
+  const link=document.createElement('a');
+  link.href=url;
+  link.download='Bank-transactions.csv';
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+
+  toast(t('export'));
+}
+
+function transactionDetailMarkup(tx){
+  const incoming=tx.dir==='in';
+
+  return `
+    <div class="detail-top">
+
+      <div>
+        <div class="eyebrow">
+          ${esc(t('details'))}
+        </div>
+
+        <h2 style="margin-top:8px">
+          ${esc(tx.title||t('paymentType'))}
+        </h2>
+      </div>
+
+      <button class="detail-close"
+        data-action="closeDrawer"
+        aria-label="${esc(t('close'))}">
+        ×
+      </button>
+
+    </div>
+
+    <div class="eyebrow">
+      ${esc(t('amount'))}
+    </div>
+
+    <div class="detail-value ${incoming?'positive':''}">
+      ${incoming?'+':'−'}${money(tx.amount)}
+    </div>
+
+    <div style="margin-bottom:30px">
+      <span class="tag ${tx.status==='scheduled'?'scheduled':''}">
+        ${esc(t(tx.status||'posted'))}
+      </span>
+    </div>
+
+    ${[
+      [t('recipient'),tx.who||'—'],
+      [t('transactionDate'),fmtDate(tx.createdAt)],
+      [t('transactionId'),tx.id||'—'],
+      [t('category'),tx.category||'—'],
+      [t('status'),t(tx.status||'posted')],
+      [t('reference'),tx.ref||'—'],
+      [t('iban'),tx.iban||'—'],
+      ...(tx.scheduledDate
+        ?[[t('date'),tx.scheduledDate]]
+        :[]
+      )
+    ].map(([label,value])=>`
+      <div class="detail-line">
+        <span>${esc(label)}</span>
+        <strong>${esc(value)}</strong>
+      </div>
+    `).join('')}
+
+    <div class="notice">
+      ${esc(t('paymentNote'))}
+    </div>
+  `;
+}
+
+function openTransactionDrawer(index){
+  const tx=(S.data.txs||[])[index];
+
+  if(!tx)return;
+
+  openDetailDrawer(
+    transactionDetailMarkup(tx)
+  );
+}
+
+/* ============================================================
+   BENEFICIARIES
+   ============================================================ */
+
+function beneficiariesView(){
+  const payees=S.data.payees||[];
+
+  return `
+    ${pageHead(
+      t('saved'),
+      t('savedSub'),
+      `<button class="btn"
+        data-page="payments">
+        + ${esc(t('send'))}
+      </button>`
+    )}
+
+    <section class="panel">
+
+      ${payees.length
+        ?payees.map(p=>`
+          <div class="payee">
+
+            <div class="row"
+              style="justify-content:flex-start;min-width:0">
+
+              <div class="avatar">
+                ${esc(
+                  (p.name||'DB')
+                    .split(/\s+/)
+                    .map(x=>x[0]||'')
+                    .slice(0,2)
+                    .join('')
+                    .toUpperCase()
+                )}
+              </div>
+
+              <div style="min-width:0">
+                <strong>${esc(p.name)}</strong>
+                <small>${esc(p.iban)}</small>
+              </div>
+
+            </div>
+
+            <div class="row"
+              style="flex-wrap:wrap;justify-content:flex-end">
+
+              <button class="btn ghost small"
+                data-select-payee="${esc(p.id)}">
+                ${esc(t('pay'))}
+              </button>
+
+              <button class="btn ghost small"
+                data-remove-payee="${esc(p.id)}">
+                ${esc(t('remove'))}
+              </button>
+
+            </div>
+
+          </div>
+        `).join('')
+        :`<div class="empty">
+          ${esc(t('noPayees'))}
+        </div>`
+      }
+
+    </section>
+  `;
+}
+
+async function removeBeneficiary(id){
+  if(S.busy)return;
+
+  const payee=(S.data.payees||[])
+    .find(p=>p.id===id);
+
+  if(!payee)return;
+
+  if(!confirm(
+    `Remove beneficiary "${payee.name}"?`
+  )){
+    return;
+  }
+
+  S.busy=true;
+
+  try{
+    const response=await rpc('removePayee',{id});
+
+    S.data=response.state;
+
+    render();
+    toast('Beneficiary removed.');
+
+  }catch(error){
+    toast(error.message);
+  }finally{
+    S.busy=false;
+  }
+}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+
+function cardsView(){
+  const card=S.data.card||{};
+
+  return `
+    ${pageHead(
+      t('cardTitle'),
+      t('cardSub')
+    )}
+
+    <div class="grid two">
+
+      <section class="panel">
+
+        <div class="bankcard">
+
+          <div class="row">
+            <strong style="
+              font-family:var(--display);
+              font-size:19px">
+              HAPOALIM BANK
+            </strong>
+
+            <span style="color:var(--champagne)">
+              PRIVATE
+            </span>
+          </div>
+
+          <div>
+            <div class="eyebrow"
+              style="color:#C7BBC1;margin-bottom:10px">
+              VIRTUAL CARD
+            </div>
+
+            <div class="digits">
+              •••• •••• •••• ${esc(card.last4||'0000')}
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <div class="tiny" style="color:#C7BBC1">
+                CARD HOLDER
+              </div>
+
+              <strong>${esc(card.holder||'PRIVATE CLIENT')}</strong>
+            </div>
+
+            <div>
+              <div class="tiny" style="color:#C7BBC1">
+                EXPIRES
+              </div>
+
+              <strong>${esc(card.expiry||'—')}</strong>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="notice">
+          ${esc(t('cardNotice'))}
+        </div>
+
+      </section>
+
+      <section class="panel">
+
+        <div class="panel-head">
+          <h2>${esc(t('cardStatus'))}</h2>
+
+          <span class="tag ${card.frozen?'scheduled':''}">
+            ${esc(card.frozen?t('frozen'):t('active'))}
+          </span>
+        </div>
+
+        <div class="reviewline">
+          <span>${esc(t('holder'))}</span>
+          <strong>${esc(card.holder||'—')}</strong>
+        </div>
+
+        <div class="reviewline">
+          <span>Card number</span>
+          <strong>•••• ${esc(card.last4||'0000')}</strong>
+        </div>
+
+        <div class="reviewline">
+          <span>Expiry</span>
+          <strong>${esc(card.expiry||'—')}</strong>
+        </div>
+
+        <button class="btn"
+          data-action="toggleCard"
+          style="margin-top:25px;width:100%">
+
+          ${esc(card.frozen?t('unfreeze'):t('freeze'))}
+        </button>
+
+      </section>
+
+    </div>
+  `;
+}
+
+async function toggleCardFreeze(){
+  if(S.busy)return;
+
+  const frozen=!Boolean(S.data.card.frozen);
+
+  S.busy=true;
+
+  try{
+    const response=await rpc('freezeCard',{frozen});
+
+    S.data=response.state;
+
+    render();
+
+    toast(
+      frozen?'Card frozen.':
+             'Card activated.'
+    );
+
+  }catch(error){
+    toast(error.message);
+  }finally{
+    S.busy=false;
+  }
+}
+
+/* ============================================================
+   NOTIFICATIONS
+   ============================================================ */
+
+function notificationsView(){
+  const items=S.data.notifications||[];
+
+  return `
+    ${pageHead(
+      t('inbox'),
+      t('inboxSub'),
+      `<button class="btn ghost"
+        data-action="markNotificationsRead">
+        ${esc(t('readAll'))}
+      </button>`
+    )}
+
+    <section class="panel">
+
+      ${items.length
+        ?items.map(item=>`
+          <div class="tx">
+
+            <div class="txicon"
+              style="
+                color:${item.read
+                  ?'var(--sub)'
+                  :'var(--burgundy)'}">
+              ♢
+            </div>
+
+            <div class="txbody">
+
+              <strong>
+                ${esc(item.title||'Notification')}
+              </strong>
+
+              <div class="tiny muted"
+                style="margin-top:5px">
+                ${esc(item.body||'')}
+              </div>
+
+              <small>
+                ${fmtDate(item.createdAt)}
+              </small>
+
+            </div>
+
+            ${item.read
+              ?''
+              :'<span class="tag">NEW</span>'
+            }
+
+          </div>
+        `).join('')
+        :`<div class="empty">
+          ${esc(t('noNotifications'))}
+        </div>`
+      }
+
+      <div class="notice">
+        ${esc(t('notificationNotice'))}
+      </div>
+
+    </section>
+  `;
+}
+
+async function markNotificationsRead(){
+  if(S.busy)return;
+
+  S.busy=true;
+
+  try{
+    const response=await rpc('markNotifsRead');
+
+    S.data=response.state;
+
+    render();
+    toast('Notifications marked as read.');
+
+  }catch(error){
+    toast(error.message);
+  }finally{
+    S.busy=false;
+  }
+}
+
+/* ============================================================
+   SETTINGS
+   ============================================================ */
+
+function settingsView(){
+  const d=S.data;
+  const session=d.session||{};
+
+  return `
+    ${pageHead(
+      t('profile'),
+      t('profileSub')
+    )}
+
+    <div class="grid two">
+
+      <section class="panel">
+
+        <div class="panel-head">
+          <h2>${esc(t('account'))}</h2>
+        </div>
+
+        <div class="reviewline">
+          <span>${esc(t('holder'))}</span>
+          <strong>${esc(d.account.holder)}</strong>
+        </div>
+
+        <div class="reviewline">
+          <span>IBAN</span>
+          <strong>${esc(d.account.iban)}</strong>
+        </div>
+
+        <div class="reviewline">
+          <span>${esc(t('currency'))}</span>
+          <strong>EUR</strong>
+        </div>
+
+        <div class="reviewline">
+          <span>${esc(t('session'))}</span>
+          <strong>${esc(session.username||'User')}</strong>
+        </div>
+
+        <button class="btn ghost"
+          data-action="copyIBAN"
+          style="margin-top:23px">
+          ${esc(t('copy'))}
+        </button>
+
+      </section>
+
+      <section class="panel">
+
+        <div class="panel-head">
+          <h2>${esc(t('settings'))}</h2>
+        </div>
+
+        <div class="reviewline">
+          <span>${esc(t('language'))}</span>
+          <strong>${esc(S.lang.toUpperCase())}</strong>
+        </div>
+
+        <div class="reviewline">
+          <span>${esc(t('theme'))}</span>
+          <strong>
+            ${S.theme==='dark'?'Dark':'Light'}
+          </strong>
+        </div>
+
+        <div class="reviewline">
+          <span>${esc(t('trainingEdition'))}</span>
+          <strong>Private Wealth</strong>
+        </div>
+
+        <button class="btn ghost"
+          data-action="theme"
+          style="margin-top:23px">
+          ${esc(t('theme'))}
+        </button>
+
+        <button class="btn ghost"
+          data-action="logout"
+          style="margin-top:12px;margin-left:8px">
+          ${esc(t('logout'))}
+        </button>
+
+      </section>
+
+    </div>
+
+    <div class="notice">
+      ${esc(t('simulation'))}
+    </div>
+  `;
+}
+
+/* ============================================================
+   RENDER ENGINE
+   ============================================================ */
+
+function render(){
+  document.documentElement.dataset.theme=S.theme;
+  document.documentElement.lang=S.lang;
+
+  if(!S.token||!S.data){
+    app.innerHTML=loginView();
+    return;
+  }
+
+  const existingShell=app.querySelector('.shell');
+
+  if(!existingShell){
+    app.innerHTML=shellView();
+  }
+
+  const main=$('main');
+
+  if(!main)return;
+
+  const views={
+    overview:dashboardView,
+    wealth:wealthView,
+    payments:paymentView,
+    transactions:transactionHistoryView,
+    beneficiaries:beneficiariesView,
+    cards:cardsView,
+    notifications:notificationsView,
+    settings:settingsView
+  };
+
+  const view=views[S.page]||dashboardView;
+
+  main.innerHTML=view();
+
+  document.querySelectorAll('[data-page]').forEach(button=>{
+    button.classList.toggle(
+      'active',
+      button.dataset.page===S.page
+    );
+  });
+
+  if(S.page==='overview'){
+    drawSpendingChart();
+
+    const allocation=$('dashboardAllocation');
+
+    if(allocation){
+      allocation.innerHTML=allocationView(true);
+    }
+  }
+
+  if(S.page==='wealth'){
+    renderPerformanceChart();
+  }
+}
+
+function navigate(page){
+  const allowed=NAVIGATION.some(item=>item[0]===page);
+
+  if(!allowed)return;
+
+  S.page=page;
+
+  closeDetailDrawer();
+
+  render();
+
+  window.scrollTo({
+    top:0,
+    behavior:'auto'
+  });
+}
+
+/* ============================================================
+   THEME AND LANGUAGE
+   ============================================================ */
+
+function changeTheme(){
+  S.theme=S.theme==='dark'?'light':'dark';
+
+  localStorage.setItem(
+    'db_hybrid_theme',
+    S.theme
+  );
+
+  document.documentElement.dataset.theme=S.theme;
+
+  if(S.data){
+    app.innerHTML=shellView();
+  }
+
+  render();
+}
+
+function changeLanguage(language){
+  if(!SUPPORTED_LANGUAGES.includes(language)){
+    return;
+  }
+
+  S.lang=language;
+
+  localStorage.setItem(
+    'db_hybrid_lang',
+    language
+  );
+
+  document.documentElement.lang=language;
+
+  if(S.data){
+    app.innerHTML=shellView();
+  }
+
+  render();
+}
+
+/* ============================================================
+   AUTHENTICATION
+   ============================================================ */
+
+async function submitLogin(){
+  if(S.busy)return;
+
+  const username=$('username')?.value.trim()||'';
+  const password=$('password')?.value||'';
+
+  if(!username||!password){
+    showFormError(
+      'loginError',
+      'Enter login details.'
+    );
+    return;
+  }
+
+  S.busy=true;
+
+  const submitButton=$('loginForm')
+    ?.querySelector('button[type="submit"]');
+
+  if(submitButton){
+    submitButton.disabled=true;
+    submitButton.textContent=t('processing');
+  }
+
+  try{
+    const result=await rpc('login',{
+      username,
+      password
+    },false);
+
+    if(!result?.token){
+      throw new Error('No session token received.');
+    }
+
+    S.token=result.token;
+
+    sessionStorage.setItem(
+      'db_atelier_token',
+      S.token
+    );
+
+    const state=await rpc('getState');
+
+    S.data=state;
+    S.page='overview';
+    S.step=1;
+    S.draft=null;
+
+    app.innerHTML=shellView();
+
+    render();
+
+    toast(t('welcome'));
+
+  }catch(error){
+    S.token='';
+    S.data=null;
+
+    sessionStorage.removeItem('db_atelier_token');
+
+    render();
+
+    showFormError(
+      'loginError',
+      error.message
+    );
+
+  }finally{
+    S.busy=false;
+
+    const button=$('loginForm')
+      ?.querySelector('button[type="submit"]');
+
+    if(button){
+      button.disabled=false;
+      button.textContent=t('loginButton');
+    }
+  }
+}
+
+async function logout(){
+  if(S.busy)return;
+
+  S.busy=true;
+
+  try{
+    if(S.token){
+      await rpc('logout');
+    }
+  }catch(error){
+    console.warn('Logout:',error.message);
+  }finally{
+    S.token='';
+    S.data=null;
+    S.page='overview';
+    S.step=1;
+    S.draft=null;
+    S.selectedHolding=null;
+    S.selectedTransaction=null;
+    S.busy=false;
+
+    sessionStorage.removeItem('db_atelier_token');
+
+    closeDetailDrawer();
+
+    render();
+  }
+}
+
+async function refreshState(){
+  if(!S.token)return;
+
+  try{
+    const state=await rpc('getState');
+
+    S.data=state;
+
+    render();
+
+  }catch(error){
+    const message=String(error.message||'');
+
+    if(/session expired|invalid session/i.test(message)){
+      S.token='';
+      S.data=null;
+
+      sessionStorage.removeItem('db_atelier_token');
+
+      render();
+
+      toast('Your session has expired. Sign in again.');
+      return;
+    }
+
+    toast(message);
+  }
+}
+
+/* ============================================================
+   SHARED DETAILS DRAWER
+   ============================================================ */
+
+let drawerPreviousFocus=null;
+
+function openDetailDrawer(content){
+  closeDetailDrawer();
+
+  drawerPreviousFocus=document.activeElement;
+
+  const backdrop=document.createElement('div');
+
+  backdrop.className='detail-backdrop';
+  backdrop.id='detailBackdrop';
+
+  backdrop.innerHTML=`
+    <aside class="detail-drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-label="${esc(t('details'))}"
+      tabindex="-1">
+
+      ${content}
+
+    </aside>
+  `;
+
+  document.body.appendChild(backdrop);
+
+  document.body.style.overflow='hidden';
+
+  backdrop.addEventListener('click',event=>{
+    if(event.target===backdrop){
+      closeDetailDrawer();
+    }
+  });
+
+  const closeButton=backdrop.querySelector(
+    '[data-action="closeDrawer"]'
+  );
+
+  (closeButton||backdrop.querySelector('.detail-drawer'))
+    ?.focus();
+}
+
+function closeDetailDrawer(){
+  const backdrop=$('detailBackdrop');
+
+  if(!backdrop)return;
+
+  backdrop.remove();
+
+  document.body.style.overflow='';
+
+  if(
+    drawerPreviousFocus&&
+    document.contains(drawerPreviousFocus)
+  ){
+    drawerPreviousFocus.focus();
+  }
+
+  drawerPreviousFocus=null;
+}
+
+function trapDrawerFocus(event){
+  const backdrop=$('detailBackdrop');
+
+  if(!backdrop||event.key!=='Tab'){
+    return;
+  }
+
+  const drawer=backdrop.querySelector('.detail-drawer');
+
+  if(!drawer)return;
+
+  const focusable=Array.from(
+    drawer.querySelectorAll(
+      'button:not([disabled]),' +
+      'a[href],' +
+      'input:not([disabled]),' +
+      'select:not([disabled]),' +
+      '[tabindex]:not([tabindex="-1"])'
+    )
+  ).filter(element=>element.getClientRects().length);
+
+  if(!focusable.length){
+    event.preventDefault();
+    drawer.focus();
+    return;
+  }
+
+  const first=focusable[0];
+  const last=focusable[focusable.length-1];
+
+  if(event.shiftKey){
+    if(
+      document.activeElement===first||
+      !drawer.contains(document.activeElement)
+    ){
+      event.preventDefault();
+      last.focus();
+    }
+  }else{
+    if(
+      document.activeElement===last||
+      !drawer.contains(document.activeElement)
+    ){
+      event.preventDefault();
+      first.focus();
+    }
+  }
+}
+
+/* ============================================================
+   CLIPBOARD
+   ============================================================ */
+
+async function copyIBAN(){
+  const iban=S.data?.account?.iban;
+
+  if(!iban)return;
+
+  try{
+    if(navigator.clipboard?.writeText){
+      await navigator.clipboard.writeText(iban);
+    }else{
+      const input=document.createElement('textarea');
+
+      input.value=iban;
+      input.style.position='fixed';
+      input.style.opacity='0';
+
+      document.body.appendChild(input);
+
+      input.select();
+
+      const copied=document.execCommand('copy');
+
+      input.remove();
+
+      if(!copied){
+        throw new Error('Clipboard unavailable.');
+      }
+    }
+
+    toast(t('copied'));
+
+  }catch(error){
+    toast('Could not copy IBAN. Please copy it manually.');
+  }
+}
+
+/* ============================================================
+   EVENT DELEGATION — CLICKS
+   ============================================================ */
+
+document.addEventListener('click',async event=>{
+
+  const navigation=event.target.closest('[data-page]');
+
+  if(navigation){
+    navigate(navigation.dataset.page);
+    return;
+  }
+
+  const period=event.target.closest('[data-period]');
+
+  if(period){
+    S.period=period.dataset.period;
+
+    render();
+    return;
+  }
+
+  const wealthPeriod=event.target.closest(
+    '[data-wealth-period]'
+  );
+
+  if(wealthPeriod){
+    S.wealthPeriod=wealthPeriod.dataset.wealthPeriod;
+
+    render();
+    return;
+  }
+
+  const holding=event.target.closest('[data-holding]');
+
+  if(holding){
+    openHoldingDrawer(holding.dataset.holding);
+    return;
+  }
+
+  const transaction=event.target.closest(
+    '[data-tx-index]'
+  );
+
+  if(transaction){
+    openTransactionDrawer(
+      Number(transaction.dataset.txIndex)
+    );
+    return;
+  }
+
+  const selectedPayee=event.target.closest(
+    '[data-select-payee]'
+  );
+
+  if(selectedPayee){
+    selectSavedPayee(selectedPayee.dataset.selectPayee);
+    return;
+  }
+
+  const removedPayee=event.target.closest(
+    '[data-remove-payee]'
+  );
+
+  if(removedPayee){
+    await removeBeneficiary(
+      removedPayee.dataset.removePayee
+    );
+    return;
+  }
+
+  const contribution=event.target.closest(
+    '[data-contribute-goal]'
+  );
+
+  if(contribution){
+    showContributionForm(
+      contribution.dataset.contributeGoal
+    );
+    return;
+  }
+
+  const actionElement=event.target.closest(
+    '[data-action]'
+  );
+
+  if(!actionElement)return;
+
+  const action=actionElement.dataset.action;
+
+  switch(action){
+
+    case 'theme':
+      changeTheme();
+      break;
+
+    case 'logout':
+      await logout();
+      break;
+
+    case 'paymentBack':
+      paymentBack();
+      break;
+
+    case 'confirmPayment':
+      await confirmPayment();
+      break;
+
+    case 'newPayment':
+      newPayment();
+      break;
+
+    case 'exportTransactions':
+      exportTransactions();
+      break;
+
+    case 'toggleCard':
+      await toggleCardFreeze();
+      break;
+
+    case 'markNotificationsRead':
+      await markNotificationsRead();
+      break;
+
+    case 'copyIBAN':
+      await copyIBAN();
+      break;
+
+    case 'showGoalForm':
+      showGoalForm();
+      break;
+
+    case 'cancelGoal':
+      cancelGoalForm();
+      break;
+
+    case 'cancelContribution':
+      cancelContributionForm();
+      break;
+
+    case 'closeDrawer':
+      closeDetailDrawer();
+      break;
+  }
+});
+
+/* ============================================================
+   EVENT DELEGATION — FORMS
+   ============================================================ */
+
+document.addEventListener('submit',async event=>{
+
+  if(event.target.id==='loginForm'){
+    event.preventDefault();
+
+    await submitLogin();
+    return;
+  }
+
+  if(event.target.id==='paymentDetailsForm'){
+    event.preventDefault();
+
+    submitPaymentDetails();
+    return;
+  }
+
+  if(event.target.id==='createGoalForm'){
+    event.preventDefault();
+
+    await submitCreateGoal();
+    return;
+  }
+
+  if(event.target.id==='contributeGoalForm'){
+    event.preventDefault();
+
+    const goalId=event.target.dataset.goalId;
+
+    await submitContribution(goalId);
+    return;
+  }
+});
+
+/* ============================================================
+   EVENT DELEGATION — INPUTS
+   ============================================================ */
+
+document.addEventListener('input',event=>{
+
+  if(event.target.id==='transactionSearch'){
+    S.search=event.target.value;
+
+    updateTransactionResults();
+    return;
+  }
+});
+
+document.addEventListener('change',event=>{
+
+  if(event.target.id==='language'){
+    changeLanguage(event.target.value);
+    return;
+  }
+
+  if(event.target.id==='transactionFilter'){
+    S.filter=event.target.value;
+
+    updateTransactionResults();
+    return;
+  }
+
+  if(event.target.id==='paymentWhen'){
+    const schedule=event.target.value==='schedule';
+
+    const field=$('scheduleField');
+
+    if(field){
+      field.classList.toggle('hidden',!schedule);
+    }
+
+    const dateInput=$('paymentDate');
+
+    if(dateInput){
+      dateInput.required=schedule;
+      dateInput.min=todayLocalISO();
+
+      if(!schedule){
+        dateInput.value='';
+      }
+    }
+
+    return;
+  }
+});
+
+/* ============================================================
+   KEYBOARD ACCESSIBILITY
+   ============================================================ */
+
+document.addEventListener('keydown',event=>{
+
+  if(event.key==='Escape'){
+    closeDetailDrawer();
+    return;
+  }
+
+  trapDrawerFocus(event);
+
+  if(
+    event.key!=='Enter'&&
+    event.key!==' '
+  ){
+    return;
+  }
+
+  if(
+    event.target.closest(
+      'button,input,select,textarea,a'
+    )
+  ){
+    return;
+  }
+
+  const holding=event.target.closest(
+    '[data-holding]'
+  );
+
+  if(holding){
+    event.preventDefault();
+
+    openHoldingDrawer(holding.dataset.holding);
+    return;
+  }
+
+  const transaction=event.target.closest(
+    '[data-tx-index]'
+  );
+
+  if(transaction){
+    event.preventDefault();
+
+    openTransactionDrawer(
+      Number(transaction.dataset.txIndex)
+    );
+  }
+});
+
+/* ============================================================
+   INITIALIZATION
+   ============================================================ */
+
+async function initialize(){
+  document.documentElement.dataset.theme=S.theme;
+  document.documentElement.lang=S.lang;
+
+  if(!S.token){
+    render();
+    return;
+  }
+
+  try{
+    const state=await rpc('getState');
+
+    S.data=state;
+
+    app.innerHTML=shellView();
+
+    render();
+
+  }catch(error){
+    S.token='';
+    S.data=null;
+
+    sessionStorage.removeItem('db_atelier_token');
+
+    render();
+
+    if(/session expired/i.test(error.message||'')){
+      toast('Your session expired. Sign in again.');
+    }else{
+      toast(error.message||'Could not restore the session.');
+    }
+  }
+}
+
+/* ============================================================
+   START HAPOALIM BANK
+   ============================================================ */
+
+initialize();
+
+</script>
+</body>
+</html>
