@@ -517,6 +517,28 @@ p,.muted {color:var(--sub)}
   font-variant-numeric:tabular-nums;
 }
 
+.tx-delete {
+  width:28px;
+  height:28px;
+  flex-shrink:0;
+  border-radius:8px;
+  border:1px solid var(--line);
+  background:var(--soft);
+  color:var(--sub);
+  font-size:16px;
+  line-height:1;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  transition:background .15s,color .15s,border-color .15s;
+}
+
+.tx-delete:hover {
+  background:#A80F3020;
+  color:var(--burgundy);
+  border-color:var(--burgundy);
+}
+
 .positive {color:#51C4A0}
 :root[data-theme="light"] .positive {color:var(--emerald)}
 
@@ -1046,11 +1068,9 @@ finance@hapoaiim.com.
    SINGLE-FILE BROWSER EDITION
    No backend. No Google Apps Script. Uses localStorage.
 
-   ------------------------------------------------------------
    LOGIN
    Username: alain.wassmer@gmail.com
    Password: alain12345678
-   (Change DEFAULT_PASSWORD below if you want.)
    ============================================================ */
 
 const DEMO = {
@@ -1078,6 +1098,7 @@ const EN = {
   password:'Password',
   reminder:'Private Banking only. Use private credentials.',
   loginButton:'Enter Private Bank',
+  loginHint:'Demo credentials are shown on this screen.',
   processing:'Processing…',
   hero:'A more complete view of your wealth.',
   heroSub:'Everyday banking and long-term wealth, thoughtfully connected.',
@@ -1416,8 +1437,6 @@ function toast(message){
    ============================================================ */
 
 function hashPassword(password, salt){
-  // Simple synchronous SHA-256 via SubtleCrypto is async; use a
-  // deterministic synchronous fallback for demo purposes.
   let h1=0xdeadbeef^salt.length, h2=0x41c6ce57^password.length;
   const str=salt+':'+password;
   for(let i=0;i<str.length;i++){
@@ -1547,11 +1566,10 @@ function publicState(account){
 }
 
 /* ============================================================
-   SIMULATED API (same actions as before)
+   SIMULATED API
    ============================================================ */
 
 async function api(action,payload={}){
-  // Fake network delay so the UI feels real
   await new Promise(r=>setTimeout(r,80));
 
   if(action==='login'){
@@ -1573,7 +1591,6 @@ async function api(action,payload={}){
     return {signedOut:true};
   }
 
-  // All other actions require a token (demo: just check it exists)
   const token=sessionStorage.getItem('hap_token');
   if(!token) throw new Error('Session expired.');
 
@@ -1601,6 +1618,28 @@ async function api(action,payload={}){
       account.notifications.forEach(n=>n.read=true);
       saveAccount(account);
       return {state:publicState(account)};
+
+    case 'deleteNotification': {
+      const id = String(payload.id || '');
+      const before = account.notifications.length;
+      account.notifications = account.notifications.filter(n => n.id !== id);
+      if (account.notifications.length === before) {
+        throw new Error('Notification not found.');
+      }
+      saveAccount(account);
+      return { state: publicState(account) };
+    }
+
+    case 'deleteTransaction': {
+      const id = String(payload.id || '');
+      const before = account.txs.length;
+      account.txs = account.txs.filter(tx => tx.id !== id);
+      if (account.txs.length === before) {
+        throw new Error('Transaction not found.');
+      }
+      saveAccount(account);
+      return { state: publicState(account) };
+    }
 
     case 'transfer':
       return transferLocal(payload,account);
@@ -1780,7 +1819,6 @@ function loginView(){
           </form>
 
           <div id="loginError"></div>
-
         </div>
       </section>
     </div>
@@ -1839,7 +1877,7 @@ function shellView(){
    TRANSACTION LIST
    ============================================================ */
 
-function transactionList(items){
+function transactionList(items, allowDelete){
   if(!items.length) return `<div class="empty">${esc(t('noTransactions'))}</div>`;
   return items.map(tx=>{
     const index=(S.data.txs||[]).indexOf(tx);
@@ -1856,6 +1894,13 @@ function transactionList(items){
           ${incoming?'+':'−'}${money(tx.amount)}
           <div style="font-size:10px;color:var(--sub);font-weight:400">${esc(t(tx.status||'posted'))}</div>
         </div>
+        ${allowDelete ? `
+          <button class="tx-delete" type="button"
+            data-delete-tx="${esc(tx.id)}"
+            title="Delete transaction"
+            aria-label="Delete transaction"
+            onclick="event.stopPropagation();">×</button>
+        ` : ''}
       </div>
     `;
   }).join('');
@@ -2844,14 +2889,14 @@ function transactionHistoryView(){
           `).join('')}
         </select>
       </div>
-      <div id="transactionResults">${transactionList(filteredTransactions())}</div>
+      <div id="transactionResults">${transactionList(filteredTransactions(), true)}</div>
     </section>
   `;
 }
 
 function updateTransactionResults(){
   const container=$('transactionResults');
-  if(container) container.innerHTML=transactionList(filteredTransactions());
+  if(container) container.innerHTML=transactionList(filteredTransactions(), true);
 }
 
 function csvSafe(value){
@@ -3040,6 +3085,10 @@ function notificationsView(){
             <small>${fmtDate(item.createdAt)}</small>
           </div>
           ${item.read?'':'<span class="tag">NEW</span>'}
+          <button class="tx-delete" type="button"
+            data-delete-notif="${esc(item.id)}"
+            title="Delete notification"
+            aria-label="Delete notification">×</button>
         </div>
       `).join(''):`<div class="empty">${esc(t('noNotifications'))}</div>`}
       <div class="notice">${esc(t('notificationNotice'))}</div>
@@ -3056,6 +3105,38 @@ async function markNotificationsRead(){
     toast('Notifications marked as read.');
   }catch(error){ toast(error.message); }
   finally{ S.busy=false; }
+}
+
+async function deleteNotification(id){
+  if(S.busy) return;
+  S.busy=true;
+  try{
+    const response=await api('deleteNotification',{id});
+    S.data=response.state;
+    render();
+    toast('Notification deleted.');
+  }catch(error){
+    toast(error.message);
+  }finally{
+    S.busy=false;
+  }
+}
+
+async function deleteTransaction(id){
+  if(S.busy) return;
+  if(!confirm('Delete this transaction? This cannot be undone.')) return;
+  S.busy=true;
+  try{
+    const response=await api('deleteTransaction',{id});
+    S.data=response.state;
+    closeDetailDrawer();
+    render();
+    toast('Transaction deleted.');
+  }catch(error){
+    toast(error.message);
+  }finally{
+    S.busy=false;
+  }
 }
 
 /* ============================================================
@@ -3309,6 +3390,20 @@ document.addEventListener('click',async event=>{
 
   const contribution=event.target.closest('[data-contribute-goal]');
   if(contribution){ showContributionForm(contribution.dataset.contributeGoal); return; }
+
+  const deleteTxBtn=event.target.closest('[data-delete-tx]');
+  if(deleteTxBtn){
+    event.stopPropagation();
+    await deleteTransaction(deleteTxBtn.dataset.deleteTx);
+    return;
+  }
+
+  const deleteNotifBtn=event.target.closest('[data-delete-notif]');
+  if(deleteNotifBtn){
+    event.stopPropagation();
+    await deleteNotification(deleteNotifBtn.dataset.deleteNotif);
+    return;
+  }
 
   const actionElement=event.target.closest('[data-action]');
   if(!actionElement) return;
