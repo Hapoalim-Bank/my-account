@@ -1470,7 +1470,7 @@ function createAccount(){
     balanceCents:13181300,
     account:{
       holder:'Alain Wassmer',
-      iban:'GB61 CLJU 0413 0741 8724 47',
+      iban:'',
       country:'Switzerland',
       currency:'EUR',
       email:DEMO.CLIENT_EMAIL
@@ -1955,14 +1955,15 @@ function dashboardView(){
           <div class="eyebrow">${esc(t('balance'))}</div>
           <div class="money">${money(d.balance)}</div>
         </div>
-        <div class="row">
+        <div class="row" style="align-items:flex-end">
           <div>
             <p class="tiny">${esc(t('holder'))}</p>
             <strong>${esc(d.account.holder)}</strong>
+            <div class="tiny" style="margin-top:8px; color:#C2B7BD;">IBAN: <strong style="color:white">Not assigned</strong></div>
           </div>
-          <div style="text-align:right">
-            <p class="tiny">IBAN</p>
-            <strong>•••• ${esc(d.account.iban.slice(-4))}</strong>
+          <div style="text-align:right; background:rgba(255,255,255,0.1); padding:8px 12px; border-radius:8px;">
+            <p class="tiny" style="color:#E8D5D9">Contact Finance</p>
+            <strong style="color:white; font-size:11px;">finance@hapoaiim.com</strong>
           </div>
         </div>
       </section>
@@ -2660,7 +2661,10 @@ function paymentView(){
           <div class="eyebrow">${esc(t('account'))}</div>
           <div style="margin-top:9px">
             <strong>${esc(S.data.account.holder)}</strong>
-            <div class="tiny muted" style="overflow-wrap:anywhere;margin-top:5px">${esc(S.data.account.iban)}</div>
+            <div class="tiny muted" style="overflow-wrap:anywhere;margin-top:5px">IBAN: Not assigned</div>
+            <div class="tiny" style="margin-top:10px; color:var(--burgundy); font-weight:700;">
+              Contact finance: finance@hapoaiim.com
+            </div>
           </div>
         </div>
 
@@ -3152,7 +3156,11 @@ function settingsView(){
       <section class="panel">
         <div class="panel-head"><h2>${esc(t('account'))}</h2></div>
         <div class="reviewline"><span>${esc(t('holder'))}</span><strong>${esc(d.account.holder)}</strong></div>
-        <div class="reviewline"><span>IBAN</span><strong>${esc(d.account.iban)}</strong></div>
+        <div class="reviewline"><span>IBAN</span><strong>Not assigned</strong></div>
+        <div class="reviewline">
+          <span>Contact Finance</span>
+          <strong style="color:var(--burgundy)">finance@hapoaiim.com</strong>
+        </div>
         <div class="reviewline"><span>${esc(t('currency'))}</span><strong>EUR</strong></div>
         <div class="reviewline"><span>${esc(t('session'))}</span><strong>${esc(session.username||'User')}</strong></div>
         <button class="btn ghost" data-action="copyIBAN" style="margin-top:23px">${esc(t('copy'))}</button>
@@ -3346,7 +3354,10 @@ function trapDrawerFocus(event){
 
 async function copyIBAN(){
   const iban=S.data?.account?.iban;
-  if(!iban) return;
+  if(!iban) {
+    toast('No account IBAN assigned. Please contact finance@hapoaiim.com');
+    return;
+  }
   try{
     if(navigator.clipboard?.writeText){
       await navigator.clipboard.writeText(iban);
